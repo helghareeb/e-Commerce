@@ -1,0 +1,430 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[AI in E-Commerce]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item Foundations: e-commerce as a socio-technical system (10 min)
+    \item AI/ML/DL essentials for e-commerce (10 min)
+    \item ML across the e-commerce lifecycle (30 min)
+    \item Deep learning in modern commerce stacks (20 min)
+    \item Data/architecture/MLOps + evaluation (15 min)
+    \item Risks, ethics, and future directions (5 min)
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning objectives}
+  By the end of this lecture, you should be able to:
+  \begin{itemize}
+    \item Explain core e-commerce models (B2C, B2B, C2C, C2B) and the value chain.
+    \item Map AI/ML/DL techniques to e-commerce use-cases (recsys, search, pricing, fraud, forecasting).
+    \item Reason about offline training vs.\ online serving, experimentation, and monitoring.
+    \item Identify key risks (bias, privacy, explainability, cost) and mitigation strategies.
+  \end{itemize}
+\end{frame}
+
+\section{1. Introduction to E-Commerce}
+
+\begin{frame}{What is e-commerce?}
+  \begin{block}{Definition}
+    Buying and selling goods/services over electronic networks (primarily the internet).
+  \end{block}
+  \vspace{0.5em}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.52\textwidth}
+      \textbf{Common transaction models}
+      \begin{itemize}
+        \item B2C (online retail)
+        \item B2B (procurement platforms)
+        \item C2C (marketplaces)
+        \item C2B (influencers, freelancing)
+      \end{itemize}
+    \column{0.48\textwidth}
+      \textbf{Why it matters for AI}
+      \begin{itemize}
+        \item High-velocity decisions
+        \item Strong feedback loops
+        \item Massive behavioral data
+      \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{E-commerce as a socio-technical system}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+      \textbf{Product-facing}
+      \begin{itemize}
+        \item Web / mobile / conversational UI
+        \item Catalog, cart, checkout
+        \item Reviews, Q\&A, support
+      \end{itemize}
+    \column{0.5\textwidth}
+      \textbf{Back-end \& operations}
+      \begin{itemize}
+        \item Payments + risk engine
+        \item Fulfillment + logistics
+        \item Data pipelines + analytics
+        \item AI/ML services (ranking, prediction, automation)
+      \end{itemize}
+  \end{columns}
+  \vspace{0.6em}
+  \begin{alertblock}{Key idea}
+    The \textbf{platform} is the product; ML models are \textbf{components} inside a larger system.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{The e-commerce value chain (where AI shows up)}
+  \begin{enumerate}
+    \item \textbf{Acquire} traffic (ads, SEO, targeting)
+    \item \textbf{Discover} products (search, recommendations, reviews)
+    \item \textbf{Convert} (checkout, payments, risk checks)
+    \item \textbf{Fulfill} (inventory, warehouse, routing)
+    \item \textbf{Engage} post-purchase (support, loyalty, reactivation)
+  \end{enumerate}
+  \vspace{0.5em}
+  \begin{block}{Data richness}
+    Page views, searches, clicks, add-to-cart, purchases, returns, time-to-decision $\rightarrow$ behavioral logs + metadata.
+  \end{block}
+\end{frame}
+
+\section{2. Foundations of AI, ML, and DL}
+
+\begin{frame}{AI vs.\ ML vs.\ DL (relationship)}
+  \begin{block}{Definitions}
+    \begin{itemize}
+      \item \textbf{AI}: systems that exhibit intelligent behavior (reasoning, learning, decision-making).
+      \item \textbf{ML}: algorithms that learn patterns from data rather than explicit rules.
+      \item \textbf{DL}: ML using deep neural networks that learn representations from large-scale data.
+    \end{itemize}
+  \end{block}
+  \vspace{0.5em}
+  \begin{center}
+    \textbf{DL} $\subset$ \textbf{ML} $\subset$ \textbf{AI}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Learning paradigms with e-commerce examples}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+      \textbf{Supervised}
+      \begin{itemize}
+        \item Conversion prediction
+        \item Fraud classification
+        \item Demand forecasting (as regression)
+      \end{itemize}
+      \vspace{0.5em}
+      \textbf{Unsupervised}
+      \begin{itemize}
+        \item Customer segmentation
+        \item Anomaly detection
+        \item Product/user embeddings
+      \end{itemize}
+    \column{0.5\textwidth}
+      \textbf{Reinforcement learning}
+      \begin{itemize}
+        \item Explore/exploit in recommendations
+        \item Dynamic pricing policies
+      \end{itemize}
+      \vspace{0.5em}
+      \textbf{Representation learning (often DL)}
+      \begin{itemize}
+        \item Session embeddings (Transformers)
+        \item Image/text embeddings for products
+      \end{itemize}
+  \end{columns}
+\end{frame}
+
+\section{3. ML Across the E-Commerce Lifecycle}
+
+\begin{frame}{(1) Recommendations: problem framing}
+  \begin{block}{Goal}
+    Suggest items a user is likely to engage with or buy.
+  \end{block}
+  \begin{itemize}
+    \item Inputs: user history, context, item metadata, interactions (views, clicks, purchases).
+    \item Outputs: ranked list (top-$k$) under latency constraints.
+  \end{itemize}
+  \begin{alertblock}{System view}
+    Recommendations are typically a \textbf{multi-stage pipeline}: candidate generation $\rightarrow$ ranking $\rightarrow$ re-ranking/business rules.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Collaborative filtering (classical baseline)}
+  Interaction matrix $R = [r_{ui}]$ where $r_{ui}$ is an implicit/explicit signal.
+  \vspace{0.4em}
+  \begin{block}{Matrix factorization}
+    \[
+      \hat{r}_{ui} = \mathbf{p}_u^\top \mathbf{q}_i
+    \]
+    where $\mathbf{p}_u$ and $\mathbf{q}_i$ are latent embeddings.
+  \end{block}
+  \begin{itemize}
+    \item Pros: simple, scalable, strong baseline.
+    \item Cons: cold start; limited context modeling.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{(2) Search and ranking}
+  \begin{itemize}
+    \item \textbf{Query understanding}: spelling correction, synonyms, intent classification.
+    \item \textbf{Retrieval}: candidate set (BM25 / dense retrieval / hybrid).
+    \item \textbf{Learning to rank}: optimize relevance + engagement + business KPIs.
+    \item \textbf{Personalized re-ranking}: adapt results to user context/history.
+  \end{itemize}
+  \begin{block}{Key distinction}
+    Search is \textbf{query-driven}; recommendations are \textbf{user-driven}. Many systems unify both via embeddings + ranking models.
+  \end{block}
+\end{frame}
+
+\begin{frame}{(3) Segmentation and customer lifetime value (CLV)}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.55\textwidth}
+      \textbf{Segmentation (unsupervised)}
+      \begin{itemize}
+        \item Features: recency, frequency, monetary value (RFM), categories, engagement.
+        \item Methods: $k$-means, GMMs, density-based clustering.
+      \end{itemize}
+    \column{0.45\textwidth}
+      \textbf{Predictive (supervised)}
+      \begin{itemize}
+        \item Churn probability
+        \item CLV forecasting
+      \end{itemize}
+  \end{columns}
+  \vspace{0.6em}
+  \begin{alertblock}{Why it is hard}
+    Feedback loops + non-stationarity: your marketing changes the data you learn from.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{(4) Dynamic pricing and promotions}
+  \begin{itemize}
+    \item Learn demand as a function of price, seasonality, competition, segments.
+    \item Optimize expected profit subject to constraints (inventory, regulations, fairness).
+    \item Online experimentation: A/B testing; bandits for faster learning.
+  \end{itemize}
+  \begin{block}{Common modeling choices}
+    Gradient boosted trees for demand, bandits/RL for policy selection, plus rule constraints for safety.
+  \end{block}
+\end{frame}
+
+\begin{frame}{(5) Forecasting and inventory management}
+  \begin{itemize}
+    \item Objective: avoid stockouts and overstock (service level vs.\ holding cost).
+    \item Inputs: historical sales, promotions, product lifecycle, holidays, weather signals.
+    \item Methods: ARIMA/ETS; tree ensembles; sequence models.
+  \end{itemize}
+  \begin{alertblock}{Operational constraint}
+    Forecast accuracy is not enough; you need \textbf{actionable} forecasts aligned with replenishment cycles.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{(6) Fraud detection and transaction security}
+  \begin{itemize}
+    \item Threats: payment fraud, account takeover, promo abuse, bot activity.
+    \item Features: device fingerprint, IP/geo, velocity, historical behavior, item/merchant signals.
+    \item Models: logistic regression/GBDT/RF/NN; anomaly detection; graph-based methods.
+  \end{itemize}
+  \begin{alertblock}{Two-sided cost}
+    False negatives $\rightarrow$ fraud loss; false positives $\rightarrow$ blocked good customers + churn.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{(7) Customer service: chatbots and assistants}
+  \begin{itemize}
+    \item Intent classification + NER
+    \item Dialogue management (rules, ML, RL)
+    \item Response: templates, retrieval, or generative models
+  \end{itemize}
+  \begin{block}{Good practice}
+    Use safe escalation: route complex or sensitive cases to humans; log outcomes for improvement.
+  \end{block}
+\end{frame}
+
+\section{4. Deep Learning in E-Commerce}
+
+\begin{frame}{Why deep learning?}
+  DL shines when data are:
+  \begin{itemize}
+    \item Large-scale (millions of users/items, billions of events)
+    \item High-dimensional (sparse IDs + rich metadata)
+    \item Unstructured (text, images) or sequential (sessions)
+    \item Relational (graphs of interactions)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Neural recommendation systems}
+  \begin{itemize}
+    \item Replace dot-product scoring with a neural scorer $f_\theta(\mathbf{p}_u,\mathbf{q}_i,\mathbf{c})$.
+    \item Sequence models (RNN/Transformer) capture short-term intent.
+    \item Context-aware models incorporate device/time/location/campaign.
+  \end{itemize}
+  \begin{block}{Takeaway}
+    Better accuracy often comes with higher compute cost and more complex monitoring.
+  \end{block}
+\end{frame}
+
+\begin{frame}{NLP for commerce text}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+      \textbf{What text exists?}
+      \begin{itemize}
+        \item Titles/descriptions
+        \item Reviews + Q\&A
+        \item Support conversations
+      \end{itemize}
+    \column{0.5\textwidth}
+      \textbf{Tasks}
+      \begin{itemize}
+        \item Sentiment/aspect mining
+        \item Semantic search + query rewriting
+        \item Conversational agents
+      \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Computer vision and visual search}
+  \begin{itemize}
+    \item Image embeddings for similarity search (``shop the look'').
+    \item Classification/detection for quality control and moderation.
+    \item Multimodal matching: image $\leftrightarrow$ text $\leftrightarrow$ attributes.
+  \end{itemize}
+  \begin{block}{Typical architecture}
+    CNN/ViT backbone $\rightarrow$ embedding index (ANN) $\rightarrow$ ranking model.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Sequences and graphs}
+  \begin{itemize}
+    \item \textbf{Sequential models}: model user sessions, funnels, repeat cycles.
+    \item \textbf{GNNs}: user--item graphs, co-purchase, fraud rings.
+  \end{itemize}
+  \begin{alertblock}{When to use graphs}
+    When relationships (who interacts with whom/what) carry signal beyond individual features.
+  \end{alertblock}
+\end{frame}
+
+\section{5. Data, Architecture, and Deployment}
+
+\begin{frame}{Data sources and feature engineering}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+      \textbf{Core sources}
+      \begin{itemize}
+        \item Behavioral logs (clickstream)
+        \item Transactions (orders, refunds, chargebacks)
+        \item Catalog (attributes, text, images)
+        \item Context (time, location, campaigns)
+      \end{itemize}
+    \column{0.5\textwidth}
+      \textbf{Common features}
+      \begin{itemize}
+        \item Recency/frequency aggregates
+        \item Ratios and velocities
+        \item Embeddings (user/item/text/image)
+        \item Time-series features
+      \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Offline training vs.\ online serving}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+      \textbf{Offline (batch)}
+      \begin{itemize}
+        \item Clean + join data
+        \item Train/tune model
+        \item Offline metrics (AUC, NDCG, RMSE)
+      \end{itemize}
+    \column{0.5\textwidth}
+      \textbf{Online (real-time)}
+      \begin{itemize}
+        \item Feature store / streaming features
+        \item Low-latency inference APIs
+        \item Logging + monitoring + drift detection
+      \end{itemize}
+  \end{columns}
+  \vspace{0.6em}
+  \begin{alertblock}{Key engineering constraint}
+    Training can take hours; serving often has a budget of \textbf{tens of milliseconds}.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Evaluation: offline metrics vs.\ business KPIs}
+  \begin{itemize}
+    \item Offline: AUC, logloss, precision@k, recall@k, NDCG.
+    \item Online: conversion rate (CVR), CTR, revenue/session, AOV, retention, fraud loss.
+  \end{itemize}
+  \begin{block}{Gold standard}
+    Randomized online experiments (A/B tests) to estimate \textbf{incremental} impact.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Monitoring and model governance}
+  Monitor:
+  \begin{itemize}
+    \item Data drift (feature distributions)
+    \item Performance drift (metrics over time)
+    \item Bias/fairness indicators
+    \item Latency, throughput, and cost
+  \end{itemize}
+  \vspace{0.4em}
+  \begin{alertblock}{Operational reality}
+    A ``good'' model can be harmful if it degrades silently or changes user behavior in unintended ways.
+  \end{alertblock}
+\end{frame}
+
+\section{6. Challenges, Ethics, and Future}
+
+\begin{frame}{Challenges and risks}
+  \begin{itemize}
+    \item Data quality + bias (feedback loops, exposure bias).
+    \item Privacy/security (regulatory obligations; breaches).
+    \item Explainability (fraud blocks, credit-like decisions).
+    \item Scalability + cost (training/serving at scale).
+    \item Org readiness (MLOps, product alignment, legal).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Future directions}
+  \begin{itemize}
+    \item Generative AI for product content and conversational shopping.
+    \item Causal inference/uplift modeling for promotions and recommendations.
+    \item RL at scale for long-term value optimization.
+    \item Multimodal unified models (text+image+behavior).
+    \item Sustainability-aware optimization (logistics, returns).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Recap}
+  \begin{itemize}
+    \item E-commerce is a data-rich system spanning discovery, transactions, and operations.
+    \item AI/ML/DL appear across the value chain: recsys, search, pricing, fraud, forecasting, support.
+    \item Success requires systems thinking: deployment, experimentation, monitoring, and governance.
+  \end{itemize}
+  \vspace{0.6em}
+  \begin{block}{Prompt for discussion}
+    Where do you expect the \textbf{largest} gains from AI in e-commerce: discovery, pricing, or operations---and why?
+  \end{block}
+\end{frame}
+
+\end{document}
