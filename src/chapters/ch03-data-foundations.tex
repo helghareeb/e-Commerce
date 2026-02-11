@@ -1,0 +1,79 @@
+\chapter{E-Commerce Data Foundations: Events, Experimentation, and Metrics (Week 3)}
+\section{Scope (placeholder)}
+\begin{itemize}
+  \item Event schema design, identity resolution, attribution caveats, and data quality.
+  \item A/B testing, bandits, and experimentation at scale (conceptual).
+\end{itemize}
+\section{Hands-on lab (placeholder)}
+\begin{itemize}
+  \item Build an event log + simple metrics layer for conversion and retention.
+\end{itemize}
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item In event-based analytics for e-commerce, which statement is most accurate?
+  \begin{enumerate}
+    \item Events should be stored without timestamps to save space.
+    \item Events are most useful when they have a consistent schema, a timestamp, and stable identifiers.
+    \item Only purchase events matter; click and view events are noise.
+    \item The best schema changes frequently to match UI updates.
+  \end{enumerate}
+
+  \item Which is an example of a \emph{data quality} problem that can directly harm ML models?
+  \begin{enumerate}
+    \item A model uses a neural network instead of linear regression.
+    \item Missing or duplicated events for key actions (e.g., add-to-cart) create biased labels/features.
+    \item Using SQL instead of Python for ETL.
+    \item Choosing a smaller batch size during training.
+  \end{enumerate}
+
+  \item Why are offline metrics often insufficient for evaluating an e-commerce ranking model?
+  \begin{enumerate}
+    \item Offline metrics are always higher than online metrics.
+    \item Offline metrics cannot measure causal impact under real user behavior and feedback loops.
+    \item Offline evaluation cannot be computed from logs.
+    \item Offline metrics are not used in industry.
+  \end{enumerate}
+
+  \item In an A/B test, the primary purpose of randomization is to:
+  \begin{enumerate}
+    \item Increase model complexity.
+    \item Ensure the treatment and control groups are comparable in expectation.
+    \item Eliminate the need for monitoring.
+    \item Guarantee the KPI improves.
+  \end{enumerate}
+
+  \item A common \emph{identity resolution} challenge in e-commerce is:
+  \begin{enumerate}
+    \item Mapping product IDs to SKU IDs.
+    \item Linking the same person across devices/sessions while respecting privacy constraints.
+    \item Computing NDCG@$k$ efficiently.
+    \item Selecting a cloud region.
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+\end{enumerate}
+
+\section{Exercises (short)}
+\begin{enumerate}
+  \item Propose an event taxonomy for a storefront: list at least 10 events (search, view, add-to-cart, checkout steps, purchase, return) and for each event specify 3--5 key fields.
+  \item Define a North Star metric for an e-commerce product and break it into 3--5 leading indicators. Explain how you would compute each from event logs.
+  \item Design a simple A/B test for a recommendation widget. Specify: unit of randomization, primary KPI, guardrail metrics, and an example of a bias/confounder to watch for.
+\end{enumerate}
+
+\section{Mini-case (Odoo-linked, vendor-neutral)}
+\textbf{Scenario:} A hybrid B2C/B2B company uses Odoo (Sales, Inventory, Accounting, CRM). The storefront and mobile app generate clickstream events.
+
+\textbf{Task:} Design a minimal data model that supports both analytics and ML:
+\begin{itemize}
+  \item Define how you will link clickstream identities to Odoo customers/partners (when possible) and how you handle guests.
+  \item Propose which entities should have stable IDs across systems (customer, product, order, shipment) and which are channel-specific.
+  \item Specify 5 ``data contracts'' (producer $\rightarrow$ consumer) that reduce breakage when the UI or ERP changes.
+\end{itemize}

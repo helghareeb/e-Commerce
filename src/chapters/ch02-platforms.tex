@@ -1,0 +1,400 @@
+\chapter{Platforms, Marketplaces, and Business Models (Week 2)}
+
+\section{Learning objectives}
+\begin{itemize}
+  \item Distinguish e-commerce \emph{channels} (storefronts) from \emph{platforms} (ecosystems) and \emph{marketplaces} (multi-seller).
+  \item Analyze platform economics: network effects, multi-homing, and pricing of participation.
+  \item Translate business model choices into architectural requirements (identity, trust, data, integration, ERP).
+\end{itemize}
+
+\section{From storefront to platform}
+\begin{itemize}
+  \item \textbf{Storefront:} a single merchant selling to buyers (B2C/B2B) via a web/app channel.
+  \item \textbf{Platform:} a system that enables interactions among multiple participant groups (e.g., buyers, sellers, advertisers, logistics providers).
+  \item \textbf{Marketplace:} a platform where multiple sellers list items and transactions are mediated by platform policies and infrastructure.
+\end{itemize}
+
+\section{Value creation, value capture, and growth}
+\subsection{Value creation and matching}
+Platforms create value by reducing search and transaction costs, increasing variety, and improving trust; AI frequently strengthens these effects by improving matching and decision support.
+
+\subsection{Value capture models}
+\begin{itemize}
+  \item Take rate (commission on completed transactions)
+  \item Subscription (seller or buyer membership tiers)
+  \item Listing fees and value-added services (e.g., promotions, analytics)
+  \item Advertising (sponsored listings, retail media)
+  \item Fulfillment fees (warehousing, last-mile delivery, returns handling)
+\end{itemize}
+
+\subsection{Network effects}
+\begin{itemize}
+  \item \textbf{Direct network effects:} more users attract more users (e.g., social commerce communities).
+  \item \textbf{Indirect network effects:} more buyers attract more sellers and vice versa (classic marketplace dynamic).
+  \item \textbf{Cold start:} bootstrapping supply and demand when network effects are weak.
+  \item \textbf{Multi-homing:} sellers/buyers participate in multiple platforms; affects differentiation strategy.
+\end{itemize}
+
+\section{Governance and trust as system requirements}
+Marketplace governance is not ``policy only'': it becomes a set of product and system requirements.
+\begin{itemize}
+  \item Seller onboarding, verification, and compliance workflows (KYC/KYB where relevant).
+  \item Catalog integrity: listing policies, moderation, and counterfeit detection.
+  \item Reviews/ratings, dispute resolution, refunds/returns policy enforcement.
+  \item Trust \& safety operations: rule+ML detection, case management, and human-in-the-loop escalation.
+\end{itemize}
+
+\section{Business model patterns (and architectural implications)}
+\subsection{B2C retail}
+\begin{itemize}
+  \item Key systems: PIM/catalog, promotions, payments, fulfillment, customer support.
+  \item ERP/CRM integration: order-to-cash, inventory, accounting, returns.
+\end{itemize}
+
+\subsection{B2B commerce}
+\begin{itemize}
+  \item Quotes, negotiated pricing, approval workflows, invoicing, credit limits.
+  \item Integration-heavy: procurement, supplier management, and EDI/API flows.
+\end{itemize}
+
+\subsection{Marketplace}
+\begin{itemize}
+  \item Split catalog ownership (platform vs sellers), seller tools, payout/settlement.
+  \item Additional ``control plane'': seller policies, listing moderation, abuse prevention.
+\end{itemize}
+
+\subsection{Digital services (subscriptions)}
+\begin{itemize}
+  \item Recurring billing, entitlements, and churn/retention analytics.
+  \item Usage-based pricing requires event design and metering.
+\end{itemize}
+
+\section{Where AI fits (system-level view)}
+\begin{itemize}
+  \item \textbf{Matching layer:} search, recommendations, ranking.
+  \item \textbf{Trust layer:} fraud/abuse detection, content moderation.
+  \item \textbf{Operations layer:} forecasting, replenishment, routing.
+  \item \textbf{Experience layer:} personalization and conversational commerce.
+\end{itemize}
+
+\section{Hands-on (placeholder)}
+\begin{itemize}
+  \item Create a one-page \emph{platform blueprint}: participant groups, value exchange, pricing model, and required capabilities.
+  \item Map capabilities to an EA view and identify which capabilities are ERP-owned vs commerce-owned.
+\end{itemize}
+
+\section{Case studies (placeholder)}
+\begin{itemize}
+  \item Modern marketplace patterns (generic; no vendor lock-in).
+\end{itemize}
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item Which statement best distinguishes a \emph{storefront} from a \emph{marketplace}?
+  \begin{enumerate}
+    \item A storefront is always B2B; a marketplace is always B2C.
+    \item A storefront has a single merchant of record; a marketplace mediates transactions among multiple sellers and buyers.
+    \item A storefront cannot use AI; a marketplace must use AI.
+    \item A storefront requires ERP integration; a marketplace does not.
+  \end{enumerate}
+
+  \item \emph{Indirect network effects} in marketplaces most directly mean:
+  \begin{enumerate}
+    \item The platform has a single user group and growth is linear.
+    \item The value to buyers increases as more sellers join, and the value to sellers increases as more buyers join.
+    \item Users prefer multiple platforms (multi-homing) regardless of differentiation.
+    \item The platform must subsidize logistics to succeed.
+  \end{enumerate}
+
+  \item In B2B commerce, which requirement is \textbf{most typical} compared to B2C?
+  \begin{enumerate}
+    \item Session-based recommendations
+    \item Negotiated pricing and approval workflows
+    \item Visual search
+    \item Social reviews and influencer marketing
+  \end{enumerate}
+
+  \item \emph{Multi-homing} refers to:
+  \begin{enumerate}
+    \item Hosting the platform in multiple cloud regions.
+    \item Sellers or buyers participating in multiple platforms simultaneously.
+    \item Using multiple payment gateways for redundancy.
+    \item Maintaining multiple warehouses for the same SKU.
+  \end{enumerate}
+
+  \item Which is the \textbf{best} example of a marketplace \emph{governance} capability?
+  \begin{enumerate}
+    \item Re-ranking items using embeddings
+    \item Seller onboarding verification and dispute resolution policies
+    \item Demand forecasting for replenishment
+    \item Offline model training with hyperparameter tuning
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+\end{enumerate}
+\chapter{Platforms, Marketplaces, and Business Models (Week 2)}
+
+\section{Learning objectives}
+\begin{itemize}
+  \item Distinguish e-commerce \emph{channels} (storefronts) from \emph{platforms} (ecosystems) and \emph{marketplaces} (multi-seller).
+  \item Analyze platform economics: network effects, multi-homing, and pricing of participation.
+  \item Translate business model choices into architectural requirements (identity, trust, data, integration, ERP).
+\end{itemize}
+
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item Which statement best distinguishes a \emph{storefront} from a \emph{marketplace}?
+  \begin{enumerate}
+    \item A storefront is always B2B; a marketplace is always B2C.
+    \item A storefront has a single merchant of record; a marketplace mediates transactions among multiple sellers and buyers.
+    \item A storefront cannot use AI; a marketplace must use AI.
+    \item A storefront requires ERP integration; a marketplace does not.
+  \end{enumerate}
+
+  \item \emph{Indirect network effects} in marketplaces most directly mean:
+  \begin{enumerate}
+    \item The platform has a single user group and growth is linear.
+    \item The value to buyers increases as more sellers join, and the value to sellers increases as more buyers join.
+    \item Users prefer multiple platforms (multi-homing) regardless of differentiation.
+    \item The platform must subsidize logistics to succeed.
+  \end{enumerate}
+
+  \item In B2B commerce, which requirement is \textbf{most typical} compared to B2C?
+  \begin{enumerate}
+    \item Session-based recommendations
+    \item Negotiated pricing and approval workflows
+    \item Visual search
+    \item Social reviews and influencer marketing
+  \end{enumerate}
+
+  \item \emph{Multi-homing} refers to:
+  \begin{enumerate}
+    \item Hosting the platform in multiple cloud regions.
+    \item Sellers or buyers participating in multiple platforms simultaneously.
+    \item Using multiple payment gateways for redundancy.
+    \item Maintaining multiple warehouses for the same SKU.
+  \end{enumerate}
+
+  \item Which is the \textbf{best} example of a marketplace \emph{governance} capability?
+  \begin{enumerate}
+    \item Re-ranking items using embeddings
+    \item Seller onboarding verification and dispute resolution policies
+    \item Demand forecasting for replenishment
+    \item Offline model training with hyperparameter tuning
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+\end{enumerate}
+
+\section{Scope}
+\begin{itemize}
+
+  \item Multi-sided platforms, network effects, platform governance, and incentives.
+  \item B2B e-commerce, procurement portals, and industry-specific marketplaces.\end{itemize}
+\section{Core concepts for Master's students}
+\subsection{From storefront to platform}
+\begin{itemize}
+  \item \textbf{Storefront:} a single merchant selling to buyers (B2C/B2B) via a web/app channel.
+  \item \textbf{Platform:} a system that enables interactions among multiple participant groups (e.g., buyers, sellers, advertisers, logistics providers).
+  \item \textbf{Marketplace:} a platform where multiple sellers list items and transactions are mediated by platform policies and infrastructure.
+\end{itemize}
+
+\subsection{Value creation and capture}
+\begin{itemize}
+  \item \textbf{Value creation:} reduce search/transaction costs, increase variety, improve trust, and improve matching (often AI-driven).
+  \item \textbf{Value capture:} take rate, subscription, listing fees, ads, fulfillment fees, and data/analytics products.
+\end{itemize}
+
+\subsection{Network effects and growth loops}
+\begin{itemize}
+  \item \textbf{Direct network effects:} more users attract more users (e.g., social commerce communities).
+  \item \textbf{Indirect network effects:} more buyers attract more sellers and vice versa (classic marketplace dynamic).
+  \item \textbf{Cold start:} early-stage bootstrapping strategies (seed supply vs seed demand).
+  \item \textbf{Multi-homing:} sellers/buyers participating in multiple platforms; implications for loyalty and differentiation.
+\end{itemize}
+
+\subsection{Governance and trust}
+\begin{itemize}
+  \item Identity and onboarding (KYC/KYB where relevant), seller verification, and catalog integrity.
+  \item Reviews/ratings, dispute management, returns policy, and service-level enforcement.
+  \item Trust \& safety as an \emph{operating system} for the marketplace: policies + detection + human-in-the-loop.
+\end{itemize}
+
+\section{Business model patterns (with architectural implications)}
+\subsection{B2C retail}
+\begin{itemize}
+  \item Key systems: product information management (PIM), promotions, payments, fulfillment, customer service.
+  \item ERP/CRM integration: order-to-cash, inventory, accounting, returns.
+\end{itemize}
+
+\subsection{B2B commerce}
+\begin{itemize}
+  \item Quotation, contracts, negotiated pricing, credit limits, invoicing, and approval workflows.
+  \item Integration-heavy by nature: procurement, supplier management, and EDI/API flows.
+\end{itemize}
+
+\subsection{Marketplace}
+\begin{itemize}
+  \item Split catalog ownership (platform vs sellers), seller tools, and payout/settlement.
+  \item Additional control plane: seller policies, listing moderation, and fraud/abuse prevention.
+\end{itemize}
+
+\subsection{Digital services (subscriptions)}
+\begin{itemize}
+  \item Recurring billing, entitlement management, and churn/retention analytics.
+  \item Usage-based pricing requires event design and metering.
+\end{itemize}
+
+\section{AI is not ``a feature'': where it fits in the platform}
+\begin{itemize}
+  \item \textbf{Matching layer:} search, recommendations, and ranking across buyers and sellers.
+  \item \textbf{Trust layer:} fraud detection, abuse detection, and content moderation.
+  \item \textbf{Operations layer:} forecasting, replenishment, routing, and workforce planning.
+  \item \textbf{Experience layer:} conversational commerce, assistants, and personalization.
+\end{itemize}
+
+\section{Hands-on (placeholder)}
+\begin{itemize}
+  \item Build a one-page \emph{platform blueprint}: participant groups, value exchange, pricing model, and required capabilities.
+  \item Map the blueprint to a capability map and identify which capabilities are ERP-owned vs commerce-owned.
+\end{itemize}
+
+\section{Core concepts for Master's students}
+\subsection{From storefront to platform}
+\begin{itemize}
+  \item \textbf{Storefront:} a single merchant selling to buyers (B2C/B2B) via a web/app channel.
+  \item \textbf{Platform:} a system that enables interactions among multiple participant groups (e.g., buyers, sellers, advertisers, logistics providers).
+  \item \textbf{Marketplace:} a platform where multiple sellers list items and transactions are mediated by platform policies and infrastructure.
+\end{itemize}
+
+\subsection{Value creation and capture}
+\begin{itemize}
+  \item \textbf{Value creation:} reduce search/transaction costs, increase variety, improve trust, and improve matching (often AI-driven).
+  \item \textbf{Value capture:} take rate, subscription, listing fees, ads, fulfillment fees, and data/analytics products.
+\end{itemize}
+
+\subsection{Network effects and growth loops}
+\begin{itemize}
+  \item \textbf{Direct network effects:} more users attract more users (e.g., social commerce communities).
+  \item \textbf{Indirect network effects:} more buyers attract more sellers and vice versa (classic marketplace dynamic).
+  \item \textbf{Cold start:} early-stage bootstrapping strategies (seed supply vs seed demand).
+  \item \textbf{Multi-homing:} sellers/buyers participating in multiple platforms; implications for loyalty and differentiation.
+\end{itemize}
+
+\subsection{Governance and trust}
+\begin{itemize}
+  \item Identity and onboarding (KYC/KYB where relevant), seller verification, and catalog integrity.
+  \item Reviews/ratings, dispute management, returns policy, and service-level enforcement.
+  \item Trust \& safety as an \emph{operating system} for the marketplace: policies + detection + human-in-the-loop.
+\end{itemize}
+
+\section{Business model patterns (with architectural implications)}
+\subsection{B2C retail}
+\begin{itemize}
+  \item Key systems: product information management (PIM), promotions, payments, fulfillment, customer service.
+  \item ERP/CRM integration: order-to-cash, inventory, accounting, returns.
+\end{itemize}
+
+\subsection{B2B commerce}
+\begin{itemize}
+  \item Quotation, contracts, negotiated pricing, credit limits, invoicing, and approval workflows.
+  \item Integration-heavy by nature: procurement, supplier management, and EDI/API flows.
+\end{itemize}
+
+\subsection{Marketplace}
+\begin{itemize}
+  \item Split catalog ownership (platform vs sellers), seller tools, and payout/settlement.
+  \item Additional control plane: seller policies, listing moderation, and fraud/abuse prevention.
+\end{itemize}
+
+\subsection{Digital services (subscriptions)}
+\begin{itemize}
+  \item Recurring billing, entitlement management, and churn/retention analytics.
+  \item Usage-based pricing requires event design and metering.
+\end{itemize}
+
+\section{AI is not ``a feature'': where it fits in the platform}
+\begin{itemize}
+  \item \textbf{Matching layer:} search, recommendations, and ranking across buyers and sellers.
+  \item \textbf{Trust layer:} fraud detection, abuse detection, and content moderation.
+  \item \textbf{Operations layer:} forecasting, replenishment, routing, and workforce planning.
+  \item \textbf{Experience layer:} conversational commerce, assistants, and personalization.
+\end{itemize}
+
+\section{Hands-on (placeholder)}
+\begin{itemize}
+  \item Build a one-page \emph{platform blueprint}: participant groups, value exchange, pricing model, and required capabilities.
+  \item Map the blueprint to a capability map and identify which capabilities are ERP-owned vs commerce-owned.
+\end{itemize}
+\section{Case studies (placeholder)}
+\begin{itemize}
+}
+  \item Modern marketplace patterns (generic, no vendor lock-in)\end{itemize}
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item Which statement best distinguishes a \emph{storefront} from a \emph{marketplace}?
+  \begin{enumerate}
+    \item A storefront is always B2B; a marketplace is always B2C.
+    \item A storefront has a single merchant of record; a marketplace mediates transactions among multiple sellers and buyers.
+    \item A storefront cannot use AI; a marketplace must use AI.
+    \item A storefront requires ERP integration; a marketplace does not.
+  \end{enumerate}
+
+  \item \emph{Indirect network effects} in marketplaces most directly mean:
+  \begin{enumerate}
+    \item The platform has a single user group and growth is linear.
+    \item The value to buyers increases as more sellers join, and the value to sellers increases as more buyers join.
+    \item Users prefer multiple platforms (multi-homing) regardless of differentiation.
+    \item The platform must subsidize logistics to succeed.
+  \end{enumerate}
+
+  \item In B2B commerce, which requirement is \textbf{most typical} compared to B2C?
+  \begin{enumerate}
+    \item Session-based recommendations
+    \item Negotiated pricing and approval workflows
+    \item Visual search
+    \item Social reviews and influencer marketing
+  \end{enumerate}
+
+  \item \emph{Multi-homing} refers to:
+  \begin{enumerate}
+    \item Hosting the platform in multiple cloud regions.
+    \item Sellers or buyers participating in multiple platforms simultaneously.
+    \item Using multiple payment gateways for redundancy.
+    \item Maintaining multiple warehouses for the same SKU.
+  \end{enumerate}
+
+  \item Which is the \textbf{best} example of a marketplace \emph{governance} capability?
+  \begin{enumerate}
+    \item Re-ranking items using embeddings
+    \item Seller onboarding verification and dispute resolution policies
+    \item Demand forecasting for replenishment
+    \item Offline model training with hyperparameter tuning
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+\end{enumerate}
+}

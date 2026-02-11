@@ -1,0 +1,152 @@
+\chapter{ERP/CRM/SCM Integration in Commerce (Week 6)}
+\section{Scope (placeholder)}
+\begin{itemize}
+  \item Odoo overview (high-level): key modules relevant to commerce (Sales, Inventory, Accounting, CRM).
+  \item Order-to-cash, inventory, fulfillment, returns, and customer data flows.
+  \item Master data management (MDM) and data ownership across domains.
+\end{itemize}
+\section{Artifacts (placeholder)}
+\begin{itemize}
+  \item Deliverable: integration context diagram + data contracts (high level), including an Odoo boundary.
+\end{itemize}
+
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item In an integrated commerce + ERP architecture, the \emph{system of record} is best defined as:
+  \begin{enumerate}
+    \item The system with the nicest UI
+    \item The system that is most convenient for analytics
+    \item The authoritative source of truth for a given entity (e.g., invoice) and its lifecycle
+    \item The system that runs in the cloud
+  \end{enumerate}
+
+  \item Which flow is most strongly associated with \emph{order-to-cash}?
+  \begin{enumerate}
+    \item Creating a product image embedding
+    \item Quote/order $\rightarrow$ delivery $\rightarrow$ invoice $\rightarrow$ payment reconciliation
+    \item Building a recommendation model
+    \item Defining a Kafka topic
+  \end{enumerate}
+
+  \item Master data management (MDM) is primarily concerned with:
+  \begin{enumerate}
+    \item Training deep learning models for search
+    \item Defining and governing shared entities (customer, product, supplier) and preventing duplicates/inconsistencies
+    \item Choosing the best database index
+    \item Encrypting API requests
+  \end{enumerate}
+
+  \item A common integration risk when connecting commerce with ERP is:
+  \begin{enumerate}
+    \item Too many unit tests
+    \item Duplicate sources of truth for prices, customers, or inventory
+    \item Having an event schema
+    \item Using idempotency keys
+  \end{enumerate}
+
+  \item In practice, why do integrations often require both APIs and events?
+  \begin{enumerate}
+    \item Because events are always cheaper than APIs
+    \item Because some steps require immediate confirmation while others benefit from decoupling and retries
+    \item Because ERP systems cannot expose APIs
+    \item Because events guarantee zero duplicates without design effort
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (c)
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+\end{enumerate}
+
+\section{Exercises (short)}
+\begin{enumerate}
+  \item For each entity, choose a system of record (commerce vs Odoo) and justify: customer, product, price list, inventory on-hand, order, invoice, payment, return.
+  \item Describe two failure modes of inventory sync and propose mitigations (e.g., eventual consistency, reservations, reconciliation jobs).
+  \item Draft a ``data contract'' for an \texttt{OrderCreated} event: required fields, optional fields, and versioning rules.
+\end{enumerate}
+
+\section{Mini-case (Odoo-linked, vendor-neutral)}
+\textbf{Scenario:} A hybrid company runs a headless storefront for B2C and a B2B portal for wholesale customers. Odoo is used for Sales, Inventory, Accounting, and CRM.
+
+\textbf{Task:} Design the integration for three end-to-end processes:
+\begin{itemize}
+  \item \textbf{Order-to-cash:} from checkout to invoice posting and payment reconciliation.
+  \item \textbf{Returns/refunds:} from return request to stock adjustment and credit note.
+  \item \textbf{B2B pricing:} negotiated price lists and approvals without duplicating sources of truth.
+\end{itemize}
+For each process, state: key events, required synchronous calls, idempotency strategy, and the minimum monitoring you would implement.
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item In an integrated commerce + ERP architecture, the \emph{system of record} is best defined as:
+  \begin{enumerate}
+    \item The system with the nicest UI
+    \item The system that is most convenient for analytics
+    \item The authoritative source of truth for a given entity (e.g., invoice) and its lifecycle
+    \item The system that runs in the cloud
+  \end{enumerate}
+
+  \item Which flow is most strongly associated with \emph{order-to-cash}?
+  \begin{enumerate}
+    \item Creating a product image embedding
+    \item Quote/order $\rightarrow$ delivery $\rightarrow$ invoice $\rightarrow$ payment reconciliation
+    \item Building a recommendation model
+    \item Defining a Kafka topic
+  \end{enumerate}
+
+  \item Master data management (MDM) is primarily concerned with:
+  \begin{enumerate}
+    \item Training deep learning models for search
+    \item Defining and governing shared entities (customer, product, supplier) and preventing duplicates/inconsistencies
+    \item Choosing the best database index
+    \item Encrypting API requests
+  \end{enumerate}
+
+  \item A common integration risk when connecting commerce with ERP is:
+  \begin{enumerate}
+    \item Too many unit tests
+    \item Duplicate sources of truth for prices, customers, or inventory
+    \item Having an event schema
+    \item Using idempotency keys
+  \end{enumerate}
+
+  \item In practice, why do integrations often require both APIs and events?
+  \begin{enumerate}
+    \item Because events are always cheaper than APIs
+    \item Because some steps require immediate confirmation while others benefit from decoupling and retries
+    \item Because ERP systems cannot expose APIs
+    \item Because events guarantee zero duplicates without design effort
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (c)
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+\end{enumerate}
+
+\section{Exercises (short)}
+\begin{enumerate}
+  \item For each entity, choose a system of record (commerce vs Odoo) and justify: customer, product, price list, inventory on-hand, order, invoice, payment, return.
+  \item Describe two failure modes of inventory sync and propose mitigations (e.g., eventual consistency, reservations, reconciliation jobs).
+  \item Draft a ``data contract'' for an \texttt{OrderCreated} event: required fields, optional fields, and versioning rules.
+\end{enumerate}
+
+\section{Mini-case (Odoo-linked, vendor-neutral)}
+\textbf{Scenario:} A hybrid company runs a headless storefront for B2C and a B2B portal for wholesale customers. Odoo is used for Sales, Inventory, Accounting, and CRM.
+
+\textbf{Task:} Design the integration for three end-to-end processes:
+\begin{itemize}
+  \item \textbf{Order-to-cash:} from checkout to invoice posting and payment reconciliation.
+  \item \textbf{Returns/refunds:} from return request to stock adjustment and credit note.
+  \item \textbf{B2B pricing:} negotiated price lists and approvals without duplicating sources of truth.
+\end{itemize}
+For each process, state: key events, required synchronous calls, idempotency strategy, and the minimum monitoring you would implement.

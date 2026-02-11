@@ -1,0 +1,384 @@
+\chapter{An Introduction to E-Commerce with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+
+\section*{Abstract}
+Electronic commerce (e-commerce) has evolved from static online catalogs into highly dynamic, data-driven ecosystems.
+This transformation has been powered largely by advances in artificial intelligence (AI), particularly machine learning (ML) and deep learning (DL).
+This chapter introduces the foundations of e-commerce and explains how AI techniques are embedded across the e-commerce value chain---from customer acquisition and product discovery to pricing, logistics, and fraud prevention.
+The discussion is aimed at master's students in computer and information sciences, and therefore emphasizes conceptual clarity, system-level thinking, and the mapping between theoretical models and real-world e-commerce applications.
+
+\textbf{Keywords:} e-commerce, artificial intelligence, machine learning, deep learning, recommendation systems, dynamic pricing, fraud detection, personalization, logistics optimization
+
+\section{Introduction to E-Commerce}
+E-commerce refers to the buying and selling of goods and services via electronic networks, primarily the internet \citep{laudon2024ecommerce}.
+It encompasses a broad set of transactional models: business-to-consumer (B2C) online retail, business-to-business (B2B) procurement platforms, consumer-to-consumer (C2C) marketplaces, and consumer-to-business (C2B) models such as influencer platforms and freelance marketplaces \citep{laudon2024ecommerce}.
+
+From a computing perspective, an e-commerce platform is not just a web front-end.
+It is a socio-technical system composed of:
+\begin{itemize}
+  \item User interfaces (web, mobile, conversational)
+  \item Application logic (catalog, cart, checkout, account management)
+  \item Payment and risk engines
+  \item Logistics and fulfillment systems
+  \item Data infrastructure and analytics pipelines
+  \item AI/ML components that drive personalization, prediction, and automation
+\end{itemize}
+
+A key characteristic of e-commerce is its data richness.
+Every user interaction---page views, searches, clicks, scrolls, wishlists, add-to-carts, purchases, returns, and even time-to-decision---can be captured as fine-grained behavioral logs.
+Combined with product metadata, prices, promotions, and external contextual data, this creates an ideal environment for AI and ML \citep{laudon2024ecommerce,kleppmann2017ddia}.
+
+\subsection{E-Commerce Business Models and Value Chain}
+Common e-commerce models include:
+\begin{itemize}
+  \item \textbf{B2C retail:} Online stores selling directly to consumers.
+  \item \textbf{Marketplaces:} Platforms mediating between many sellers and buyers.
+  \item \textbf{B2B platforms:} Portals for wholesale ordering, procurement, and supply chain integration.
+  \item \textbf{Digital services:} Software subscriptions, digital content, and online education.
+\end{itemize}
+
+Across these models, the \textbf{e-commerce value chain} typically includes:
+\begin{enumerate}
+  \item Customer acquisition and traffic generation (marketing, ads, SEO)
+  \item Product discovery and decision support (search, recommendations, reviews)
+  \item Conversion and transaction processing (checkout, payments, risk checks)
+  \item Order fulfillment and logistics (inventory, warehousing, routing)
+  \item Post-purchase engagement (support, returns, loyalty, re-activation)
+\end{enumerate}
+
+\noindent AI, ML, and DL are now present at each stage of this chain \citep{laudon2024ecommerce}.
+
+\section{Foundations of AI, Machine Learning, and Deep Learning}
+\subsection{Definitions and Relationships}
+\begin{itemize}
+  \item \textbf{Artificial Intelligence (AI):} Systems that exhibit behaviors considered ``intelligent'' (perception, reasoning, learning, decision-making).
+  \item \textbf{Machine Learning (ML):} Algorithms that learn patterns from data and improve with experience.
+  \item \textbf{Deep Learning (DL):} ML methods based on multi-layer neural networks that learn representations from large-scale data.
+\end{itemize}
+Thus, deep learning $\subset$ machine learning $\subset$ artificial intelligence \citep{goodfellow2016dl,murphy2022ml,hastie2009esl}.
+
+\subsection{Types of Learning and E-Commerce Examples}
+\begin{enumerate}
+  \item \textbf{Supervised learning:} learn $f:X\rightarrow Y$ from labeled examples $(x_i,y_i)$.
+  Examples: conversion prediction, fraud classification, demand forecasting.
+  \item \textbf{Unsupervised learning:} discover structure in unlabeled data.
+  Examples: customer segmentation, anomaly detection, and learning embeddings from interactions.
+  \item \textbf{Reinforcement learning:} learn a policy to maximize long-term reward.
+  Examples: recommendation policies and dynamic pricing under constraints.
+  \item \textbf{Representation learning:} learn features $\phi(x)$ automatically (often via DL).
+  Examples: user/item embeddings; Transformer-based session representations.
+\end{enumerate}
+
+\section{Machine Learning Across the E-Commerce Lifecycle}
+\subsection{Personalized Recommendations}
+Recommendation systems use past behavior and product attributes to suggest items a user is likely to buy \citep{aggarwal2016recsys,koren2009mf}.
+Key evaluation ideas include ranking quality (precision@$k$, recall@$k$, NDCG) and business impact (incremental revenue) \citep{jannach2017recsys_eval}.
+
+\subsection{Search and Ranking}
+Learning-to-rank uses user feedback (including clicks) to optimize product ranking in response to queries \citep{joachims2002ltr}.
+Modern systems increasingly incorporate semantic retrieval and NLP components \citep{jurafsky2023slp}.
+
+\subsection{Segmentation, churn, and CLV}
+Segmentation (e.g., via clustering) and predictive modeling (e.g., churn/CLV) connect behavioral data to marketing and retention actions \citep{hastie2009esl}.
+
+\subsection{Dynamic Pricing and Promotion Optimization}
+Pricing combines prediction (demand response) with optimization under constraints; evaluation typically requires controlled online experimentation \citep{laudon2024ecommerce,hastie2009esl}.
+
+\subsection{Demand Forecasting and Inventory Management}
+Forecasting methods range from statistical time-series models to ML sequence models; forecasts drive replenishment and inventory decisions \citep{ngai2011ec,hastie2009esl}.
+
+\subsection{Fraud Detection and Transaction Security}
+Fraud detection is an imbalanced classification problem with non-stationarity (attackers adapt), and must balance false positives against fraud loss \citep{dalpozzolo2015fraud,hastie2009esl}.
+
+\subsection{Customer Service and Conversational Commerce}
+Customer support automation mixes information retrieval, intent/entity extraction, and increasingly LLM-based interaction \citep{jurafsky2023slp}.
+
+\section{Deep Learning in E-Commerce}
+DL is especially useful for unstructured and high-dimensional data (text, images, sequences) \citep{goodfellow2016dl}.
+
+\subsection{Neural Recommendation Systems}
+Deep recommender architectures model non-linear user--item interactions and session dynamics \citep{covington2016youtube,hidasi2016gru4rec}.
+
+\subsection{NLP for Product Text and Reviews}
+NLP supports query understanding, semantic search, review analysis, and conversational interfaces \citep{jurafsky2023slp}.
+
+\subsection{Computer Vision and Visual Search}
+Vision models support category classification, attribute extraction, and similarity search via embeddings \citep{goodfellow2016dl}.
+
+\section{Data, Architecture, and Deployment Considerations}
+E-commerce ML requires robust pipelines (data quality, governance), reliable deployment (latency, availability), and continuous evaluation (monitoring and experiments) \citep{kleppmann2017ddia}.
+
+\section{Challenges and Responsible AI}
+Key challenges include bias, privacy/security, explainability for high-impact decisions, and the organizational processes needed for safe deployment \citep{laudon2024ecommerce,kleppmann2017ddia}.
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item Which relationship is correct?
+  \begin{enumerate}
+    \item AI $\subset$ ML $\subset$ DL
+    \item DL $\subset$ ML $\subset$ AI
+    \item ML $\subset$ DL $\subset$ AI
+    \item AI, ML, and DL are disjoint fields
+  \end{enumerate}
+
+  \item In e-commerce, which is \textbf{most} naturally framed as a \emph{ranking} problem?
+  \begin{enumerate}
+    \item Choosing the best warehouse location for a new facility
+    \item Ordering products in a search results page for a query
+    \item Estimating the total demand for next quarter
+    \item Balancing accounting entries for an invoice
+  \end{enumerate}
+
+  \item Which metric is \textbf{most} aligned with offline evaluation of a top-$k$ recommender?
+  \begin{enumerate}
+    \item NDCG@$k$
+    \item Mean squared error (MSE) on prices
+    \item Page load time (ms)
+    \item Uptime percentage
+  \end{enumerate}
+
+  \item Fraud detection is often difficult because:
+  \begin{enumerate}
+    \item Fraud labels are always perfectly accurate
+    \item The problem is typically extremely imbalanced and attackers adapt over time
+    \item Fraud has no economic cost, only technical cost
+    \item The best approach is always rule-based
+  \end{enumerate}
+
+  \item Which statement best describes why A/B testing is important in e-commerce ML?
+  \begin{enumerate}
+    \item It guarantees the model is unbiased
+    \item It measures causal impact on business KPIs under real user behavior
+    \item It replaces the need for offline evaluation entirely
+    \item It eliminates the need for monitoring after deployment
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (a)
+  \item (b)
+  \item (b)
+\end{enumerate}
+\chapter{An Introduction to E-Commerce with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+
+
+\begin{abstract}
+Electronic commerce (e-commerce) has evolved from static online catalogs into highly dynamic, data-driven ecosystems.
+This transformation has been powered largely by advances in artificial intelligence (AI), particularly machine learning (ML) and deep learning (DL).
+This chapter introduces the foundations of e-commerce and explains how AI techniques are embedded across the e-commerce value chain---from customer acquisition and product discovery to pricing, logistics, and fraud prevention.
+The discussion is aimed at master's students in computer and information sciences, and therefore emphasizes conceptual clarity, system-level thinking, and the mapping between theoretical models and real-world e-commerce applications.
+\end{abstract}
+
+\textbf{Keywords:} E-commerce, Artificial Intelligence, Machine Learning, Deep Learning, Recommendation Systems, Dynamic Pricing, Fraud Detection, Personalization, Logistics Optimization
+
+\section{Introduction to E-Commerce}
+E-commerce refers to the buying and selling of goods and services via electronic networks, primarily the internet.
+It encompasses a broad set of transactional models: business-to-consumer (B2C) online retail, business-to-business (B2B) procurement platforms, consumer-to-consumer (C2C) marketplaces, and consumer-to-business (C2B) models such as influencer platforms and freelance marketplaces.
+
+\citep{usal_ecommerce_ml_2024}
+
+\citep{usal_ecommerce_ml_2024}
+
+
+From a computing perspective, an e-commerce platform is not just a web front-end.
+It is a socio-technical system composed of:
+\begin{itemize}
+  \item User interfaces (web, mobile, conversational)
+  \item Application logic (catalog, cart, checkout, account management)
+  \item Payment and risk engines
+  \item Logistics and fulfillment systems
+  \item Data infrastructure and analytics pipelines
+  \item AI/ML components that drive personalization, prediction, and automation
+\end{itemize}
+
+A key characteristic of e-commerce is its data richness.
+Every user interaction---page views, searches, clicks, scrolls, wishlists, add-to-carts, purchases, returns, and even time-to-decision---can be captured as fine-grained behavioral logs.Combined with product metadata, prices, promotions, and external contextual data, this creates an ideal environment for AI and ML.
+\citep{nix_ml_ecommerce}
+
+
+
+\subsection{E-Commerce Business Models and Value Chain}
+Common e-commerce models include:
+\begin{itemize}
+  \item \textbf{B2C Retail:} Online stores selling directly to consumers (e.g., Amazon, local grocery delivery).
+  \item \textbf{Marketplaces:} Platforms mediating between many sellers and buyers (e.g., eBay, regional platforms).
+  \item \textbf{B2B Platforms:} Portals for wholesale ordering, procurement, and supply chain integration.
+  \item \textbf{Digital Services:} Software subscriptions, digital content, and online education.
+\end{itemize}
+
+Across these models, the \textbf{e-commerce value chain} typically includes:
+\begin{enumerate}
+  \item Customer acquisition and traffic generation (marketing, ads, SEO).
+  \item Product discovery and decision support (search, recommendations, reviews).
+  \item Conversion and transaction processing (checkout, payments, risk checks).
+  \item Order fulfillment and logistics (inventory, warehousing, routing).
+  \item Post-purchase engagement (support, returns, loyalty, re-activation\end{enumerate}
+\noindent AI, ML, and DL are now present at each stage of this chain.\citep{univio_ai_ecommerce}
+
+}
+
+\section{Foundations of AI, Machine Learning, and Deep Learning}
+\subsection{Definitions and Relationships}
+\begin{itemize}
+  \item \textbf{Artificial Intelligence (AI):} The broader field focused on building systems that exhibit behaviors considered ``intelligent,'' such as perception, reasoning, learning, and decision-making.
+  \item \textbf{Machine Learning (ML):} A subfield of AI that develops algorithms which learn patterns from data and improve with experience, rather than relying on explicit, hand-crafted rules.
+  \item \textbf{Deep Learning (DL):} A subfield of ML based on artificial neural networks with many layers, capable of automatically learning complex representations from large volumes of data, particularly unstructured data such as images, text, and click sequences.
+\end{itemize}
+ThThus, deep learning $\subset$ machine learning $\subset$ artificial intelligence.
+\citep{jcer_ai_ml_dl_ebook,raschka_intro_dl_ch01,routledge_ai_freebook}
+
+\subsection{Types of Learning and E-Commerce Examples}
+\begin{enumerate}
+  \item \textbf{Supervised learning:} Learn a mapping $f:X\rightarrow Y$ from labeled examples $(x_i,y_i)$.
+  Examples: conversion prediction, fraud classification, demand forecasting.
+  \item \textbf{Unsupervised learning:} Discover structure in unlabeled data.
+  Examples: customer clustering, anomaly detection, learning product embeddings from co-view/co-purchase graphs.
+  \item \textbf{Reinforcement learning (RL):} Learn a policy that maps states to actions to maximize long-term reward.
+  Examples: adaptive recommendation strategies; dynamic pricing agents balancing revenue, churn, and fairness constraints.
+  \item \textbf{Representation learning (often via DL):} Learn feature representations $\phi(x)$ automatically.
+  Examples: user/item embeddings; Transformer-based session models.
+\end{enumerate}
+
+\noindent AI, ML, and DL are now present at each stage of this chain.\citep{univio_ai_ecommerce}
+
+\section{Machine Learning Across the E-Commerce LifecycML algorithms are now embedded in nearly all functional domains of e-commerce, including recommendation, fraud detection, demand forecasting, pricing, and customer segmentation.
+\citep{nix_ml_ecommerce}
+
+n.
+
+\subsection{Personalized Recommendations}
+Recommendation systems use past behavior and product attributes to suggest items a user is likely to buy.
+Typical approaches include:
+\begin{itemize}
+  \item \textbf{Collaborative filtering:} Uses an interaction matrix $R=[r_{ui}]$.
+  Memory-based $k$-nearest neighbors over users or items; model-based matrix factorization:
+  \[
+    \hat{r}_{ui}=\mathbf{p}_u^\top \mathbf{q}_i,
+  \]
+  where $\mathbf{p}_u$ and $\mathbf{q}_i$ are latent factors for user and item.
+  \item \textbf{Content-based filtering:} Uses item features (category, brand, text description, image features) and user profiles to recommend similar items.
+  \item \textbf{Hybrid models:} Combine collaborative and content-based signals, often via gradient boosted trees or neural ranking models.
+\end{itemCommon evaluation metrics include precision@$k$, recall@$k$, NDCG, click-through rate (CTR), and incremental revenue.
+\citep{gfg_ml_usecases_ecommerce}
+
+ue.
+
+\subsection{Search and Ranking}
+E-commerce search engines retrieve and rank products based on user queries.
+ML enters at multiple layers: query understanding (spell correction, synonyms, intent classification), learning-to-rank, and personalized re-ranDeep learning methods increasingly support semantic search by encoding queries and products into dense embeddings.
+\citep{ieee_ecommerce_ai_11009009}
+
+ngs.
+
+\subsection{Customer Segmentation and Lifetime Value}
+Customer segmentation partitions users into groups with similar behavioral patterns, enabling tailored marketing and personalization strategies.
+Clustering methods include $k$-means, Gaussian mixture models, and density-based clustering using features such as recency, frequency, and monetary value Supervised models estimate churn probability and customer lifetime value (CLV), often approximated by the discounted sum of expected future purchases.
+\citep{usal_ecommerce_ml_2024,nix_ml_ecommerce}
+
+ases.
+
+\subsection{Dynamic Pricing and Promotion Optimization}
+ML models can predict demand as a function of price, promotions, competitor prices, seasonality, and user seTypical components include demand modeling (regression/boosted trees), constrained optimization for price setting, and online experimentation (A/B testing and bandits).
+\citep{univio_ai_ecommerce,nix_ml_ecommerce}
+
+dits).
+
+\subsection{Demand Forecasting and Inventory Management}
+Forecasting models integrate historical sales, seasonality, marketing campaigns, product lifecycle stages, and external Approaches range from ARIMA/exponential smoothing to gradient boosting and sequence models; forecasts feed inventory planning, warehouse allocation, and supplier ordering.
+\citep{univio_ai_ecommerce}
+
+dering.
+
+\subsection{Fraud Detection and Transaction Security}
+Fraud and account takeover are major risks in e-commerce.
+Rule-based systems struggle to adapt to new attack patterns; ML models learn from high-dimensional features such as device fingerprints, geolocation, velocity indicators, and userSupervised learning is complemented by unsupervised and semi-supervised anomaly detection, and by graph-based methods in relational settings.
+\citep{nexocode_fraud_ml,unl_fraud_slr}
+
+ettings.
+
+\subsection{Customer Service, Chatbots, and Virtual Assistants}
+AI-powered chatbots and virtual assistants support customers 24/7, answering queries about orders, returns, product details, and troublTypical components include intent classification, named entity recognition (NER), dialogue management, and response generation via templates, retrieval, or generative language models.
+\citep{univio_ai_ecommerce,gfg_ml_usecases_ecommerce}
+
+e models.
+
+\section{Deep Learning in Deep learning plays a central role in handling large-scale, high-dimensional, and unstructured data typical of modern e-commerce systems.
+\citep{usal_ecommerce_ml_2024}
+
+e systems.
+
+\subsection{Neural Recommendation Systems}
+Deep recommendation models can replace the dot product $\mathbf{p}_u^\top \mathbf{q}_i$ with a neural network $f_\theta(\mathbf{p}_u,\mathbf{q}_i)$ to learn non-linear iSequence-based recommenders (RNNs/Transformers) model user sessions; context-aware models incorporate device, time, location, and campaign signals.
+\citep{ieee_ecommerce_ai_11009009}
+
+gn signals.
+
+\subsection{Natural Language Processing (NLP) for DL-based NLP supports review analysis (sentiment and aspects), query understanding and semantic search, and conversational AI for multi-turn customer support.
+\citep{ieee_ecommerce_ai_11009009}
+
+mer support.
+
+\subsection{Computer Vision and Computer vision enables image classification, object detection, visual search via embeddings, and content moderation for catalog integrity.
+\citep{gfg_ml_usecases_ecommerce}
+
+og integrity.
+
+\subsection{Sequential and Graph Modeling ofSequence models capture temporal dynamics and short-term intent; graph neural networks (GNNs) capture interaction graphs connecting users, items, categories, and attributes for recommendation and fraud detection.
+\citep{unl_fraud_slr}
+
+aud detection.
+
+\subsection{Deep Learning for Deep models help address class imbalance and temporal/adversarial patterns by learning non-linear boundaries and by incorporating sequences and graphs for real-time detection.
+\citep{iapress_fraud_dl}
+
+time detection.
+
+\section{AI for Operations, Logistics, and Marketing Optimization}
+\subsection{Logistics Applications include route optimization (ML + combinatorial optimization), warehouse automation (robots and vision), and inventory placement across warehouses.
+\citep{ttms_ai_ecommerce}
+
+ross warehouses.
+
+\subsection{Marketing and CaML supports response prediction, channel/budget optimization, and personalization; generative AI can assist with product descriptions, localization, and SEO-oriented text generation.
+\citep{univio_ai_ecommerce}
+
+ text generation.
+
+\section{Data, Architecture, and Deployment Considerations}
+\subsection{Data Sources and Feature Engineering}
+Typical data sources include behavioral logs, transactional records, the product catalog, customer data (where permitted), and Feature engineering transforms raw logs into model-ready features; DL reduces reliance on manual features but still benefits from strong input design.
+\citep{nix_ml_ecommerce}
+
+rong input design.
+
+\subsection{Offline Training vs.\ Online Serving}
+Most pipelines have an offline phase (extraction, cleaning, training, tuning, offline evaluation) and an online phase (real-time features, serving, and Streaming architectures and low-latency feature stores support real-time personalization and fraud detection.
+\citep{nix_ml_ecommerce}
+
+nd fraud detection.
+
+\subsection{Evaluation, Experimentation, and Monitoring}
+Offline metrics (AUC, precision@$k$, RMSE) are necessary but insufficient; online KPIs include conversion rate, average order value, revenue per session, retention,A/B testing is the standard for causal assessment; deployed models must be monitored for drift, bias, and performance degradation.
+\citep{ieee_ecommerce_ai_11009009}
+
+ormance degradation.
+
+\section{Challenges, Risks, and Ethical Considerations}
+\begin{enumerate}
+  \item \textbf{Data quality and bias:} Historical data can encode bias; models can amplify unfair outcomes.
+  \item \textbf{Privacy and security:} Collection and processing of user data raise privacy obligations; breaches and model attacks are risks.
+  \item \textbf{Explainability and transparency:} High-impact decisions (fraud blocking, credit) require interpretable policies and explanations.
+  \item \textbf{Scalability and cost:} Large models and low-latency serving require careful systems trade-offs.
+  \item \textbf{Organizational readiness:} Successful deployment requires culture, governance, and MLOps practices, not only algorithms.
+\end{enumerate}
+
+\section{Future Directions inProminent directions include generative AI for commerce, causal inference and uplift modeling, reinforcement learning at scale, multimodal and unified models, deeper use of graphs, and sustainability-aware optimization.
+\citep{univio_ai_ecommerce,ieee_ecommerce_ai_11009009}
+
+y-aware optimization.
+
+\section{Summary and Pedagogical Notes}
+This chapter introduced e-commerce as a data-rich, AI-intensive domain; clarified AI/ML/DL relationships; surveyed ML/DL applications; and highlighted deployment, evaluation, and ethical issues.
+Suggested follow-up activities include implementing a basic recommender, designing a fraud detection pipeline for imbalanced data, simulating A/B tests for ranking/pricing strategies, and analyzing an AI feature from technical and ethical perspectives.

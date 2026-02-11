@@ -1,0 +1,79 @@
+\chapter{Enterprise Architecture for E-Commerce (Week 4)}
+\section{Scope (placeholder)}
+\begin{itemize}
+  \item Capability maps, value streams, domain boundaries, and target architecture.
+  \item Reference views: business, application, data, and technology architectures.
+\end{itemize}
+\section{Artifacts (placeholder)}
+\begin{itemize}
+  \item Deliverable: e-commerce capability map + domain model.
+\end{itemize}
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item In enterprise architecture, a \emph{capability map} primarily describes:
+  \begin{enumerate}
+    \item A list of specific microservices and their endpoints.
+    \item \emph{What} the business does (stable abilities), independent of \emph{how} it is implemented.
+    \item The physical network topology of the data center.
+    \item A Gantt chart of the project plan.
+  \end{enumerate}
+
+  \item A good domain boundary (e.g., for a ``Catalog'' domain) typically aims to:
+  \begin{enumerate}
+    \item Maximize shared database tables across all teams.
+    \item Minimize coupling and define clear ownership of data and behaviors.
+    \item Ensure all operations are synchronous.
+    \item Avoid having APIs.
+  \end{enumerate}
+
+  \item Which artifact is most suitable for describing how business value is delivered end-to-end?
+  \begin{enumerate}
+    \item Value stream map
+    \item Entity-relationship diagram (ERD)
+    \item Source code repository layout
+    \item TLS configuration file
+  \end{enumerate}
+
+  \item ``Target architecture'' is best described as:
+  \begin{enumerate}
+    \item The current-state system diagram.
+    \item A future-state design that guides decisions and sequencing of change.
+    \item A vendor product brochure.
+    \item A test plan for unit tests.
+  \end{enumerate}
+
+  \item In an AI-driven e-commerce context, which is the best example of an \emph{architectural concern} (not a model choice)?
+  \begin{enumerate}
+    \item Whether to use XGBoost or logistic regression
+    \item How to ensure training-serving consistency and monitor drift
+    \item Whether to use $k$-means or DBSCAN
+    \item Whether to use SGD or Adam
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (a)
+  \item (b)
+  \item (b)
+\end{enumerate}
+
+\section{Exercises (short)}
+\begin{enumerate}
+  \item Draft a capability map for an AI-enabled e-commerce organization. Include at least: customer acquisition, discovery, pricing/promotions, order management, fulfillment/returns, customer support, data/analytics, and governance/security.
+  \item Choose one value stream (e.g., ``order-to-cash'' or ``browse-to-buy''). Identify 5--8 steps and list the owning domain/system for each step (commerce vs ERP vs logistics vs payment).
+  \item Propose domain boundaries for: catalog, pricing, orders, payments, and customer profiles. For each boundary, name the system-of-record for key data entities.
+\end{enumerate}
+
+\section{Mini-case (Odoo-linked, vendor-neutral)}
+\textbf{Scenario:} Your company is hybrid B2C/B2B. Odoo is used for core ERP flows (Sales, Inventory, Accounting, CRM). A separate commerce layer handles web/mobile experiences and AI features.
+
+\textbf{Task:} Produce a short ``target architecture'' note:
+\begin{itemize}
+  \item Draw a capability-to-system mapping (capabilities $\rightarrow$ commerce layer vs Odoo vs data platform).
+  \item Define the \emph{system of record} for customer, product, price list, order, invoice, and shipment.
+  \item Identify 3 integration risks (data consistency, latency, duplicate sources of truth) and propose mitigations.
+\end{itemize}

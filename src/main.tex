@@ -1,0 +1,105 @@
+\documentclass[11pt]{book}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+\usepackage{url}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage{microtype}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6\baselineskip}
+
+\title{AI-Driven E-Commerce (Master's Level)\\Book Structure \& 14-Week Plan (Placeholder)}
+\author{Faculty of Computers and Information Sciences\\Mansoura University, Egypt}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter*{How to Use This Draft}
+This document is a \emph{structure-only} placeholder for an AI-driven, practical Master's-level e-commerce book.
+Each chapter will be written later; for now, sections contain brief bullets stating scope, key skills, and deliverables.
+
+\chapter*{Intended Audience and Prerequisites}
+\begin{itemize}
+  \item Audience: Master's students in Information Systems / Computer \& Information Sciences.
+  \item Prereqs (recommended): databases, basic programming, web fundamentals, and introductory ML.
+  \item Tooling (suggested): Python, notebooks, APIs, cloud services, and an ERP/EA modeling tool (as available).
+\end{itemize}
+
+\chapter*{Hands-on Track (Agreed)}
+\begin{itemize}
+  \item Approach: both tracks (lighter each).
+  \item Track A (Enterprise/ERP): Odoo-focused integration labs (Sales/Inventory/Accounting flows).
+  \item Track B (AI/ML): ML-heavy notebooks using e-commerce datasets (recsys, pricing, fraud, support).
+\end{itemize}
+
+\chapter*{Course Outcomes (Draft)}
+\begin{itemize}
+  \item Design end-to-end e-commerce systems with enterprise architecture (EA) and integration concerns.
+  \item Apply ML/DL/AI to personalization, search, pricing, fraud, operations, and customer service.
+  \item Integrate e-commerce with ERP/CRM/SCM (reference: Odoo) via APIs, events, and modern integration patterns.
+  \item Evaluate systems for security, privacy, governance, ethics, and measurable business value.
+\end{itemize}
+
+\part{14-Week Teaching Plan (Mapping Weeks to Chapters)}
+\chapter{Weekly Plan Overview}
+\section*{Course emphasis (agreed)}
+\begin{itemize}
+  \item Overall emphasis: balanced (EA/ERP + ML/DL/AI).
+  \item ERP reference stack: Odoo (concepts remain vendor-neutral where possible).
+\end{itemize}
+\begin{center}
+\begin{tabular}{|p{0.12\linewidth}|p{0.80\linewidth}|}
+  \hline
+  Week & Topic (maps to the corresponding chapter) \\
+  \hline
+  1 & Foundations of modern e-commerce systems and AI-driven product thinking \\
+  2 & Digital platforms, marketplaces, and business models (B2C/B2B/D2C, multi-sided platforms) \\
+  3 & E-commerce data foundations: events, tracking, data quality, and experimentation \\
+  4 & Enterprise architecture for e-commerce: capabilities, domains, and reference architectures \\
+  5 & Enterprise integration: APIs, iPaaS, ESB, events/streaming, and integration patterns \\
+  6 & ERP/CRM/SCM integration: order-to-cash, procure-to-pay, inventory, and master data \\
+  7 & Recommenders I: classical + learning-to-rank for personalization and search \\
+  8 & Recommenders II: deep learning, embeddings, sequence models, and retrieval \\
+  9 & Pricing and promotion analytics: forecasting, elasticity, and optimization (ML + OR) \\
+  10 & Fraud, risk, and trust \& safety: anomaly detection, graph ML, and AML patterns \\
+  11 & Customer service automation: LLMs, RAG, chatbots, and agentic workflows \\
+  12 & MLOps + DataOps for e-commerce: deployment, monitoring, drift, and governance \\
+  13 & Security, privacy, compliance, and responsible AI in commerce \\
+  14 & Capstone: enterprise-grade AI e-commerce solution architecture + evaluation \\
+  \hline
+\end{tabular}
+\end{center}
+
+\part{Book Structure (Chapters with Placeholders)}
+\input{chapters/ch01-foundations}
+\input{chapters/ch02-platforms}
+\input{chapters/ch03-data-foundations}
+\input{chapters/ch04-enterprise-architecture}
+\input{chapters/ch05-integration-patterns}
+\input{chapters/ch06-odoo-integration}
+\input{chapters/ch07-recsys-1}
+\input{chapters/ch08-recsys-2}
+\input{chapters/ch09-pricing}
+\input{chapters/ch10-fraud}
+\input{chapters/ch11-llm-customer-service}
+\input{chapters/ch12-mlops-dataops}
+\input{chapters/ch13-security-privacy-responsible-ai}
+\input{chapters/ch14-capstone}
+
+\appendix
+\part{Appendices (Placeholders)}
+\chapter{Datasets and Synthetic Data for Teaching (placeholder)}
+\chapter{Template: System Design Document (placeholder)}
+\chapter{Template: Data Contract (placeholder)}
+\chapter{Template: Model Card and Risk Assessment (placeholder)}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

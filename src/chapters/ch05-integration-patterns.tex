@@ -1,0 +1,151 @@
+\chapter{Enterprise Integration Patterns for E-Commerce (Week 5)}
+\section{Scope (placeholder)}
+\begin{itemize}
+  \item API-first, integration styles (sync/async), event-driven architecture.
+  \item iPaaS/ESB concepts, message brokers/streams, and reliability patterns.
+\end{itemize}
+\section{Hands-on lab (placeholder)}
+\begin{itemize}
+  \item Model an order lifecycle with events + idempotency + outbox pattern (conceptual + pseudo).
+\end{itemize}
+
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item Which statement best characterizes synchronous vs asynchronous integration?
+  \begin{enumerate}
+    \item Synchronous integration cannot fail; asynchronous always fails.
+    \item Synchronous integration couples availability and latency; asynchronous trades immediacy for resilience and decoupling.
+    \item Asynchronous integration is only for analytics; synchronous is only for ERP.
+    \item They are equivalent as long as JSON is used.
+  \end{enumerate}
+
+  \item Why is idempotency important in order processing APIs?
+  \begin{enumerate}
+    \item It makes responses larger.
+    \item It prevents duplicate effects when requests are retried.
+    \item It eliminates the need for authentication.
+    \item It guarantees exactly-once message delivery in all systems.
+  \end{enumerate}
+
+  \item The \emph{outbox pattern} is primarily used to:
+  \begin{enumerate}
+    \item Store images for the catalog.
+    \item Reliably publish events when database writes succeed, avoiding dual-write inconsistencies.
+    \item Encrypt API traffic.
+    \item Replace a message broker.
+  \end{enumerate}
+
+  \item In event-driven systems, a \emph{consumer} should typically be designed to be:
+  \begin{enumerate}
+    \item State-less but non-retryable
+    \item Idempotent and retryable
+    \item Dependent on message ordering always being perfect
+    \item Tightly coupled to producer database schemas
+  \end{enumerate}
+
+  \item Which is a common reason to choose events over direct API calls for some flows?
+  \begin{enumerate}
+    \item To avoid defining schemas/contracts
+    \item To decouple systems and allow multiple downstream consumers without changing the producer
+    \item To guarantee zero latency
+    \item To avoid monitoring
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+\end{enumerate}
+
+\section{Exercises (short)}
+\begin{enumerate}
+  \item For each flow, choose sync API or async events and justify: (i) ``place order'', (ii) ``update inventory availability'', (iii) ``invoice posted'', (iv) ``shipment delivered'', (v) ``customer profile updated''.
+  \item Design an idempotency strategy for the ``create order'' API. Specify the idempotency key and how long it is retained.
+  \item Write a short failure story: a dual-write bug between database and message broker. Explain how the outbox pattern prevents it.
+\end{enumerate}
+
+\section{Mini-case (Odoo-linked, vendor-neutral)}
+\textbf{Scenario:} A headless storefront integrates with Odoo for orders, inventory, invoices, and CRM updates.
+
+\textbf{Task:} Propose an integration design that supports scale and reliability:
+\begin{itemize}
+  \item Define the key domain events (at least 8) and which system publishes each.
+  \item Identify where you need synchronous APIs (e.g., payment authorization) vs asynchronous events (e.g., shipment updates).
+  \item Specify two data contracts and a versioning strategy to avoid breaking changes.
+  \item List the minimum observability signals (logs/metrics/traces) required to operate the integration in production.
+\end{itemize}
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item Which statement best characterizes synchronous vs asynchronous integration?
+  \begin{enumerate}
+    \item Synchronous integration cannot fail; asynchronous always fails.
+    \item Synchronous integration couples availability and latency; asynchronous trades immediacy for resilience and decoupling.
+    \item Asynchronous integration is only for analytics; synchronous is only for ERP.
+    \item They are equivalent as long as JSON is used.
+  \end{enumerate}
+
+  \item Why is idempotency important in order processing APIs?
+  \begin{enumerate}
+    \item It makes responses larger.
+    \item It prevents duplicate effects when requests are retried.
+    \item It eliminates the need for authentication.
+    \item It guarantees exactly-once message delivery in all systems.
+  \end{enumerate}
+
+  \item The \emph{outbox pattern} is primarily used to:
+  \begin{enumerate}
+    \item Store images for the catalog.
+    \item Reliably publish events when database writes succeed, avoiding dual-write inconsistencies.
+    \item Encrypt API traffic.
+    \item Replace a message broker.
+  \end{enumerate}
+
+  \item In event-driven systems, a \emph{consumer} should typically be designed to be:
+  \begin{enumerate}
+    \item State-less but non-retryable
+    \item Idempotent and retryable
+    \item Dependent on message ordering always being perfect
+    \item Tightly coupled to producer database schemas
+  \end{enumerate}
+
+  \item Which is a common reason to choose events over direct API calls for some flows?
+  \begin{enumerate}
+    \item To avoid defining schemas/contracts
+    \item To decouple systems and allow multiple downstream consumers without changing the producer
+    \item To guarantee zero latency
+    \item To avoid monitoring
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (b)
+\end{enumerate}
+
+\section{Exercises (short)}
+\begin{enumerate}
+  \item For each flow, choose sync API or async events and justify: (i) ``place order'', (ii) ``update inventory availability'', (iii) ``invoice posted'', (iv) ``shipment delivered'', (v) ``customer profile updated''.
+  \item Design an idempotency strategy for the ``create order'' API. Specify the idempotency key and how long it is retained.
+  \item Write a short failure story: a dual-write bug between database and message broker. Explain how the outbox pattern prevents it.
+\end{enumerate}
+
+\section{Mini-case (Odoo-linked, vendor-neutral)}
+\textbf{Scenario:} A headless storefront integrates with Odoo for orders, inventory, invoices, and CRM updates.
+
+\textbf{Task:} Propose an integration design that supports scale and reliability:
+\begin{itemize}
+  \item Define the key domain events (at least 8) and which system publishes each.
+  \item Identify where you need synchronous APIs (e.g., payment authorization) vs asynchronous events (e.g., shipment updates).
+  \item Specify two data contracts and a versioning strategy to avoid breaking changes.
+  \item List the minimum observability signals (logs/metrics/traces) required to operate the integration in production.
+\end{itemize}
