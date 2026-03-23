@@ -1,10 +1,448 @@
 \chapter{Pricing and Promotions with ML + Optimization (Week 9)}
-\section{Scope (placeholder)}
+
+\section{Learning objectives}
 \begin{itemize}
-  \item Demand forecasting, elasticity, uplift, and constraints (inventory/competition).
-  \item Optimization approaches and experiment design for pricing.
+  \item Explain why pricing in e-commerce is both a prediction problem and an optimization problem.
+  \item Distinguish demand forecasting, price elasticity estimation, and promotion uplift modeling.
+  \item Analyze how business constraints such as inventory, margins, contracts, and competition shape pricing decisions.
+  \item Design a pricing workflow that combines forecasting, optimization, and experimentation rather than treating price as a static input.
 \end{itemize}
-\section{Hands-on lab (placeholder)}
+
+\section{Why pricing is a core AI problem in commerce}
+Pricing is one of the most consequential decisions in e-commerce.
+It affects demand, conversion, margin, inventory movement, customer perception, and competitive position.
+Unlike many prediction tasks, pricing also changes the system it measures.
+When a platform changes price, user behavior changes, competitor response may change, and future training data are altered.
+
+This is why pricing cannot be treated as ``just another regression target.''
+The practical pricing problem combines:
 \begin{itemize}
-  \item Forecast baseline + simple constrained optimization scenario.
+  \item demand estimation,
+  \item elasticity understanding,
+  \item business-rule enforcement,
+  \item optimization under constraints,
+  \item and experimentation to measure causal impact.
+\end{itemize}
+
+In enterprise settings, pricing also interacts with ERP-owned price lists, promotions engines, finance controls, and B2B contractual terms.
+
+\section{Pricing objectives}
+Different organizations optimize different pricing objectives.
+Students should recognize that ``best price'' depends on the business question.
+
+\subsection{Common objectives}
+\begin{itemize}
+  \item \textbf{Revenue maximization:} increase gross sales volume.
+  \item \textbf{Margin or contribution optimization:} emphasize profitability rather than top-line revenue.
+  \item \textbf{Inventory balancing:} accelerate slow-moving stock or protect scarce inventory.
+  \item \textbf{Customer acquisition or retention:} use pricing to influence long-term account value rather than immediate transaction value.
+  \item \textbf{Competitive positioning:} maintain price perception within a market segment.
+\end{itemize}
+
+\subsection{Why objective clarity matters}
+The same product may warrant different prices depending on whether the business prioritizes:
+\begin{itemize}
+  \item clearing inventory,
+  \item preserving premium brand position,
+  \item growing category share,
+  \item protecting margin under rising costs.
+\end{itemize}
+
+A pricing model trained without explicit objective alignment often produces analytically plausible but operationally poor recommendations.
+
+\section{Price, promotion, and discount structure}
+In e-commerce, price is rarely a single number.
+The platform may have:
+\begin{itemize}
+  \item list price,
+  \item sale price,
+  \item coupon-adjusted price,
+  \item customer-specific or B2B negotiated price,
+  \item bundle price,
+  \item shipping-inclusive effective price.
+\end{itemize}
+
+\subsection{Promotions as structured interventions}
+Promotions are not merely ``lower prices.''
+They can take many forms:
+\begin{itemize}
+  \item percentage discount,
+  \item fixed-amount coupon,
+  \item buy-one-get-one structures,
+  \item free shipping thresholds,
+  \item loyalty-only offers,
+  \item category-wide or seller-funded campaigns.
+\end{itemize}
+
+Each structure affects user behavior differently.
+For example, a coupon may increase conversion among already interested users, while a shipping threshold may increase basket size rather than item-level demand.
+
+\section{Demand forecasting}
+Pricing decisions require an estimate of how demand changes over time and under different commercial conditions.
+
+\subsection{What is being forecast}
+Forecast targets may include:
+\begin{itemize}
+  \item unit demand by SKU and day,
+  \item category demand,
+  \item promotion-period lift,
+  \item expected cart conversion,
+  \item replenishment-sensitive demand.
+\end{itemize}
+
+\subsection{Inputs to demand models}
+Typical features include:
+\begin{itemize}
+  \item historical sales,
+  \item current and historical prices,
+  \item promotions,
+  \item seasonality and holidays,
+  \item catalog position and visibility,
+  \item marketing traffic,
+  \item competitor signals where available,
+  \item inventory availability.
+\end{itemize}
+
+\subsection{Why forecasting is not enough}
+Forecasting predicts what may happen.
+Pricing still requires a decision about what the system should do.
+A forecast without an optimization layer does not tell the platform which price to choose among feasible options.
+
+\section{Price elasticity}
+Elasticity describes how demand changes in response to price changes.
+It is one of the most important concepts in pricing analytics.
+
+\subsection{Intuition}
+If a small increase in price causes a large reduction in demand, the product is relatively price-sensitive.
+If demand changes little, the product is relatively price-insensitive.
+
+\subsection{Why elasticity is difficult to estimate}
+In live commerce systems, observed prices are not randomly assigned.
+They may reflect prior business policy, inventory conditions, promotions, or manual intervention.
+This means historical price-demand relationships are often confounded.
+
+\subsection{Practical considerations}
+Elasticity may vary by:
+\begin{itemize}
+  \item category,
+  \item season,
+  \item customer segment,
+  \item brand strength,
+  \item competitive intensity,
+  \item stock scarcity,
+  \item whether the user arrived organically or through a promotion.
+\end{itemize}
+
+Students should therefore avoid assuming a single global elasticity coefficient is sufficient for realistic commerce settings.
+
+\section{Promotions and uplift}
+Promotion modeling asks not only ``what happened under promotion?'' but ``what additional effect did the promotion cause?''
+
+\subsection{Observed uplift versus causal uplift}
+If conversion rises during a campaign, that increase may reflect:
+\begin{itemize}
+  \item genuine causal impact from the promotion,
+  \item seasonal demand shifts,
+  \item traffic-source changes,
+  \item selection bias in who received the offer.
+\end{itemize}
+
+True uplift modeling attempts to estimate incremental effect rather than raw observed response.
+
+\subsection{Why uplift matters}
+Promotions can be expensive.
+If the platform discounts heavily for users who would have purchased anyway, the business sacrifices margin without creating incremental value.
+Targeted promotion strategies therefore require causal thinking, not just descriptive analytics.
+
+\section{Optimization under business constraints}
+After forecasting and elasticity estimation, the pricing problem becomes an optimization problem.
+
+\subsection{Typical constraints}
+Real pricing decisions are constrained by:
+\begin{itemize}
+  \item minimum margin thresholds,
+  \item inventory availability,
+  \item supplier or brand pricing rules,
+  \item MAP or contractual restrictions,
+  \item competitive guardrails,
+  \item fairness or anti-discrimination rules,
+  \item B2B price-list obligations,
+  \item operational simplicity limits on how often prices can change.
+\end{itemize}
+
+\subsection{Why unconstrained optimization is unrealistic}
+A mathematically optimal price from a simple model may be unusable if it:
+\begin{itemize}
+  \item violates margin policy,
+  \item creates stockouts,
+  \item damages brand trust,
+  \item conflicts with contractual pricing,
+  \item or overwhelms operations with constant price updates.
+\end{itemize}
+
+Optimization in enterprise commerce therefore means ``best feasible decision,'' not ``best unconstrained number.''
+
+\section{Dynamic pricing}
+Dynamic pricing adjusts prices over time in response to changing conditions.
+It is widely discussed, but it should not be treated as a universal default.
+
+\subsection{When dynamic pricing can help}
+Dynamic pricing is often useful when:
+\begin{itemize}
+  \item demand fluctuates quickly,
+  \item inventory is perishable or time-sensitive,
+  \item competitive prices move frequently,
+  \item the catalog is large enough that manual pricing is infeasible.
+\end{itemize}
+
+\subsection{When dynamic pricing can hurt}
+It can also create problems:
+\begin{itemize}
+  \item customer trust may decline if prices feel unstable or unfair,
+  \item operations may struggle with frequent updates,
+  \item historical comparison becomes harder,
+  \item legal or contractual issues may arise in some markets.
+\end{itemize}
+
+The correct architecture therefore distinguishes between categories that justify dynamic treatment and those that require more stable commercial rules.
+
+\section{Competition-aware pricing}
+In many categories, prices are influenced by competitor behavior.
+Yet competitor-aware pricing is not the same as ``match the lowest price.''
+
+\subsection{Competitive signals}
+Useful signals may include:
+\begin{itemize}
+  \item competitor list price,
+  \item promotion intensity,
+  \item assortment overlap,
+  \item shipping speed comparisons,
+  \item seller reputation and availability differences.
+\end{itemize}
+
+\subsection{Strategic caution}
+A competitor may use a loss leader or temporary campaign that should not be copied directly.
+Blind matching can destroy margin without improving long-term position.
+The architecture should therefore support competitor monitoring while still respecting internal pricing objectives and constraints.
+
+\section{B2C versus B2B pricing}
+Pricing design differs sharply between B2C and B2B commerce.
+
+\subsection{B2C}
+B2C pricing usually emphasizes:
+\begin{itemize}
+  \item high-volume SKU-level decisions,
+  \item campaign responsiveness,
+  \item public price perception,
+  \item consumer conversion behavior.
+\end{itemize}
+
+\subsection{B2B}
+B2B pricing often involves:
+\begin{itemize}
+  \item negotiated price lists,
+  \item account-specific discounts,
+  \item credit terms,
+  \item approval workflows,
+  \item contract validity windows,
+  \item product-assortment restrictions.
+\end{itemize}
+
+This means many B2B pricing decisions belong closer to ERP and enterprise sales workflows than to the storefront alone.
+
+\section{Feature design for pricing models}
+Pricing models often require features from multiple systems.
+Representative feature groups include:
+\begin{itemize}
+  \item \textbf{Product features:} category, brand, cost, lifecycle stage, substitutes.
+  \item \textbf{Demand features:} recent sales velocity, conversion rate, traffic.
+  \item \textbf{Promotion features:} campaign type, discount depth, channel.
+  \item \textbf{Inventory features:} on-hand stock, days of supply, replenishment lead time.
+  \item \textbf{Customer features:} segment, loyalty status, contract class.
+  \item \textbf{Market features:} competitor price, holiday periods, macro signals.
+\end{itemize}
+
+\subsection{Feature governance}
+Pricing is high impact, so feature governance matters.
+If cost, inventory, or contract data are delayed or inconsistent, the resulting recommendations may be financially harmful.
+This ties pricing directly to the data-foundation and systems-of-record questions from earlier chapters.
+
+\section{Experimentation in pricing}
+Offline evaluation is useful, but pricing decisions have strong causal and behavioral effects.
+Therefore online experimentation is especially important.
+
+\subsection{Why pricing experiments are sensitive}
+Pricing tests differ from many UI experiments because they:
+\begin{itemize}
+  \item affect revenue directly,
+  \item may trigger competitor response,
+  \item can influence customer trust,
+  \item may have spillover across channels or segments,
+  \item often require tighter legal and policy review.
+\end{itemize}
+
+\subsection{What to measure}
+Useful experiment metrics may include:
+\begin{itemize}
+  \item conversion rate,
+  \item unit sales,
+  \item revenue,
+  \item contribution margin,
+  \item basket size,
+  \item repeat purchase,
+  \item return rate,
+  \item customer support complaints,
+  \item price-perception surveys where available.
+\end{itemize}
+
+\subsection{Guardrails}
+Pricing experiments should include guardrails such as:
+\begin{itemize}
+  \item margin floor protection,
+  \item inventory depletion limits,
+  \item customer fairness checks,
+  \item B2B account or contractual exclusions.
+\end{itemize}
+
+\section{A practical pricing architecture}
+A practical pricing system often includes:
+\begin{itemize}
+  \item demand and elasticity data pipelines,
+  \item forecasting models,
+  \item optimization logic,
+  \item a pricing decision service,
+  \item a promotions engine,
+  \item ERP integration for governed price lists and approvals,
+  \item experimentation and monitoring controls.
+\end{itemize}
+
+\subsection{Decision flow}
+A simplified pricing flow may be:
+\begin{enumerate}
+  \item gather product, demand, inventory, and market signals,
+  \item forecast demand under candidate price scenarios,
+  \item optimize within business constraints,
+  \item publish recommended price or promotional action,
+  \item validate through workflow or approval gates,
+  \item serve price to commerce channels,
+  \item measure downstream outcomes.
+\end{enumerate}
+
+\subsection{Why architecture matters}
+Pricing is not just a model output.
+It is a governed operational decision that affects customers, suppliers, finance, and brand perception.
+The architecture must therefore support auditability and rollback, not only prediction accuracy.
+
+\section{Common failure modes}
+Pricing systems often fail in predictable ways:
+\begin{itemize}
+  \item forecasting ignores stockouts and mistakes absence of sales for lack of demand,
+  \item elasticity estimates are biased by historical policy,
+  \item optimization recommends prices that violate margin or contractual constraints,
+  \item promotions are evaluated on revenue alone while margin collapses,
+  \item competitor signals are stale or incomparable,
+  \item different channels display conflicting prices due to synchronization delays.
+\end{itemize}
+
+These failures are reminders that pricing is a socio-technical control problem, not just an analytics exercise.
+
+\section{Hands-on lab: forecast plus constrained optimization}
+The practical goal of this chapter is to connect prediction and decision-making.
+
+\subsection{Lab scenario}
+Students are given historical SKU sales, prices, promotion flags, inventory levels, and seasonality indicators.
+They are asked to produce a pricing recommendation for a small catalog segment.
+
+\subsection{Lab tasks}
+\begin{enumerate}
+  \item Build a baseline demand forecast for a selected product or category.
+  \item Estimate how demand changes across a small set of candidate prices.
+  \item Define a margin floor and one inventory-related constraint.
+  \item Choose a recommended price or promotion and justify it.
+  \item Specify how you would validate the decision using an online experiment.
+\end{enumerate}
+
+\subsection{Expected learning outcome}
+By the end of the lab, students should be able to explain why pricing requires a pipeline of assumptions, constraints, and measurement rather than a single predictive model.
+
+\section{Managerial implications}
+Pricing systems can create large business value, but they can also create large business damage when poorly governed.
+Organizations should therefore invest in:
+\begin{itemize}
+  \item clear pricing objectives,
+  \item data quality around cost, stock, and catalog attributes,
+  \item explicit separation between descriptive analytics and prescriptive decisions,
+  \item and controlled experimentation before scaling automated pricing.
+\end{itemize}
+
+The most effective pricing systems are not those that change the most prices.
+They are those that align predictive intelligence with disciplined commercial control.
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item Why is pricing in e-commerce best viewed as both a prediction and an optimization problem?
+  \begin{enumerate}
+    \item Because prices are always random.
+    \item Because the platform must estimate demand response and then choose the best feasible action under business constraints.
+    \item Because forecasting and optimization are mathematically identical.
+    \item Because optimization eliminates the need for data.
+  \end{enumerate}
+
+  \item Which statement best describes price elasticity?
+  \begin{enumerate}
+    \item It is the speed of the API that serves prices.
+    \item It describes how demand responds when price changes.
+    \item It is the number of SKUs in a category.
+    \item It guarantees causal inference from any historical dataset.
+  \end{enumerate}
+
+  \item In promotion analytics, \emph{uplift} is most closely concerned with:
+  \begin{enumerate}
+    \item the additional causal effect of a promotion beyond what would have happened otherwise.
+    \item the size of the ERP database.
+    \item the number of products in a campaign.
+    \item the compression ratio of log files.
+  \end{enumerate}
+
+  \item Which is the best example of a realistic pricing constraint?
+  \begin{enumerate}
+    \item The model should only use purple charts.
+    \item The recommended price must preserve a minimum margin and respect contractual rules.
+    \item The system should never store timestamps.
+    \item The experiment should avoid all monitoring.
+  \end{enumerate}
+
+  \item Why are pricing experiments especially sensitive?
+  \begin{enumerate}
+    \item Because prices have no effect on customer behavior.
+    \item Because pricing directly affects revenue, margin, customer trust, and sometimes legal or contractual obligations.
+    \item Because they can only be run offline.
+    \item Because recommendations and pricing are unrelated.
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (a)
+  \item (b)
+  \item (b)
+\end{enumerate}
+
+\section{Exercises (short)}
+\begin{enumerate}
+  \item Compare revenue-maximizing and margin-maximizing pricing decisions for one product category. Explain when they may diverge.
+  \item Design a feature set for estimating promotional uplift on a category page campaign. Include traffic, inventory, price, and seasonality signals.
+  \item Propose a constrained pricing policy for a B2B account segment where negotiated price lists exist in ERP but promotional flexibility is allowed for selected categories.
+\end{enumerate}
+
+\section{Mini-case (Odoo-linked, vendor-neutral)}
+\textbf{Scenario:} A hybrid B2C/B2B company uses a headless storefront, Odoo for ERP and accounting, and a data platform for forecasting. The company wants better pricing decisions for seasonal inventory and account-specific promotions.
+
+\textbf{Task:} Design a pricing workflow:
+\begin{itemize}
+  \item Define which signals come from storefront behavior, which come from Odoo, and which are external.
+  \item Explain how you would separate public promotional pricing from ERP-governed B2B price lists.
+  \item Identify two experiment guardrails and two operational constraints that must be enforced before automated pricing recommendations are exposed.
 \end{itemize}
