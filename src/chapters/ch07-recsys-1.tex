@@ -1,10 +1,444 @@
 \chapter{Recommenders I: Classical Methods + Learning-to-Rank (Week 7)}
-\section{Scope (placeholder)}
+
+\section{Learning objectives}
 \begin{itemize}
-  \item Collaborative filtering, matrix factorization, and implicit feedback.
-  \item Learning-to-rank: pointwise/pairwise/listwise framing; offline vs online evaluation.
+  \item Explain the business role of recommendation and ranking systems in e-commerce discovery.
+  \item Distinguish memory-based collaborative filtering, matrix factorization, and learning-to-rank approaches.
+  \item Understand the difference between explicit and implicit feedback, and why e-commerce is usually dominated by implicit signals.
+  \item Evaluate recommendation systems using offline ranking metrics while recognizing the limits of offline evaluation.
 \end{itemize}
-\section{Hands-on lab (placeholder)}
+
+\section{Why recommenders matter in e-commerce}
+Recommendation systems are central to modern e-commerce because large catalogs create a matching problem.
+Customers rarely inspect all available items.
+The platform therefore needs mechanisms for deciding which products to surface, in what order, and in which context.
+
+Recommendation is not only a technical personalization problem.
+It is also a business control layer for:
 \begin{itemize}
-  \item Baseline recommender with clear metrics (MAP@K/NDCG@K).
+  \item product discovery,
+  \item cross-sell and upsell,
+  \item session continuation,
+  \item re-engagement,
+  \item merchandising efficiency,
+  \item and marketplace supply exposure.
+\end{itemize}
+
+This chapter focuses on classical recommenders and ranking methods.
+These methods remain important because they are interpretable, computationally efficient, and often strong baselines even when deep-learning systems are eventually adopted.
+
+\section{Recommendation surfaces and tasks}
+Not all recommender problems are identical.
+A commerce platform usually contains several recommendation surfaces with different goals.
+
+\subsection{Common recommendation tasks}
+\begin{itemize}
+  \item \textbf{Homepage recommendations:} highlight likely-interest products for returning or anonymous users.
+  \item \textbf{Product detail recommendations:} suggest similar, complementary, or substitute items.
+  \item \textbf{Cart recommendations:} support bundle expansion and accessory attachment.
+  \item \textbf{Email or push recommendations:} re-engage users outside the session.
+  \item \textbf{Search ranking and re-ranking:} order retrieved items for a query.
+\end{itemize}
+
+\subsection{Retrieval versus ranking}
+It is useful to distinguish two subproblems:
+\begin{itemize}
+  \item \textbf{Candidate generation:} find a manageable subset of items from a very large catalog.
+  \item \textbf{Ranking or re-ranking:} order the candidates for the current context.
+\end{itemize}
+
+This chapter emphasizes ranking-oriented thinking and classical candidate selection methods.
+Chapter 8 will extend this to deep retrieval and embedding-heavy systems.
+
+\section{Feedback in commerce recommendation}
+Recommendation systems learn from user behavior.
+The nature of that behavior strongly affects modeling choices.
+
+\subsection{Explicit feedback}
+Explicit feedback is directly provided by users, such as:
+\begin{itemize}
+  \item star ratings,
+  \item likes or dislikes,
+  \item structured review scores,
+  \item preference selections.
+\end{itemize}
+
+Explicit feedback is valuable because it is interpretable, but in many commerce settings it is sparse.
+Most customers do not rate enough items to support the full recommendation problem.
+
+\subsection{Implicit feedback}
+Implicit feedback is inferred from behavior:
+\begin{itemize}
+  \item clicks,
+  \item product views,
+  \item add-to-cart events,
+  \item purchases,
+  \item dwell time,
+  \item repeat visits,
+  \item returns or cancellations as negative indicators.
+\end{itemize}
+
+E-commerce is largely an implicit-feedback domain.
+This makes modeling harder because a missing interaction does not necessarily mean dislike.
+It may simply mean the user never saw the item.
+
+\subsection{Signal strength}
+Not all implicit signals are equally informative.
+For example:
+\begin{itemize}
+  \item a purchase usually signals stronger intent than a click,
+  \item an add-to-cart event may indicate interest but not final preference,
+  \item a return may weaken confidence in the original purchase signal,
+  \item repeated category browsing may indicate exploration rather than commitment.
+\end{itemize}
+
+Feature and label design should therefore reflect business meaning, not just event counts.
+
+\section{Memory-based collaborative filtering}
+Classical collaborative filtering starts from the idea that similar users may like similar items, and similar items may be preferred by similar users.
+
+\subsection{User-based collaborative filtering}
+In user-based collaborative filtering, the system identifies users whose historical behavior resembles the target user and recommends items those similar users engaged with.
+Conceptually:
+\begin{itemize}
+  \item define a user--item interaction matrix $R=[r_{ui}]$,
+  \item compute user-user similarity,
+  \item aggregate neighbor preferences for unseen items.
+\end{itemize}
+
+This approach is intuitive but often scales poorly for large consumer systems with many users and rapidly changing behavior.
+
+\subsection{Item-based collaborative filtering}
+Item-based collaborative filtering compares items rather than users.
+If two items are frequently co-viewed, co-purchased, or similarly interacted with, one can recommend one when the other is observed.
+
+Item-based methods are often more stable in commerce because items change more slowly than user sessions.
+They work well for:
+\begin{itemize}
+  \item ``similar items'',
+  \item ``customers also bought'',
+  \item and complementary recommendation widgets.
+\end{itemize}
+
+\subsection{Similarity measures}
+Common similarity measures include cosine similarity, Pearson correlation, and co-occurrence-based heuristics.
+The choice depends on data type and normalization assumptions.
+Architecturally, what matters is that similarity calculations must be based on well-defined interaction windows and item identities.
+
+\section{Matrix factorization}
+Memory-based methods are useful, but they struggle with sparsity and scale.
+Matrix factorization addresses this by learning low-dimensional latent representations for users and items.
+
+\subsection{Basic idea}
+Given an interaction matrix $R$, matrix factorization approximates it as:
+\[
+\hat{r}_{ui}=\mathbf{p}_u^\top \mathbf{q}_i
+\]
+where $\mathbf{p}_u$ is a latent vector for user $u$ and $\mathbf{q}_i$ is a latent vector for item $i$.
+
+These latent factors capture hidden structure such as taste patterns, style clusters, or price sensitivity without requiring manually defined categories.
+
+\subsection{Why factorization works well}
+Matrix factorization often performs strongly because:
+\begin{itemize}
+  \item it compresses sparse interactions into learnable structure,
+  \item it generalizes beyond direct co-occurrence,
+  \item it supports efficient ranking once vectors are learned,
+  \item it forms a bridge toward later embedding-based methods.
+\end{itemize}
+
+\subsection{Limitations}
+Despite its strengths, factorization has limits:
+\begin{itemize}
+  \item it handles cold-start users and items poorly without additional features,
+  \item it may ignore rich session context,
+  \item it can struggle when preferences shift quickly,
+  \item it usually needs careful treatment of implicit feedback and negative sampling.
+\end{itemize}
+
+\section{Implicit-feedback recommendation}
+Most commerce recommenders do not predict star ratings.
+Instead, they infer preference from implicit interactions.
+This changes both objective design and evaluation.
+
+\subsection{Positive-only observations}
+In implicit-feedback settings, observed interactions are often treated as positive evidence, while unobserved interactions are ambiguous.
+Training usually requires assumptions such as:
+\begin{itemize}
+  \item sampling unobserved items as negatives,
+  \item weighting confidence by interaction type,
+  \item or optimizing pairwise ranking losses instead of rating prediction.
+\end{itemize}
+
+\subsection{Confidence weighting}
+Different interactions can be assigned different strengths.
+For example:
+\begin{itemize}
+  \item purchase $>$ add-to-cart $>$ click $>$ impression,
+  \item repeat purchase may strengthen confidence,
+  \item return or refund events may weaken confidence.
+\end{itemize}
+
+This is not just a modeling choice.
+It is a business-rule decision and should align with how the organization interprets engagement quality.
+
+\section{Cold start and sparsity}
+Cold start is one of the defining challenges of recommendation systems.
+It occurs when the system has insufficient data about a new user, a new item, or a new marketplace participant.
+
+\subsection{User cold start}
+New users may have little or no history.
+Common mitigation strategies include:
+\begin{itemize}
+  \item popularity-based defaults,
+  \item category-entry onboarding questions,
+  \item contextual recommendations from landing page or query behavior,
+  \item session-based short-term signals.
+\end{itemize}
+
+\subsection{Item cold start}
+New items may not yet have interaction data.
+Mitigation strategies include:
+\begin{itemize}
+  \item using metadata such as category, brand, and price range,
+  \item manual merchandising boosts,
+  \item seller and catalog-quality priors,
+  \item controlled exploration to gather initial interactions.
+\end{itemize}
+
+\subsection{Marketplace and fairness considerations}
+In marketplaces, recommendation systems also influence seller exposure.
+If the system only amplifies already popular items, new or smaller sellers may never gather enough interaction data to compete.
+This creates a business and governance concern, not just a model-performance issue.
+
+\section{Learning-to-rank}
+Recommendation is often framed as a ranking problem rather than a rating-prediction problem.
+Learning-to-rank (LTR) methods optimize the order of items shown to users for a given context.
+
+\subsection{Pointwise, pairwise, and listwise views}
+LTR methods are often grouped into three families:
+\begin{itemize}
+  \item \textbf{Pointwise:} predict a score or label for each item independently.
+  \item \textbf{Pairwise:} learn which of two items should be ranked higher.
+  \item \textbf{Listwise:} optimize over the ordering of whole ranked lists.
+\end{itemize}
+
+\subsection{Why LTR is important in commerce}
+E-commerce surfaces almost always have limited slots.
+The platform is not merely predicting whether an item is relevant; it is deciding which few items to prioritize.
+LTR is therefore especially appropriate for:
+\begin{itemize}
+  \item search result ordering,
+  \item recommendation carousel ranking,
+  \item category page re-ranking,
+  \item email content selection.
+\end{itemize}
+
+\subsection{Feature design for LTR}
+Classical ranking models often use hand-engineered or structured features such as:
+\begin{itemize}
+  \item user affinity to category or brand,
+  \item historical click-through rate,
+  \item purchase propensity,
+  \item price distance from user norms,
+  \item popularity and freshness,
+  \item inventory availability,
+  \item promotion eligibility,
+  \item query-item lexical match for search contexts.
+\end{itemize}
+
+This makes LTR highly practical because structured business features are often already available in commerce systems.
+
+\section{Offline evaluation}
+Recommendation systems need offline evaluation for rapid iteration, model comparison, and failure analysis before live deployment.
+
+\subsection{Common ranking metrics}
+Frequently used metrics include:
+\begin{itemize}
+  \item precision@$k$,
+  \item recall@$k$,
+  \item mean average precision (MAP@$k$),
+  \item normalized discounted cumulative gain (NDCG@$k$),
+  \item mean reciprocal rank (MRR) in some search-style tasks.
+\end{itemize}
+
+\subsection{What these metrics measure}
+\begin{itemize}
+  \item \textbf{Precision@$k$:} how many of the top-$k$ items are relevant.
+  \item \textbf{Recall@$k$:} how much of the relevant set is recovered in the top-$k$.
+  \item \textbf{NDCG@$k$:} rewards placing more relevant items higher in the ranked list.
+\end{itemize}
+
+These metrics are useful because they reflect ranking quality rather than raw score accuracy.
+
+\subsection{Limits of offline evaluation}
+Offline metrics are not enough on their own.
+They cannot fully capture:
+\begin{itemize}
+  \item causal business impact,
+  \item position bias and feedback loops,
+  \item changing user behavior under new experiences,
+  \item interference with other surfaces such as promotions or search.
+\end{itemize}
+
+This is why offline evaluation should be seen as a filtering step, not the final decision criterion.
+
+\section{Online evaluation and business impact}
+Ultimately, recommender systems exist to improve user and business outcomes in production.
+Typical online measures include:
+\begin{itemize}
+  \item click-through rate,
+  \item add-to-cart rate,
+  \item conversion rate,
+  \item average order value,
+  \item revenue per session,
+  \item repeat engagement,
+  \item return rate or dissatisfaction signals.
+\end{itemize}
+
+However, online KPI interpretation must be careful.
+A recommender can increase clicks while harming profitability or reducing diversity.
+Guardrail metrics are therefore important.
+
+\section{Biases and practical risks}
+Recommendation systems are affected by several structural biases.
+
+\subsection{Popularity bias}
+Popular items accumulate more exposure and therefore more interactions, reinforcing their future dominance.
+This can suppress niche discovery and reduce long-tail coverage.
+
+\subsection{Selection bias}
+Models only observe interactions for items that were shown.
+Unseen items do not generate evidence, so naive training pipelines may overestimate the quality of historically exposed items.
+
+\subsection{Position bias}
+Higher-ranked items receive more clicks partly because they are higher ranked, not only because they are more relevant.
+This complicates interpretation of click data.
+
+\subsection{Business-constraint tension}
+The ``best'' recommendation by predicted engagement may conflict with:
+\begin{itemize}
+  \item margin objectives,
+  \item inventory constraints,
+  \item seller-fairness rules,
+  \item compliance or policy requirements,
+  \item user-experience diversity needs.
+\end{itemize}
+
+Recommendation is therefore not a pure prediction task.
+It is a constrained decision problem embedded in business policy.
+
+\section{A practical recommender architecture}
+Even for classical methods, recommender systems are not just models.
+They require an end-to-end architecture that includes:
+\begin{itemize}
+  \item event collection and identity linking,
+  \item feature generation,
+  \item offline training,
+  \item candidate generation,
+  \item ranking logic,
+  \item serving interfaces,
+  \item monitoring and experimentation.
+\end{itemize}
+
+This chapter remains focused on the modeling layer, but students should keep the surrounding system in mind.
+The model only creates value when the architecture can serve it reliably and measure its effect.
+
+\section{Hands-on lab: a baseline recommender}
+The hands-on goal for this chapter is to build and evaluate a classical recommendation baseline.
+
+\subsection{Lab scenario}
+Students are given a synthetic or public interaction dataset containing user IDs, item IDs, timestamps, and event types such as view, add-to-cart, and purchase.
+
+\subsection{Lab tasks}
+\begin{enumerate}
+  \item Construct a user--item interaction matrix using implicit feedback.
+  \item Implement a simple popularity baseline and one collaborative filtering or matrix-factorization baseline.
+  \item Evaluate the models using MAP@$K$ and NDCG@$K$.
+  \item Analyze cold-start and sparsity cases explicitly.
+  \item Propose one feature-based re-ranking rule that incorporates a business constraint such as inventory or diversity.
+\end{enumerate}
+
+\subsection{Expected learning outcome}
+By the end of the lab, students should be able to explain not only which model performed better offline, but why the evaluation setup and business constraints matter.
+
+\section{Managerial implications}
+Classical recommendation methods remain valuable in practice because they provide:
+\begin{itemize}
+  \item strong baselines,
+  \item fast iteration cycles,
+  \item reasonable interpretability,
+  \item lower infrastructure cost than many deep systems.
+\end{itemize}
+
+Organizations often make a mistake by jumping directly to deep-learning architectures without first establishing strong baselines, high-quality data, and trustworthy evaluation pipelines.
+For many commerce surfaces, the real bottleneck is not model sophistication but poor signal design or unclear business objectives.
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item In e-commerce recommendation, which statement best distinguishes \emph{implicit} from \emph{explicit} feedback?
+  \begin{enumerate}
+    \item Implicit feedback is always more accurate than explicit feedback.
+    \item Explicit feedback comes directly from user judgments such as ratings, whereas implicit feedback is inferred from behaviors such as clicks or purchases.
+    \item Explicit feedback can only be used in search ranking.
+    \item Implicit feedback means the platform has no user identifiers.
+  \end{enumerate}
+
+  \item Item-based collaborative filtering is often attractive in commerce because:
+  \begin{enumerate}
+    \item items are usually more stable than users and item-item similarities can support scalable recommendation widgets.
+    \item it eliminates cold start entirely.
+    \item it requires no interaction data.
+    \item it guarantees causal lift.
+  \end{enumerate}
+
+  \item In matrix factorization, the expression $\hat{r}_{ui}=\mathbf{p}_u^\top \mathbf{q}_i$ is intended to represent:
+  \begin{enumerate}
+    \item a network timeout policy.
+    \item the predicted affinity between user $u$ and item $i$ using latent factors.
+    \item the exact accounting value of an order.
+    \item a lossless compression ratio for logs.
+  \end{enumerate}
+
+  \item Which metric is most appropriate for evaluating the quality of a top-$k$ ranked recommendation list offline?
+  \begin{enumerate}
+    \item NDCG@$k$
+    \item Mean absolute error on shipping cost
+    \item CPU utilization
+    \item Database replication lag
+  \end{enumerate}
+
+  \item Why is learning-to-rank especially relevant in e-commerce?
+  \begin{enumerate}
+    \item Because commerce systems never need candidate generation.
+    \item Because the platform must decide which limited set of items to place at the top of a ranked surface.
+    \item Because it replaces online experimentation.
+    \item Because it removes the need for features.
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (a)
+  \item (b)
+  \item (a)
+  \item (b)
+\end{enumerate}
+
+\section{Exercises (short)}
+\begin{enumerate}
+  \item Compare user-based, item-based, and matrix-factorization approaches for a medium-sized commerce catalog. State one strength and one weakness of each.
+  \item Define an implicit-feedback weighting scheme for view, add-to-cart, purchase, and return events. Explain the business reasoning behind your weights.
+  \item Design a simple learning-to-rank feature set for a ``recommended for you'' widget. Include at least one user feature, one item feature, one context feature, and one business-rule feature.
+\end{enumerate}
+
+\section{Mini-case (Odoo-linked, vendor-neutral)}
+\textbf{Scenario:} A company uses a headless storefront, Odoo for ERP, and a central data platform. The business wants recommendation widgets on the homepage, product pages, and cart page.
+
+\textbf{Task:} Propose a classical recommender design:
+\begin{itemize}
+  \item Define which interaction signals from storefront and Odoo-derived outcomes should be used for training.
+  \item Choose a baseline method (item-based CF, matrix factorization, or feature-based ranking) for each surface and justify the choice.
+  \item Identify two business constraints the ranking layer should respect, such as inventory, margin, seller exposure, or return risk.
 \end{itemize}

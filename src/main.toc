@@ -194,30 +194,75 @@
 \contentsline {section}{\numberline {7.16}Exercises (short)}{81}{section.7.16}%
 \contentsline {section}{\numberline {7.17}Mini-case (Odoo-linked, vendor-neutral)}{81}{section.7.17}%
 \contentsline {chapter}{\numberline {8}Recommenders I: Classical Methods + Learning-to-Rank (Week 7)}{83}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Scope (placeholder)}{83}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Hands-on lab (placeholder)}{83}{section.8.2}%
-\contentsline {chapter}{\numberline {9}Recommenders II: Deep Learning, Embeddings, and Retrieval (Week 8)}{85}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Scope (placeholder)}{85}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Hands-on lab (placeholder)}{85}{section.9.2}%
-\contentsline {chapter}{\numberline {10}Pricing and Promotions with ML + Optimization (Week 9)}{87}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Scope (placeholder)}{87}{section.10.1}%
-\contentsline {section}{\numberline {10.2}Hands-on lab (placeholder)}{87}{section.10.2}%
-\contentsline {chapter}{\numberline {11}Fraud, Risk, and Trust \& Safety (Week 10)}{89}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Scope (placeholder)}{89}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Hands-on lab (placeholder)}{89}{section.11.2}%
-\contentsline {chapter}{\numberline {12}Customer Service Automation with LLMs (Week 11)}{91}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Scope (placeholder)}{91}{section.12.1}%
-\contentsline {section}{\numberline {12.2}Hands-on lab (placeholder)}{91}{section.12.2}%
-\contentsline {chapter}{\numberline {13}MLOps + DataOps for E-Commerce (Week 12)}{93}{chapter.13}%
-\contentsline {section}{\numberline {13.1}Scope (placeholder)}{93}{section.13.1}%
-\contentsline {section}{\numberline {13.2}Artifacts (placeholder)}{93}{section.13.2}%
-\contentsline {chapter}{\numberline {14}Security, Privacy, Compliance, and Responsible AI (Week 13)}{95}{chapter.14}%
-\contentsline {section}{\numberline {14.1}Scope (placeholder)}{95}{section.14.1}%
-\contentsline {section}{\numberline {14.2}Discussion (placeholder)}{95}{section.14.2}%
-\contentsline {chapter}{\numberline {15}Capstone: Enterprise-Grade AI E-Commerce Architecture (Week 14)}{97}{chapter.15}%
-\contentsline {section}{\numberline {15.1}Scope (placeholder)}{97}{section.15.1}%
-\contentsline {section}{\numberline {15.2}Capstone deliverables (placeholder)}{97}{section.15.2}%
-\contentsline {chapter}{\numberline {A}Datasets and Synthetic Data for Teaching (placeholder)}{99}{appendix.A}%
-\contentsline {chapter}{\numberline {B}Template: System Design Document (placeholder)}{101}{appendix.B}%
-\contentsline {chapter}{\numberline {C}Template: Data Contract (placeholder)}{103}{appendix.C}%
-\contentsline {chapter}{\numberline {D}Template: Model Card and Risk Assessment (placeholder)}{105}{appendix.D}%
+\contentsline {section}{\numberline {8.1}Learning objectives}{83}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Why recommenders matter in e-commerce}{83}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Recommendation surfaces and tasks}{84}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Common recommendation tasks}{84}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Retrieval versus ranking}{84}{subsection.8.3.2}%
+\contentsline {section}{\numberline {8.4}Feedback in commerce recommendation}{84}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}Explicit feedback}{84}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}Implicit feedback}{85}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}Signal strength}{85}{subsection.8.4.3}%
+\contentsline {section}{\numberline {8.5}Memory-based collaborative filtering}{85}{section.8.5}%
+\contentsline {subsection}{\numberline {8.5.1}User-based collaborative filtering}{86}{subsection.8.5.1}%
+\contentsline {subsection}{\numberline {8.5.2}Item-based collaborative filtering}{86}{subsection.8.5.2}%
+\contentsline {subsection}{\numberline {8.5.3}Similarity measures}{86}{subsection.8.5.3}%
+\contentsline {section}{\numberline {8.6}Matrix factorization}{86}{section.8.6}%
+\contentsline {subsection}{\numberline {8.6.1}Basic idea}{86}{subsection.8.6.1}%
+\contentsline {subsection}{\numberline {8.6.2}Why factorization works well}{87}{subsection.8.6.2}%
+\contentsline {subsection}{\numberline {8.6.3}Limitations}{87}{subsection.8.6.3}%
+\contentsline {section}{\numberline {8.7}Implicit-feedback recommendation}{87}{section.8.7}%
+\contentsline {subsection}{\numberline {8.7.1}Positive-only observations}{87}{subsection.8.7.1}%
+\contentsline {subsection}{\numberline {8.7.2}Confidence weighting}{88}{subsection.8.7.2}%
+\contentsline {section}{\numberline {8.8}Cold start and sparsity}{88}{section.8.8}%
+\contentsline {subsection}{\numberline {8.8.1}User cold start}{88}{subsection.8.8.1}%
+\contentsline {subsection}{\numberline {8.8.2}Item cold start}{88}{subsection.8.8.2}%
+\contentsline {subsection}{\numberline {8.8.3}Marketplace and fairness considerations}{88}{subsection.8.8.3}%
+\contentsline {section}{\numberline {8.9}Learning-to-rank}{89}{section.8.9}%
+\contentsline {subsection}{\numberline {8.9.1}Pointwise, pairwise, and listwise views}{89}{subsection.8.9.1}%
+\contentsline {subsection}{\numberline {8.9.2}Why LTR is important in commerce}{89}{subsection.8.9.2}%
+\contentsline {subsection}{\numberline {8.9.3}Feature design for LTR}{89}{subsection.8.9.3}%
+\contentsline {section}{\numberline {8.10}Offline evaluation}{90}{section.8.10}%
+\contentsline {subsection}{\numberline {8.10.1}Common ranking metrics}{90}{subsection.8.10.1}%
+\contentsline {subsection}{\numberline {8.10.2}What these metrics measure}{90}{subsection.8.10.2}%
+\contentsline {subsection}{\numberline {8.10.3}Limits of offline evaluation}{90}{subsection.8.10.3}%
+\contentsline {section}{\numberline {8.11}Online evaluation and business impact}{91}{section.8.11}%
+\contentsline {section}{\numberline {8.12}Biases and practical risks}{91}{section.8.12}%
+\contentsline {subsection}{\numberline {8.12.1}Popularity bias}{91}{subsection.8.12.1}%
+\contentsline {subsection}{\numberline {8.12.2}Selection bias}{91}{subsection.8.12.2}%
+\contentsline {subsection}{\numberline {8.12.3}Position bias}{91}{subsection.8.12.3}%
+\contentsline {subsection}{\numberline {8.12.4}Business-constraint tension}{92}{subsection.8.12.4}%
+\contentsline {section}{\numberline {8.13}A practical recommender architecture}{92}{section.8.13}%
+\contentsline {section}{\numberline {8.14}Hands-on lab: a baseline recommender}{92}{section.8.14}%
+\contentsline {subsection}{\numberline {8.14.1}Lab scenario}{92}{subsection.8.14.1}%
+\contentsline {subsection}{\numberline {8.14.2}Lab tasks}{93}{subsection.8.14.2}%
+\contentsline {subsection}{\numberline {8.14.3}Expected learning outcome}{93}{subsection.8.14.3}%
+\contentsline {section}{\numberline {8.15}Managerial implications}{93}{section.8.15}%
+\contentsline {section}{\numberline {8.16}Multiple-choice questions (MCQs)}{93}{section.8.16}%
+\contentsline {section}{\numberline {8.17}Exercises (short)}{95}{section.8.17}%
+\contentsline {section}{\numberline {8.18}Mini-case (Odoo-linked, vendor-neutral)}{95}{section.8.18}%
+\contentsline {chapter}{\numberline {9}Recommenders II: Deep Learning, Embeddings, and Retrieval (Week 8)}{97}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Scope (placeholder)}{97}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Hands-on lab (placeholder)}{97}{section.9.2}%
+\contentsline {chapter}{\numberline {10}Pricing and Promotions with ML + Optimization (Week 9)}{99}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Scope (placeholder)}{99}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Hands-on lab (placeholder)}{99}{section.10.2}%
+\contentsline {chapter}{\numberline {11}Fraud, Risk, and Trust \& Safety (Week 10)}{101}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Scope (placeholder)}{101}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Hands-on lab (placeholder)}{101}{section.11.2}%
+\contentsline {chapter}{\numberline {12}Customer Service Automation with LLMs (Week 11)}{103}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Scope (placeholder)}{103}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Hands-on lab (placeholder)}{103}{section.12.2}%
+\contentsline {chapter}{\numberline {13}MLOps + DataOps for E-Commerce (Week 12)}{105}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Scope (placeholder)}{105}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Artifacts (placeholder)}{105}{section.13.2}%
+\contentsline {chapter}{\numberline {14}Security, Privacy, Compliance, and Responsible AI (Week 13)}{107}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Scope (placeholder)}{107}{section.14.1}%
+\contentsline {section}{\numberline {14.2}Discussion (placeholder)}{107}{section.14.2}%
+\contentsline {chapter}{\numberline {15}Capstone: Enterprise-Grade AI E-Commerce Architecture (Week 14)}{109}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Scope (placeholder)}{109}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Capstone deliverables (placeholder)}{109}{section.15.2}%
+\contentsline {chapter}{\numberline {A}Datasets and Synthetic Data for Teaching (placeholder)}{111}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Template: System Design Document (placeholder)}{113}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Template: Data Contract (placeholder)}{115}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Template: Model Card and Risk Assessment (placeholder)}{117}{appendix.D}%
