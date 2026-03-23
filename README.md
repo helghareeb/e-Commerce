@@ -1,6 +1,8 @@
 # AI-Driven E-Commerce Systems
 
-This repository contains the LaTeX source for a full book on modern e-commerce systems, covering platform strategy, enterprise architecture, data foundations, AI and ML applications, ERP integration, governance, and a final capstone architecture.
+This repository contains the LaTeX source for the book *AI-Driven E-Commerce Systems: Architecture, Data, Intelligence, and Operations*. The manuscript covers platform strategy, enterprise architecture, data foundations, AI and ML applications, ERP integration, governance, and a final capstone architecture.
+
+The current cover metadata identifies the book as authored by **Haitham A. El-Ghareeb**, Associate Professor, Information Systems Department, Faculty of Computers and Information Sciences, Mansoura University, Egypt.
 
 ## Project Nature
 
@@ -23,7 +25,14 @@ The manuscript is written as a continuous book rather than a slide deck or disco
 
 ## Current Manuscript Status
 
-The repository currently contains a 14-chapter manuscript plus appendices. The chapter sequence covers:
+The repository currently contains:
+
+- an unnumbered preface;
+- a 14-chapter continuous manuscript;
+- appendices and bibliography support;
+- a compiled PDF in `src/main.pdf`.
+
+The chapter sequence covers:
 
 1. Foundations of modern e-commerce systems
 2. Digital platforms and business models
@@ -46,12 +55,17 @@ Compile from the `src/` directory:
 
 ```bash
 pdflatex -interaction=nonstopmode main.tex
+bibtex main
+pdflatex -interaction=nonstopmode main.tex
 pdflatex -interaction=nonstopmode main.tex
 ```
 
-Two passes are typically needed for the table of contents and PDF outline to settle.
+Use the full sequence above when bibliography entries change or new citations are added.
+If only text changes are made without bibliography updates, two `pdflatex` passes are usually enough.
 
 ## Notes
 
-- The bibliography file `src/references_2.bib` is currently empty, so citation keys render as question marks until entries are added and BibTeX is run.
+- The manuscript now uses `src/references_2.bib` with BibTeX and `plainnat` for citations and references.
+- The front matter has been converted to a proper preface, so Chapter 1 is the first numbered chapter in the book.
+- Several long chapter titles use shortened running-head forms in LaTeX to keep page headers clean while preserving full chapter titles in the text.
 - Generated LaTeX artifacts such as `main.aux`, `main.out`, `main.toc`, and `main.pdf` are currently tracked in the repository.
