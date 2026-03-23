@@ -1,11 +1,432 @@
 \chapter{MLOps + DataOps for E-Commerce (Week 12)}
-\section{Scope (placeholder)}
+
+\section{Learning objectives}
 \begin{itemize}
-  \item Platform-agnostic MLOps/DataOps: CI/CD for ML, pipelines, and reproducibility.
-  \item Feature stores (concept), training-serving skew, monitoring, drift, and SLOs.
-  \item Experiment tracking, model governance, and evaluation at scale.
+  \item Explain why production ML in e-commerce requires disciplined operational practices beyond model training.
+  \item Distinguish MLOps concerns from DataOps concerns while understanding their overlap in end-to-end commerce systems.
+  \item Analyze training-serving skew, feature consistency, monitoring, drift, and deployment risk in production ML workflows.
+  \item Design an ML system artifact set that includes reproducibility, observability, and governance requirements.
 \end{itemize}
-\section{Artifacts (placeholder)}
+
+\section{Why MLOps and DataOps matter in e-commerce}
+E-commerce organizations often move quickly from a notebook proof-of-concept to a production dependency.
+Models may begin as experiments for recommendation, fraud, pricing, or service automation, but once deployed they affect revenue, customer experience, and operational load.
+
+At that point, the technical question is no longer ``does the model score well offline?''
+It becomes:
 \begin{itemize}
-  \item Deliverable: ML system design doc + monitoring plan.
+  \item How is the model trained repeatedly?
+  \item How are features computed consistently?
+  \item How is the model deployed safely?
+  \item How is degradation detected?
+  \item How is the system rolled back when behavior becomes harmful?
 \end{itemize}
+
+MLOps addresses the operational lifecycle of models.
+DataOps addresses the operational lifecycle of the data systems those models depend on.
+In e-commerce, the two are tightly coupled because behavior, catalog state, pricing, inventory, and fraud patterns all change continuously.
+
+\section{From experimentation to production systems}
+Many teams can build a model.
+Far fewer can operate one reliably.
+
+\subsection{The production gap}
+The production gap often appears when a promising model meets real constraints such as:
+\begin{itemize}
+  \item missing or delayed features,
+  \item inconsistent identifiers across systems,
+  \item changes in business process that alter label meaning,
+  \item latency requirements,
+  \item lack of rollback or approval workflow,
+  \item weak monitoring once the model is live.
+\end{itemize}
+
+\subsection{Why e-commerce is especially operational}
+E-commerce ML systems are unusually exposed to changing conditions:
+\begin{itemize}
+  \item product assortments change,
+  \item promotions alter behavior,
+  \item demand shifts seasonally,
+  \item fraudsters adapt,
+  \item support policies evolve,
+  \item customers interact across multiple channels.
+\end{itemize}
+
+This means that a model that looked strong last month may become weak or unsafe if the surrounding system changes.
+
+\section{What MLOps covers}
+MLOps is the discipline of making ML systems buildable, deployable, observable, and governable.
+
+\subsection{Typical MLOps responsibilities}
+\begin{itemize}
+  \item versioning code, data references, and model artifacts,
+  \item training pipelines,
+  \item model packaging and deployment,
+  \item experiment tracking,
+  \item model registry and release control,
+  \item performance monitoring,
+  \item rollback and incident response.
+\end{itemize}
+
+\subsection{What DataOps covers}
+DataOps focuses more on:
+\begin{itemize}
+  \item data pipeline reliability,
+  \item data contracts and validation,
+  \item data freshness and lineage,
+  \item reproducible transformations,
+  \item quality checks across analytical and operational data movement.
+\end{itemize}
+
+In practice, production ML depends on both.
+Poor DataOps can silently break a model.
+Poor MLOps can deploy a model without control or visibility.
+
+\section{Reproducibility}
+Reproducibility is a foundation of trustworthy ML operations.
+If the team cannot explain how a model was trained and with which data, governance and debugging become weak.
+
+\subsection{What should be reproducible}
+A strong production workflow should make it possible to recover:
+\begin{itemize}
+  \item source code version,
+  \item feature definitions,
+  \item training data snapshot or reference,
+  \item hyperparameters,
+  \item evaluation outputs,
+  \item model artifact,
+  \item deployment configuration.
+\end{itemize}
+
+\subsection{Why this matters in commerce}
+When a recommender starts pushing low-margin items, or a fraud model begins over-blocking legitimate customers, teams need to determine whether the cause was:
+\begin{itemize}
+  \item new data,
+  \item a model change,
+  \item a feature transformation bug,
+  \item a serving mismatch,
+  \item or a business-rule change upstream.
+\end{itemize}
+
+Without reproducibility, that diagnosis becomes slow and politically difficult.
+
+\section{Pipelines and orchestration}
+Production ML systems depend on pipelines rather than ad hoc manual execution.
+
+\subsection{Typical pipeline stages}
+A simplified pipeline may include:
+\begin{enumerate}
+  \item ingest and validate raw data,
+  \item transform features,
+  \item train models,
+  \item evaluate and compare candidates,
+  \item register approved artifacts,
+  \item deploy to staging or production,
+  \item monitor outcomes and trigger retraining or rollback when needed.
+\end{enumerate}
+
+\subsection{Batch and streaming coexistence}
+E-commerce ML often requires both:
+\begin{itemize}
+  \item batch pipelines for training and aggregate features,
+  \item streaming or near-real-time pipelines for serving-time context such as session behavior, current inventory, or recent fraud indicators.
+\end{itemize}
+
+The system design must make clear which features belong to each path.
+
+\section{Feature consistency and training-serving skew}
+One of the most important production risks in ML systems is training-serving skew.
+This occurs when the features or transformations used at serving time do not match those used in training.
+
+\subsection{How skew happens}
+Typical causes include:
+\begin{itemize}
+  \item using different code paths offline and online,
+  \item stale or delayed online feature values,
+  \item inconsistent joins or identifiers,
+  \item business-rule changes applied only in one environment,
+  \item time-window leakage in offline training that is impossible online.
+\end{itemize}
+
+\subsection{Why skew is dangerous}
+Skew can degrade a model even when the model artifact itself is correct.
+For example:
+\begin{itemize}
+  \item a fraud model may receive delayed account-age features online,
+  \item a recommender may use a stale inventory flag,
+  \item a pricing model may be trained on clean margin data but served with inconsistent cost feeds.
+\end{itemize}
+
+\subsection{Feature stores as a concept}
+Feature stores are often introduced to reduce this risk by standardizing feature definitions and access patterns across training and serving.
+The technology choice matters less than the architectural goal: one governed definition of each important feature.
+
+\section{Model registry and release management}
+Production ML systems need a controlled way to manage candidate and approved models.
+
+\subsection{Why a registry matters}
+A model registry or equivalent control plane helps track:
+\begin{itemize}
+  \item which model versions exist,
+  \item which one is approved,
+  \item which environment each version is deployed in,
+  \item what evaluation evidence supported release,
+  \item how to roll back if needed.
+\end{itemize}
+
+\subsection{Release strategies}
+Common release strategies include:
+\begin{itemize}
+  \item shadow deployment,
+  \item canary rollout,
+  \item staged traffic ramp-up,
+  \item champion-challenger comparison,
+  \item full rollback on guardrail breach.
+\end{itemize}
+
+These practices are especially useful in e-commerce where small degradations can have immediate commercial consequences.
+
+\section{Monitoring production ML systems}
+Monitoring must cover more than CPU usage and uptime.
+A live model can be operationally healthy and still commercially harmful.
+
+\subsection{Technical monitoring}
+Useful technical signals include:
+\begin{itemize}
+  \item latency,
+  \item throughput,
+  \item error rate,
+  \item feature freshness,
+  \item missing-value spikes,
+  \item tool or dependency failures in inference paths.
+\end{itemize}
+
+\subsection{Model monitoring}
+Useful model-focused signals include:
+\begin{itemize}
+  \item score distribution shifts,
+  \item calibration changes,
+  \item prediction drift,
+  \item confidence anomalies,
+  \item slice-level performance changes.
+\end{itemize}
+
+\subsection{Business monitoring}
+Production evaluation should also include business outcomes such as:
+\begin{itemize}
+  \item click-through and conversion for recommenders,
+  \item fraud-dollar capture and false-positive burden,
+  \item margin and inventory effects for pricing models,
+  \item containment and recontact rate for service assistants.
+\end{itemize}
+
+This is what turns monitoring from infrastructure tracking into operational accountability.
+
+\section{Data drift and concept drift}
+Drift is unavoidable in e-commerce ML.
+Students should understand several forms of drift.
+
+\subsection{Data drift}
+Data drift occurs when the distribution of inputs changes.
+Examples include:
+\begin{itemize}
+  \item seasonal traffic changes,
+  \item new product categories,
+  \item device mix shifts,
+  \item changed promotion patterns,
+  \item new fraud tactics.
+\end{itemize}
+
+\subsection{Concept drift}
+Concept drift occurs when the relationship between inputs and outcomes changes.
+For example:
+\begin{itemize}
+  \item the same browsing behavior stops indicating purchase intent after a UI redesign,
+  \item fraud patterns evolve so past indicators weaken,
+  \item pricing response changes because a competitor enters the market.
+\end{itemize}
+
+\subsection{Response to drift}
+Possible responses include:
+\begin{itemize}
+  \item alerting,
+  \item retraining,
+  \item threshold adjustment,
+  \item feature revision,
+  \item temporary fallback to safer baselines.
+\end{itemize}
+
+\section{CI/CD for ML}
+Continuous integration and deployment for ML differs from classical software delivery because the deployed artifact is influenced by data as well as code.
+
+\subsection{What CI for ML should validate}
+Reasonable validation steps include:
+\begin{itemize}
+  \item unit tests for transformations,
+  \item schema and feature checks,
+  \item reproducibility checks,
+  \item training pipeline success,
+  \item offline evaluation against baselines,
+  \item safety or policy checks for sensitive outputs.
+\end{itemize}
+
+\subsection{What CD for ML should consider}
+Deployment should consider:
+\begin{itemize}
+  \item compatibility with serving infrastructure,
+  \item readiness of online features,
+  \item staged rollout strategy,
+  \item alert thresholds,
+  \item rollback readiness.
+\end{itemize}
+
+In e-commerce, deployment speed matters, but so does release discipline.
+
+\section{Experiment tracking and model comparison}
+Teams need a reliable record of what was tried and what worked.
+
+\subsection{What to track}
+Useful tracked metadata include:
+\begin{itemize}
+  \item dataset reference,
+  \item feature set version,
+  \item model type,
+  \item hyperparameters,
+  \item training date and window,
+  \item evaluation metrics,
+  \item release decision.
+\end{itemize}
+
+\subsection{Why this matters}
+Without structured experiment tracking, teams can neither compare models honestly nor explain why a deployed model was chosen.
+This becomes particularly important when several business units or use cases share the same ML platform.
+
+\section{Governance and approvals}
+Not every model should be promoted automatically.
+Some e-commerce use cases have a high enough impact that governance gates are necessary.
+
+\subsection{Examples of governed models}
+\begin{itemize}
+  \item fraud and abuse scoring,
+  \item dynamic pricing,
+  \item customer-service agents with action tools,
+  \item high-visibility recommendation systems,
+  \item risk or compliance-related models.
+\end{itemize}
+
+\subsection{Typical governance artifacts}
+Reasonable artifacts may include:
+\begin{itemize}
+  \item model cards,
+  \item risk assessment notes,
+  \item monitoring plans,
+  \item evaluation summaries,
+  \item rollback criteria,
+  \item ownership and escalation paths.
+\end{itemize}
+
+Governance is not meant to slow all experimentation equally.
+It is meant to scale decision quality for systems that matter.
+
+\section{Incident response for ML systems}
+Production ML systems need incident handling just like other production services.
+
+\subsection{Examples of ML incidents}
+\begin{itemize}
+  \item a recommender starts surfacing unavailable items,
+  \item a fraud model causes a spike in false declines,
+  \item a service assistant cites the wrong policy version,
+  \item a pricing model recommends below-cost prices after a cost feed failure.
+\end{itemize}
+
+\subsection{Preparedness}
+Good preparedness includes:
+\begin{itemize}
+  \item clear runbooks,
+  \item fallback modes,
+  \item alert ownership,
+  \item frozen-safe baselines,
+  \item audit logs for recent model and data changes.
+\end{itemize}
+
+This is one reason operational simplicity is valuable.
+Complex ML systems without response plans tend to fail expensively.
+
+\section{Artifacts for this chapter}
+The central artifact deliverable for this chapter is an ML system design package containing:
+\begin{itemize}
+  \item pipeline overview,
+  \item feature and data dependencies,
+  \item deployment path,
+  \item monitoring plan,
+  \item drift and rollback strategy,
+  \item governance and ownership summary.
+\end{itemize}
+
+\section{Hands-on artifacts}
+Students should produce:
+\begin{itemize}
+  \item an ML system design document,
+  \item a monitoring plan with technical, model, and business signals,
+  \item and a short incident playbook for one selected use case.
+\end{itemize}
+
+\section{Managerial implications}
+Organizations often underestimate the operational cost of ML.
+The model may be only a small fraction of the total system effort.
+Most production pain comes from weak data contracts, poor observability, inconsistent features, and unclear ownership.
+
+Well-run MLOps and DataOps allow the business to benefit from ML repeatedly rather than episodically.
+They convert isolated model wins into an operational capability.
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item What is \emph{training-serving skew}?
+  \begin{enumerate}
+    \item A difference between the fonts used in notebooks and dashboards.
+    \item A mismatch between how features or transformations are produced in training and how they are produced at serving time.
+    \item A pricing discount given only during model training.
+    \item A mandatory property of all neural networks.
+  \end{enumerate}
+
+  \item Why is a model registry or equivalent release control useful?
+  \begin{enumerate}
+    \item It guarantees no model will ever fail.
+    \item It helps track approved model versions, deployment state, evaluation evidence, and rollback options.
+    \item It replaces monitoring entirely.
+    \item It only matters for academic experiments.
+  \end{enumerate}
+
+  \item Which is the best example of a \emph{business} monitoring signal for an e-commerce ML system?
+  \begin{enumerate}
+    \item CPU temperature
+    \item Fraud-dollar capture or revenue-per-session lift
+    \item Container image size
+    \item Disk inode count
+  \end{enumerate}
+
+  \item Data drift differs from concept drift because:
+  \begin{enumerate}
+    \item data drift is about input-distribution change, while concept drift is about change in the relationship between inputs and outcomes.
+    \item concept drift is only about network outages.
+    \item data drift only happens in recommendation systems.
+    \item there is no real difference in practice.
+  \end{enumerate}
+
+  \item Why do production ML systems need incident playbooks?
+  \begin{enumerate}
+    \item Because model failures can affect real business outcomes and require fast, structured response.
+    \item Because playbooks improve offline accuracy.
+    \item Because incidents only happen in ERP systems.
+    \item Because monitoring removes the need for rollback.
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (a)
+  \item (a)
+\end{enumerate}
