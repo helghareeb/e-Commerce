@@ -1,10 +1,461 @@
 \chapter{Recommenders II: Deep Learning, Embeddings, and Retrieval (Week 8)}
-\section{Scope (placeholder)}
+
+\section{Learning objectives}
 \begin{itemize}
-  \item Two-tower retrieval, embeddings, sequence models, and candidate generation vs re-ranking.
-  \item Practical concerns: cold-start, diversity, bias, and latency.
+  \item Explain why deep learning methods are useful for large-scale recommendation and retrieval problems in e-commerce.
+  \item Distinguish candidate generation from re-ranking and understand why modern recommenders are often multi-stage systems.
+  \item Describe embeddings, two-tower retrieval, sequence models, and session-aware recommendation at a system level.
+  \item Analyze production concerns such as cold start, diversity, latency, and bias in deep recommender architectures.
 \end{itemize}
-\section{Hands-on lab (placeholder)}
+
+\section{From classical recommenders to deep retrieval}
+Chapter 7 focused on classical collaborative filtering, matrix factorization, and learning-to-rank.
+Those methods remain important, but large-scale e-commerce platforms often face additional pressures:
 \begin{itemize}
-  \item Train embeddings; build a retrieval + re-ranking pipeline (high level).
+  \item extremely large catalogs,
+  \item rapidly changing inventories,
+  \item sparse user histories,
+  \item multi-modal item information such as text and images,
+  \item session behavior that changes within minutes,
+  \item and tight latency requirements at serving time.
+\end{itemize}
+
+Deep learning is useful in this setting because it can learn richer representations from heterogeneous data.
+Rather than relying only on manually designed similarity signals, deep systems can learn embeddings that organize users, items, queries, sessions, and contexts into a common representational space.
+
+\section{Modern recommender architecture: retrieval and ranking}
+Large recommender systems are rarely a single model.
+They are usually multi-stage decision systems.
+
+\subsection{Candidate generation}
+Candidate generation or retrieval narrows a huge catalog to a much smaller set of promising items.
+For a catalog containing millions of products, the system cannot fully rank every item in real time for every request.
+Retrieval therefore acts as a coarse but scalable selection layer.
+
+\subsection{Re-ranking}
+After candidate generation, a second-stage model or rule system orders the retrieved candidates more precisely.
+This stage can use richer features, business constraints, and context-aware logic because the item set is now small enough to handle with more expensive computation.
+
+\subsection{Why multi-stage design matters}
+The multi-stage architecture exists because of a systems tradeoff:
+\begin{itemize}
+  \item retrieval prioritizes speed and coverage,
+  \item re-ranking prioritizes precision and business control.
+\end{itemize}
+
+Students should understand that recommendation quality depends not only on model accuracy, but also on how these stages interact.
+A weak retrieval stage can permanently exclude relevant items before ranking ever sees them.
+
+\section{Embeddings as learned representations}
+Embeddings are dense vectors that represent entities such as users, items, queries, categories, or sessions.
+They generalize the latent-factor intuition of matrix factorization, but in a more flexible framework.
+
+\subsection{Why embeddings are powerful}
+Embeddings are useful because they:
+\begin{itemize}
+  \item capture similarity in a continuous space,
+  \item support nearest-neighbor retrieval,
+  \item can combine multiple signals and modalities,
+  \item transfer across tasks such as recommendation, search, and personalization.
+\end{itemize}
+
+\subsection{What can be embedded}
+Common embedded entities in commerce include:
+\begin{itemize}
+  \item users or customer accounts,
+  \item products,
+  \item search queries,
+  \item brands or categories,
+  \item sellers,
+  \item sessions,
+  \item product text and images.
+\end{itemize}
+
+\subsection{Interpretation}
+An embedding dimension does not usually have a simple human-readable meaning.
+The value of the representation comes from geometry:
+items or users that are close in vector space are more likely to be related in terms of behavior or semantics.
+
+\section{Two-tower retrieval models}
+One of the most influential deep retrieval architectures is the two-tower model.
+It is widely used because it balances expressiveness with serving practicality.
+
+\subsection{Basic structure}
+A two-tower model learns:
+\begin{itemize}
+  \item one tower that maps user or context features to an embedding,
+  \item one tower that maps item features to an embedding.
+\end{itemize}
+
+The compatibility between a user/context and an item is then computed using a similarity function such as dot product or cosine similarity.
+
+\subsection{Why two towers are useful}
+Two-tower models are attractive because item embeddings can often be precomputed offline and indexed for fast approximate nearest-neighbor retrieval.
+At serving time, the system computes the user or session embedding and retrieves nearby items efficiently.
+
+\subsection{Typical inputs}
+The user/context tower may consume:
+\begin{itemize}
+  \item recent interaction history,
+  \item device and channel context,
+  \item customer segment,
+  \item geographic or temporal features,
+  \item active search or page context.
+\end{itemize}
+
+The item tower may consume:
+\begin{itemize}
+  \item item ID,
+  \item category,
+  \item brand,
+  \item price bucket,
+  \item title and description text,
+  \item image-derived features,
+  \item seller or inventory context.
+\end{itemize}
+
+\section{Approximate nearest-neighbor retrieval}
+Deep retrieval only becomes operationally useful when the serving system can search the embedding space quickly.
+This is where approximate nearest-neighbor (ANN) indexing enters the architecture.
+
+\subsection{Why exact search is often too expensive}
+If the platform must compare each request embedding against millions of item embeddings, exact retrieval may be too slow for production latency budgets.
+ANN methods trade a small amount of exactness for major speed improvements.
+
+\subsection{Architectural implication}
+This means recommender design now depends on more than model training.
+It also depends on:
+\begin{itemize}
+  \item embedding refresh cadence,
+  \item index rebuild strategy,
+  \item item insertion and deletion handling,
+  \item consistency between item catalog state and retrieval index.
+\end{itemize}
+
+An item that is unavailable or unpublished should not remain in the active candidate index without explicit policy.
+
+\section{Sequence models and session-aware recommendation}
+Many commerce interactions are highly sequential.
+A user may move from broad exploration to narrow intent within a single session.
+Classical long-term preference models may miss this short-term drift.
+
+\subsection{Session behavior}
+Session-aware recommendation tries to capture recency and order, not only aggregate history.
+Examples of useful sequential signals include:
+\begin{itemize}
+  \item last viewed products,
+  \item order of category transitions,
+  \item repeated brand examination,
+  \item add-to-cart followed by substitution browsing,
+  \item search reformulation patterns.
+\end{itemize}
+
+\subsection{Sequence model families}
+Common sequence-oriented approaches include:
+\begin{itemize}
+  \item recurrent models,
+  \item convolutional sequence models,
+  \item Transformer-style attention models,
+  \item next-item prediction objectives.
+\end{itemize}
+
+\subsection{Why sequence models help}
+These models help because they can distinguish:
+\begin{itemize}
+  \item stable preference from temporary intent,
+  \item exploration from purchase preparation,
+  \item repeated exposure from genuine narrowing of interest.
+\end{itemize}
+
+This is especially useful for anonymous users, where long-term account history may be unavailable.
+
+\section{Multi-modal recommendation}
+Deep systems are particularly useful when products have rich unstructured content.
+E-commerce catalogs often contain:
+\begin{itemize}
+  \item titles and descriptions,
+  \item structured attributes,
+  \item images,
+  \item reviews,
+  \item seller-generated content,
+  \item taxonomy information.
+\end{itemize}
+
+\subsection{Text and semantic understanding}
+Text encoders can help represent product meaning beyond exact attribute matching.
+For example, two products may be semantically similar even when they do not share the same surface keywords.
+
+\subsection{Image understanding}
+Visual features matter strongly in apparel, furniture, decor, and other style-driven categories.
+Image embeddings can support:
+\begin{itemize}
+  \item visually similar item recommendation,
+  \item cold-start support for new products,
+  \item quality or anomaly checks for catalog content.
+\end{itemize}
+
+\subsection{Fusion}
+Modern item representations often combine ID-based, attribute-based, text-based, and image-based features.
+This reduces dependence on raw interaction history alone and helps address sparse data problems.
+
+\section{Deep re-ranking}
+Retrieval is only the first stage.
+Deep models can also be applied in re-ranking after candidates are retrieved.
+
+\subsection{Why re-ranking differs from retrieval}
+The re-ranker can use richer cross-features because it evaluates a much smaller candidate set.
+For example, it may incorporate:
+\begin{itemize}
+  \item user-item interaction history,
+  \item session context,
+  \item merchandising rules,
+  \item margin, inventory, or delivery constraints,
+  \item diversity adjustments,
+  \item fraud or return-risk features.
+\end{itemize}
+
+\subsection{Business role of re-ranking}
+The re-ranker is often where business policy becomes explicit.
+The retrieval stage finds promising candidates.
+The re-ranker decides which candidates best satisfy a mix of relevance and operational constraints.
+
+\section{Training data and objectives}
+Deep recommender quality depends heavily on how the training problem is defined.
+
+\subsection{Positive and negative examples}
+Training often requires:
+\begin{itemize}
+  \item positive examples from clicks, carts, or purchases,
+  \item sampled negatives from unseen or skipped items,
+  \item sometimes hard negatives that were exposed but not chosen.
+\end{itemize}
+
+\subsection{Objective choices}
+Common objectives include:
+\begin{itemize}
+  \item next-item prediction,
+  \item pairwise ranking losses,
+  \item contrastive retrieval objectives,
+  \item multi-task objectives combining click, cart, and purchase behavior.
+\end{itemize}
+
+\subsection{Label quality}
+As in earlier chapters, the label design is a business interpretation problem.
+If a purchase is later returned, or if a click was caused mainly by position bias, the training data need careful handling.
+Deep models can amplify weak signals just as efficiently as strong ones.
+
+\section{Cold start in deep recommendation}
+Deep systems do not eliminate cold start.
+They only change the available tools for addressing it.
+
+\subsection{User cold start}
+For new users, deep models may rely on:
+\begin{itemize}
+  \item session behavior,
+  \item page context,
+  \item acquisition source,
+  \item demographic or geo context where appropriate,
+  \item popularity and trend priors.
+\end{itemize}
+
+\subsection{Item cold start}
+For new items, deep models can use metadata and content features more effectively than classical ID-only approaches.
+Text and image embeddings are especially helpful because they allow the item to be placed in a meaningful neighborhood before interaction data accumulate.
+
+\subsection{Catalog churn}
+Commerce catalogs change frequently.
+A useful architecture must define how new item embeddings are generated, validated, indexed, and exposed without waiting for a full model retrain in every case.
+
+\section{Diversity, exploration, and bias}
+A recommender that always shows the most probable item is not necessarily the best commerce system.
+The platform may need to balance relevance with diversity and exploration.
+
+\subsection{Diversity}
+Diversity can improve user experience by preventing repetitive lists and broadening discovery.
+It may also improve business robustness by reducing over-concentration on a few items or sellers.
+
+\subsection{Exploration}
+Exploration is necessary to learn about new items, uncertain user interests, and shifting trends.
+Without exploration, the platform over-commits to historical winners and limits future learning.
+
+\subsection{Bias}
+Deep systems can intensify:
+\begin{itemize}
+  \item popularity bias,
+  \item seller-exposure bias,
+  \item feedback-loop bias,
+  \item and representation bias if product metadata are uneven or low quality.
+\end{itemize}
+
+This means governance remains essential even when model quality appears strong offline.
+
+\section{Serving and latency constraints}
+Deep recommenders exist under production latency budgets.
+This makes serving architecture as important as modeling.
+
+\subsection{Key serving questions}
+\begin{itemize}
+  \item Which features are available in real time?
+  \item Which embeddings can be precomputed?
+  \item How often are indexes refreshed?
+  \item What is the fallback plan if the retrieval service is unavailable?
+  \item How are out-of-stock or restricted items removed before final ranking?
+\end{itemize}
+
+\subsection{Caching and freshness}
+Caching can reduce latency, but stale caches can recommend unavailable or irrelevant items.
+Architecture must define freshness tolerances by surface.
+For example, homepage suggestions may tolerate more staleness than cart recommendations near checkout.
+
+\subsection{Fallback behavior}
+Production systems usually need fallback strategies such as:
+\begin{itemize}
+  \item popularity-based lists,
+  \item category best-sellers,
+  \item recent-view heuristics,
+  \item rule-based complements.
+\end{itemize}
+
+Fallbacks are not a sign of failure.
+They are part of robust recommender system design.
+
+\section{Evaluation beyond offline metrics}
+Deep recommendation systems are often evaluated offline with ranking metrics, but their real value appears only in production.
+
+\subsection{Why deep models can mislead offline}
+Deep models may improve offline ranking scores because they capture rich structure, yet still disappoint online if:
+\begin{itemize}
+  \item latency increases and user experience degrades,
+  \item popularity bias worsens,
+  \item retrieval excludes important fresh inventory,
+  \item serving features differ from training features,
+  \item business constraints are ignored in ranking.
+\end{itemize}
+
+\subsection{Online considerations}
+Relevant online metrics include:
+\begin{itemize}
+  \item click-through and add-to-cart lift,
+  \item incremental conversion,
+  \item revenue per session,
+  \item item and seller coverage,
+  \item return rate,
+  \item latency and availability,
+  \item fairness or exposure guardrails.
+\end{itemize}
+
+\section{A practical deep recommender stack}
+A practical deep recommender architecture often includes:
+\begin{itemize}
+  \item event collection and identity stitching,
+  \item a feature store or equivalent feature pipelines,
+  \item model training jobs,
+  \item embedding generation,
+  \item ANN index building,
+  \item retrieval serving,
+  \item re-ranking serving,
+  \item experimentation and monitoring layers.
+\end{itemize}
+
+This is why deep recommendation belongs not only to machine learning, but also to systems design and MLOps.
+
+\section{Hands-on lab: retrieval plus re-ranking}
+The goal of the practical work is to help students think beyond one-model recommendation.
+
+\subsection{Lab scenario}
+Students are given a dataset with user interaction histories, product metadata, and timestamps.
+They are asked to design a two-stage pipeline for recommendation.
+
+\subsection{Lab tasks}
+\begin{enumerate}
+  \item Train or simulate product embeddings from interaction and metadata signals.
+  \item Build a simple candidate retrieval mechanism using embedding similarity.
+  \item Add a lightweight re-ranking stage using business-aware features such as inventory or price sensitivity.
+  \item Define a serving plan that explains which representations are precomputed and which features are computed online.
+  \item Propose online guardrail metrics that would be monitored during an experiment.
+\end{enumerate}
+
+\subsection{Expected learning outcome}
+By the end of the lab, students should be able to explain why a high-quality recommender is a pipeline and not just a neural model.
+
+\section{Managerial implications}
+Deep recommendation systems can unlock major gains in relevance and catalog understanding, but they also introduce higher system complexity.
+Organizations should adopt them when the business problem justifies:
+\begin{itemize}
+  \item richer representation learning,
+  \item very large-scale retrieval,
+  \item multi-modal item understanding,
+  \item session-aware adaptation.
+\end{itemize}
+
+They should not adopt them merely because they sound more advanced.
+Without strong data foundations, business constraints, and serving discipline, deep recommenders can become expensive complexity with limited net value.
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item In a modern recommender stack, the main purpose of \emph{candidate generation} is to:
+  \begin{enumerate}
+    \item finalize the exact business KPI improvement.
+    \item reduce a very large catalog to a manageable subset before detailed ranking.
+    \item eliminate the need for embeddings.
+    \item replace experimentation.
+  \end{enumerate}
+
+  \item A two-tower retrieval model is most accurately described as:
+  \begin{enumerate}
+    \item a model with one tower for pricing and one tower for fraud.
+    \item separate encoders for user/context and item representations whose similarity supports retrieval.
+    \item a rule engine with two fallback policies.
+    \item a batch-only ERP integration pattern.
+  \end{enumerate}
+
+  \item Why are embeddings useful in e-commerce recommendation?
+  \begin{enumerate}
+    \item They always eliminate cold start completely.
+    \item They provide dense learned representations that support similarity and retrieval across users, items, and contexts.
+    \item They make item metadata unnecessary.
+    \item They are only relevant for payment systems.
+  \end{enumerate}
+
+  \item Sequence models are especially valuable when:
+  \begin{enumerate}
+    \item user intent changes within a session and order of interactions matters.
+    \item the catalog has only ten products.
+    \item recommendation is based only on ERP invoices.
+    \item latency does not matter.
+  \end{enumerate}
+
+  \item Which is the best example of a production concern specific to deep retrieval systems?
+  \begin{enumerate}
+    \item Whether the catalog has chapter numbers.
+    \item How to refresh embeddings and ANN indexes while respecting latency and availability constraints.
+    \item Whether to use bullet points in documentation.
+    \item Whether offline MAP@$K$ is equal to precision@$K$.
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (b)
+  \item (a)
+  \item (b)
+\end{enumerate}
+
+\section{Exercises (short)}
+\begin{enumerate}
+  \item Compare a classical matrix-factorization recommender and a two-tower retrieval system for a large commerce catalog. State two reasons why the deep system may help and two costs it introduces.
+  \item Propose an embedding feature set for items in a fashion store. Include structured, textual, and visual signals.
+  \item Design a retrieval plus re-ranking pipeline for a cart recommendation widget. Specify where you would enforce inventory and diversity constraints.
+\end{enumerate}
+
+\section{Mini-case (Odoo-linked, vendor-neutral)}
+\textbf{Scenario:} A hybrid B2C/B2B commerce company uses a headless storefront, Odoo for ERP, and a central ML platform. The product catalog is large and changes frequently.
+
+\textbf{Task:} Design a deep recommender architecture:
+\begin{itemize}
+  \item Define the inputs to the user/context tower and the item tower.
+  \item Explain how item embeddings would be refreshed when products, prices, or availability change.
+  \item Identify two risks in using deep retrieval for B2B customers with negotiated catalogs or restricted assortments, and propose mitigations.
 \end{itemize}

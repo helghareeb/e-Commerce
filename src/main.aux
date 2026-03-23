@@ -284,50 +284,104 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {9}Recommenders II: Deep Learning, Embeddings, and Retrieval (Week 8)}{97}{chapter.9}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {9.1}Scope (placeholder)}{97}{section.9.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9.2}Hands-on lab (placeholder)}{97}{section.9.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {10}Pricing and Promotions with ML + Optimization (Week 9)}{99}{chapter.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.1}Learning objectives}{97}{section.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.2}From classical recommenders to deep retrieval}{97}{section.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.3}Modern recommender architecture: retrieval and ranking}{98}{section.9.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3.1}Candidate generation}{98}{subsection.9.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3.2}Re-ranking}{98}{subsection.9.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3.3}Why multi-stage design matters}{98}{subsection.9.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.4}Embeddings as learned representations}{98}{section.9.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.1}Why embeddings are powerful}{98}{subsection.9.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.2}What can be embedded}{99}{subsection.9.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.3}Interpretation}{99}{subsection.9.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.5}Two-tower retrieval models}{99}{section.9.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.5.1}Basic structure}{99}{subsection.9.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.5.2}Why two towers are useful}{100}{subsection.9.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.5.3}Typical inputs}{100}{subsection.9.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.6}Approximate nearest-neighbor retrieval}{100}{section.9.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.6.1}Why exact search is often too expensive}{100}{subsection.9.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.6.2}Architectural implication}{101}{subsection.9.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.7}Sequence models and session-aware recommendation}{101}{section.9.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.7.1}Session behavior}{101}{subsection.9.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.7.2}Sequence model families}{101}{subsection.9.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.7.3}Why sequence models help}{102}{subsection.9.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.8}Multi-modal recommendation}{102}{section.9.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.8.1}Text and semantic understanding}{102}{subsection.9.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.8.2}Image understanding}{102}{subsection.9.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.8.3}Fusion}{103}{subsection.9.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.9}Deep re-ranking}{103}{section.9.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.9.1}Why re-ranking differs from retrieval}{103}{subsection.9.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.9.2}Business role of re-ranking}{103}{subsection.9.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.10}Training data and objectives}{103}{section.9.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.10.1}Positive and negative examples}{103}{subsection.9.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.10.2}Objective choices}{104}{subsection.9.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.10.3}Label quality}{104}{subsection.9.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.11}Cold start in deep recommendation}{104}{section.9.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.11.1}User cold start}{104}{subsection.9.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.11.2}Item cold start}{104}{subsection.9.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.11.3}Catalog churn}{105}{subsection.9.11.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.12}Diversity, exploration, and bias}{105}{section.9.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.12.1}Diversity}{105}{subsection.9.12.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.12.2}Exploration}{105}{subsection.9.12.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.12.3}Bias}{105}{subsection.9.12.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.13}Serving and latency constraints}{105}{section.9.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.13.1}Key serving questions}{106}{subsection.9.13.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.13.2}Caching and freshness}{106}{subsection.9.13.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.13.3}Fallback behavior}{106}{subsection.9.13.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.14}Evaluation beyond offline metrics}{106}{section.9.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.14.1}Why deep models can mislead offline}{106}{subsection.9.14.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.14.2}Online considerations}{107}{subsection.9.14.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.15}A practical deep recommender stack}{107}{section.9.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.16}Hands-on lab: retrieval plus re-ranking}{107}{section.9.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.16.1}Lab scenario}{108}{subsection.9.16.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.16.2}Lab tasks}{108}{subsection.9.16.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.16.3}Expected learning outcome}{108}{subsection.9.16.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.17}Managerial implications}{108}{section.9.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.18}Multiple-choice questions (MCQs)}{108}{section.9.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.19}Exercises (short)}{110}{section.9.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.20}Mini-case (Odoo-linked, vendor-neutral)}{110}{section.9.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {10}Pricing and Promotions with ML + Optimization (Week 9)}{111}{chapter.10}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {10.1}Scope (placeholder)}{99}{section.10.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10.2}Hands-on lab (placeholder)}{99}{section.10.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {11}Fraud, Risk, and Trust \& Safety (Week 10)}{101}{chapter.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.1}Scope (placeholder)}{111}{section.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.2}Hands-on lab (placeholder)}{111}{section.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {11}Fraud, Risk, and Trust \& Safety (Week 10)}{113}{chapter.11}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {11.1}Scope (placeholder)}{101}{section.11.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {11.2}Hands-on lab (placeholder)}{101}{section.11.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {12}Customer Service Automation with LLMs (Week 11)}{103}{chapter.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.1}Scope (placeholder)}{113}{section.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.2}Hands-on lab (placeholder)}{113}{section.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {12}Customer Service Automation with LLMs (Week 11)}{115}{chapter.12}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {12.1}Scope (placeholder)}{103}{section.12.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {12.2}Hands-on lab (placeholder)}{103}{section.12.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {13}MLOps + DataOps for E-Commerce (Week 12)}{105}{chapter.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12.1}Scope (placeholder)}{115}{section.12.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12.2}Hands-on lab (placeholder)}{115}{section.12.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {13}MLOps + DataOps for E-Commerce (Week 12)}{117}{chapter.13}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {13.1}Scope (placeholder)}{105}{section.13.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {13.2}Artifacts (placeholder)}{105}{section.13.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {14}Security, Privacy, Compliance, and Responsible AI (Week 13)}{107}{chapter.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13.1}Scope (placeholder)}{117}{section.13.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13.2}Artifacts (placeholder)}{117}{section.13.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {14}Security, Privacy, Compliance, and Responsible AI (Week 13)}{119}{chapter.14}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {14.1}Scope (placeholder)}{107}{section.14.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {14.2}Discussion (placeholder)}{107}{section.14.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {15}Capstone: Enterprise-Grade AI E-Commerce Architecture (Week 14)}{109}{chapter.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {14.1}Scope (placeholder)}{119}{section.14.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {14.2}Discussion (placeholder)}{119}{section.14.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {15}Capstone: Enterprise-Grade AI E-Commerce Architecture (Week 14)}{121}{chapter.15}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {15.1}Scope (placeholder)}{109}{section.15.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {15.2}Capstone deliverables (placeholder)}{109}{section.15.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Datasets and Synthetic Data for Teaching (placeholder)}{111}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {15.1}Scope (placeholder)}{121}{section.15.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {15.2}Capstone deliverables (placeholder)}{121}{section.15.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Datasets and Synthetic Data for Teaching (placeholder)}{123}{appendix.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {B}Template: System Design Document (placeholder)}{113}{appendix.B}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Template: System Design Document (placeholder)}{125}{appendix.B}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {C}Template: Data Contract (placeholder)}{115}{appendix.C}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {C}Template: Data Contract (placeholder)}{127}{appendix.C}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibstyle{plainnat}
 \bibdata{references_2}
-\@writefile{toc}{\contentsline {chapter}{\numberline {D}Template: Model Card and Risk Assessment (placeholder)}{117}{appendix.D}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {D}Template: Model Card and Risk Assessment (placeholder)}{129}{appendix.D}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\gdef \@abspage@last{117}
+\gdef \@abspage@last{129}
