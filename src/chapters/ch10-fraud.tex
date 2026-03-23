@@ -1,10 +1,481 @@
 \chapter{Fraud, Risk, and Trust \& Safety (Week 10)}
-\section{Scope (placeholder)}
+
+\section{Learning objectives}
 \begin{itemize}
-  \item Fraud types: payment, account takeover, promotion abuse, refund abuse.
-  \item Methods: supervised learning, anomaly detection, graph ML, and rule+ML hybrids.
+  \item Identify major categories of fraud and abuse in e-commerce, including payment fraud, account takeover, promotion abuse, and refund abuse.
+  \item Explain why fraud detection is a cost-sensitive, adversarial, and highly imbalanced decision problem.
+  \item Compare supervised learning, anomaly detection, graph-based methods, and rule+ML hybrid approaches.
+  \item Design a trust-and-safety workflow that combines scoring, thresholds, review operations, and business guardrails.
 \end{itemize}
-\section{Hands-on lab (placeholder)}
+
+\section{Why fraud and trust \& safety matter}
+E-commerce systems are open economic systems.
+They make it easy for legitimate customers to browse, buy, receive promotions, request returns, and manage accounts.
+Unfortunately, the same accessibility also creates opportunities for malicious behavior.
+
+Fraud and abuse affect more than chargeback loss.
+They influence:
 \begin{itemize}
-  \item Build a risk scoring baseline + thresholding and cost-sensitive evaluation.
+  \item payment costs,
+  \item customer trust,
+  \item seller trust in marketplaces,
+  \item operational review burden,
+  \item promotional efficiency,
+  \item regulatory and compliance exposure.
+\end{itemize}
+
+For this reason, fraud prevention is best understood as part of a broader \emph{trust \& safety} capability rather than a narrow payment model.
+The system must protect revenue while preserving a smooth user experience for legitimate customers.
+
+\section{Fraud and abuse categories}
+Fraud in e-commerce is heterogeneous.
+Different abuse patterns require different signals and response strategies.
+
+\subsection{Payment fraud}
+Payment fraud often involves stolen cards, synthetic identities, mule accounts, or coordinated abuse of payment flows.
+The platform must distinguish legitimate but unusual behavior from malicious transactions.
+
+\subsection{Account takeover}
+Account takeover occurs when an attacker gains control of an existing customer account.
+This can lead to unauthorized purchases, loyalty theft, stored-value abuse, and privacy harm.
+
+\subsection{Promotion and coupon abuse}
+Promotions are common attack surfaces because they create direct economic value.
+Abuse patterns include:
+\begin{itemize}
+  \item creating multiple accounts to redeem new-user offers,
+  \item coordinated coupon sharing,
+  \item automated checkout attempts,
+  \item exploiting referral programs or cashback loops.
+\end{itemize}
+
+\subsection{Refund and return abuse}
+Refund abuse includes false non-delivery claims, empty-box returns, repeated wardrobing behavior, and manipulation of return policies.
+This category often requires joining transaction, logistics, support, and account-history signals.
+
+\subsection{Marketplace and seller abuse}
+In multi-seller environments, trust \& safety also includes:
+\begin{itemize}
+  \item counterfeit listings,
+  \item fake reviews,
+  \item seller collusion,
+  \item policy evasion,
+  \item manipulated performance metrics.
+\end{itemize}
+
+\section{Fraud as a machine learning problem}
+Fraud detection is not a standard balanced classification task.
+It has several defining properties.
+
+\subsection{Class imbalance}
+Fraudulent events are typically a small fraction of all transactions.
+This means a naive high-accuracy classifier may still be useless if it mostly predicts ``not fraud.''
+
+\subsection{Adversarial behavior}
+Fraudsters adapt.
+Once a platform changes a rule or scoring model, attackers may alter devices, payment instruments, shipping behavior, or timing patterns.
+This makes fraud a moving-target problem.
+
+\subsection{Label delay and label noise}
+Ground truth often arrives late.
+Chargebacks, disputes, and investigations may occur days or weeks after the original transaction.
+Even then, labels can be incomplete or noisy.
+
+\subsection{Asymmetric costs}
+False negatives lose money and trust.
+False positives block legitimate customers and harm conversion.
+The decision threshold must therefore reflect business costs rather than abstract accuracy alone.
+
+\section{Signals and features for fraud detection}
+Fraud models typically depend on a broad feature space spanning account, transaction, device, and network behavior.
+
+\subsection{Transaction signals}
+\begin{itemize}
+  \item order value,
+  \item payment method,
+  \item basket composition,
+  \item discount depth,
+  \item shipping speed,
+  \item billing-shipping mismatch,
+  \item repeated authorization attempts.
+\end{itemize}
+
+\subsection{Account signals}
+\begin{itemize}
+  \item account age,
+  \item prior successful orders,
+  \item return history,
+  \item password reset activity,
+  \item loyalty balance behavior,
+  \item contact-information change frequency.
+\end{itemize}
+
+\subsection{Device and network signals}
+\begin{itemize}
+  \item device fingerprint,
+  \item IP reputation,
+  \item geolocation inconsistency,
+  \item emulator or automation indicators,
+  \item velocity across devices or sessions.
+\end{itemize}
+
+\subsection{Behavioral and sequence signals}
+\begin{itemize}
+  \item login and checkout timing,
+  \item session depth,
+  \item rapid account creation followed by high-value purchase,
+  \item repeated failed payments,
+  \item navigation patterns inconsistent with normal shopping behavior.
+\end{itemize}
+
+These signals are only useful when identity linkage and event quality are sound.
+Fraud modeling therefore depends directly on the data-foundation chapter and on integration with operational systems.
+
+\section{Rule-based systems}
+Fraud prevention historically relied heavily on rules.
+Rules remain important because they are fast, transparent, and easy to deploy for known abuse patterns.
+
+\subsection{Examples of useful rules}
+\begin{itemize}
+  \item block transactions from known bad cards or IPs,
+  \item trigger review if order value exceeds a threshold and account age is very low,
+  \item limit coupon redemption frequency by account, device, and payment instrument,
+  \item hold high-risk shipping destinations when signals conflict.
+\end{itemize}
+
+\subsection{Strengths and weaknesses}
+Rules are valuable for:
+\begin{itemize}
+  \item deterministic policy enforcement,
+  \item emergency response,
+  \item explainability in operations.
+\end{itemize}
+
+They are weak when:
+\begin{itemize}
+  \item abuse patterns evolve quickly,
+  \item interactions among many weak signals matter,
+  \item manual rule maintenance becomes operationally expensive.
+\end{itemize}
+
+\section{Supervised learning}
+Supervised models learn from labeled examples of fraud and legitimate behavior.
+They are widely used because they can combine many signals more flexibly than hand-written rules.
+
+\subsection{Typical model families}
+Common model families include:
+\begin{itemize}
+  \item logistic regression,
+  \item tree-based ensembles,
+  \item gradient boosting,
+  \item neural models where scale and feature complexity justify them.
+\end{itemize}
+
+\subsection{Why supervised learning helps}
+Supervised learning helps by:
+\begin{itemize}
+  \item aggregating many weak predictors,
+  \item ranking risk more smoothly than rigid rules,
+  \item enabling threshold tuning by cost and segment,
+  \item adapting to new feature sets over time.
+\end{itemize}
+
+\subsection{Operational caution}
+Supervised models are only as good as:
+\begin{itemize}
+  \item the quality of labels,
+  \item the recency of training data,
+  \item the alignment between training and serving features,
+  \item the monitoring for drift and policy changes.
+\end{itemize}
+
+\section{Anomaly detection}
+Some abuse patterns are rare or novel enough that labeled examples are limited.
+In these settings, anomaly detection can be useful.
+
+\subsection{What anomaly methods look for}
+Anomaly-oriented methods try to identify behavior that differs sharply from established norms, such as:
+\begin{itemize}
+  \item unusual transaction timing,
+  \item atypical device usage,
+  \item unexpected country or route changes,
+  \item extreme coupon redemption behavior,
+  \item sudden seller or account behavior shifts.
+\end{itemize}
+
+\subsection{Strengths and weaknesses}
+Anomaly methods are useful for surfacing suspicious patterns and complementing supervised systems.
+However, anomaly does not automatically mean fraud.
+Legitimate edge cases can also appear unusual.
+This means anomaly scores usually work best as part of a broader review or hybrid decision pipeline.
+
+\section{Graph-based fraud analysis}
+Fraud is often relational.
+Accounts, devices, cards, addresses, merchants, and products form networks rather than isolated rows of data.
+
+\subsection{Why graph structure matters}
+Graph methods help detect:
+\begin{itemize}
+  \item many accounts linked to one device,
+  \item many cards shipping to related addresses,
+  \item collusive seller or review networks,
+  \item abuse rings coordinating promotions or refunds.
+\end{itemize}
+
+\subsection{Graph features and graph ML}
+Practical graph-based approaches may include:
+\begin{itemize}
+  \item connected-component and degree features,
+  \item shared-entity counts,
+  \item neighborhood risk propagation,
+  \item graph neural networks where scale and maturity justify them.
+\end{itemize}
+
+Graph analysis is powerful because fraudsters often try to hide in transactional noise while still reusing infrastructure or identity fragments.
+
+\section{Hybrid rules + ML systems}
+In production e-commerce systems, the strongest approach is often hybrid rather than purely rule-based or purely model-based.
+
+\subsection{Why hybrids work}
+Rules are good for hard policy constraints and urgent pattern blocking.
+ML is good for scoring complex combinations of soft signals.
+Combined systems can:
+\begin{itemize}
+  \item enforce mandatory blocks,
+  \item assign risk scores,
+  \item route borderline cases to review,
+  \item and learn from review outcomes.
+\end{itemize}
+
+\subsection{Example decision flow}
+A practical decision flow may look like:
+\begin{enumerate}
+  \item apply deterministic policy rules,
+  \item compute risk score from supervised and anomaly signals,
+  \item adjust using graph or network intelligence,
+  \item compare against thresholds for approve, review, or reject,
+  \item log explanations and outcomes for feedback.
+\end{enumerate}
+
+\section{Thresholds and decision economics}
+Fraud systems do not end at model scoring.
+The business must choose action thresholds.
+
+\subsection{Approve, review, reject}
+Many systems use three zones:
+\begin{itemize}
+  \item \textbf{Approve:} low-risk transactions proceed automatically.
+  \item \textbf{Review:} medium-risk cases go to human review or secondary checks.
+  \item \textbf{Reject or challenge:} high-risk cases are blocked or subjected to stronger verification.
+\end{itemize}
+
+\subsection{Cost-sensitive tuning}
+Thresholds should reflect:
+\begin{itemize}
+  \item fraud loss,
+  \item customer lifetime value,
+  \item review-team capacity,
+  \item conversion impact,
+  \item chargeback and compliance costs.
+\end{itemize}
+
+This means threshold selection is not a pure ML exercise.
+It is an economic operating decision.
+
+\section{Human-in-the-loop review}
+Not all fraud decisions should be fully automated.
+Human review remains important for edge cases, novel fraud patterns, appeals, and policy-sensitive decisions.
+
+\subsection{What reviewers need}
+Review tools should expose:
+\begin{itemize}
+  \item transaction history,
+  \item device and network context,
+  \item linked entities,
+  \item model score and contributing signals,
+  \item policy reason codes,
+  \item prior outcomes on related entities.
+\end{itemize}
+
+\subsection{Feedback loop}
+Review outcomes should feed back into:
+\begin{itemize}
+  \item rule refinement,
+  \item model retraining,
+  \item investigation workflows,
+  \item reporting on false positives and operational load.
+\end{itemize}
+
+\section{Fraud evaluation metrics}
+Accuracy alone is misleading in fraud detection because the class distribution is highly imbalanced.
+
+\subsection{Useful metrics}
+Practical evaluation often includes:
+\begin{itemize}
+  \item precision,
+  \item recall,
+  \item precision-recall curves,
+  \item ROC-AUC with caution,
+  \item false-positive rate,
+  \item fraud-dollar capture,
+  \item review rate,
+  \item cost-weighted utility.
+\end{itemize}
+
+\subsection{Business interpretation}
+A model with strong recall but excessive false positives may block good customers.
+A model with low review cost but weak fraud capture may lose large sums.
+Evaluation must therefore align with operational and economic goals.
+
+\section{Drift, adaptation, and monitoring}
+Fraud systems need continuous monitoring because attacker behavior evolves.
+
+\subsection{What to monitor}
+\begin{itemize}
+  \item score distribution shifts,
+  \item feature drift,
+  \item approval and decline rates,
+  \item review queue volume,
+  \item chargeback lag trends,
+  \item abuse-type mix over time.
+\end{itemize}
+
+\subsection{Why monitoring is essential}
+Even a well-trained model can degrade if:
+\begin{itemize}
+  \item fraud patterns shift,
+  \item product flows change,
+  \item new promotions alter normal behavior,
+  \item identity or logging systems are modified.
+\end{itemize}
+
+Fraud detection is therefore inseparable from MLOps and operational analytics.
+
+\section{Trust \& safety beyond payment fraud}
+Trust \& safety is broader than payment authorization.
+It includes keeping the entire commerce environment healthy.
+
+\subsection{Examples beyond transactions}
+\begin{itemize}
+  \item review authenticity,
+  \item marketplace seller compliance,
+  \item abuse of support or refund workflows,
+  \item harmful or prohibited catalog content,
+  \item bot-driven scraping or stock hoarding.
+\end{itemize}
+
+\subsection{Why this matters architecturally}
+These problems span domains.
+A trust \& safety capability often depends on:
+\begin{itemize}
+  \item commerce events,
+  \item ERP refund records,
+  \item CRM support interactions,
+  \item identity and authentication systems,
+  \item marketplace governance workflows.
+\end{itemize}
+
+This reinforces the enterprise view that trust \& safety is an operating system for commerce, not a single checkout model.
+
+\section{Hands-on lab: risk scoring and thresholding}
+The practical goal of this chapter is to connect fraud modeling with decision policy.
+
+\subsection{Lab scenario}
+Students are given a synthetic transaction dataset containing payment, account, device, and label information, plus estimated fraud-loss and false-positive costs.
+
+\subsection{Lab tasks}
+\begin{enumerate}
+  \item Build a baseline risk model using structured transaction and account features.
+  \item Compute precision, recall, and a cost-sensitive evaluation summary.
+  \item Define approve, review, and reject thresholds.
+  \item Propose one anomaly signal and one graph-style linkage feature to improve the system.
+  \item Explain how a human review queue would be integrated into the workflow.
+\end{enumerate}
+
+\subsection{Expected learning outcome}
+By the end of the lab, students should be able to explain fraud detection as a staged decision system rather than a single prediction score.
+
+\section{Managerial implications}
+Fraud and trust \& safety systems require balancing protection with customer experience.
+Overly strict controls reduce conversion and frustrate legitimate users.
+Overly weak controls invite direct loss and operational abuse.
+
+The best systems therefore combine:
+\begin{itemize}
+  \item clear policy,
+  \item strong data quality,
+  \item hybrid detection methods,
+  \item review operations,
+  \item and continuous monitoring.
+\end{itemize}
+
+Organizations that treat fraud as an isolated technical model usually underinvest in the workflow and governance layers that actually determine business outcomes.
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item Why is fraud detection in e-commerce often difficult from an ML perspective?
+  \begin{enumerate}
+    \item Because fraud labels are always complete and immediate.
+    \item Because the problem is highly imbalanced, adversarial, and often affected by delayed labels.
+    \item Because fraud can only be solved with static rules.
+    \item Because customer behavior never changes.
+  \end{enumerate}
+
+  \item Which is the best example of \emph{promotion abuse}?
+  \begin{enumerate}
+    \item A customer browsing many products before purchase.
+    \item Creating many accounts or identities to repeatedly exploit a first-order coupon.
+    \item A warehouse updating shipment status.
+    \item A user selecting a shipping address.
+  \end{enumerate}
+
+  \item Why are graph-based methods useful in fraud detection?
+  \begin{enumerate}
+    \item Because fraud is often relational and linked through shared devices, addresses, accounts, or payment instruments.
+    \item Because graphs eliminate the need for labels.
+    \item Because they only work for product recommendation.
+    \item Because they remove the need for monitoring.
+  \end{enumerate}
+
+  \item In a hybrid fraud system, rules are especially useful for:
+  \begin{enumerate}
+    \item hard policy enforcement and fast blocking of known bad patterns.
+    \item replacing all human review.
+    \item guaranteeing perfect recall.
+    \item making embeddings unnecessary in every domain.
+  \end{enumerate}
+
+  \item Why are thresholds in fraud systems business decisions as well as technical decisions?
+  \begin{enumerate}
+    \item Because thresholds determine the tradeoff between fraud loss, false positives, review cost, and customer experience.
+    \item Because thresholds only affect documentation style.
+    \item Because all thresholds are set randomly.
+    \item Because supervised learning does not produce scores.
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+\begin{enumerate}
+  \item (b)
+  \item (b)
+  \item (a)
+  \item (a)
+  \item (a)
+\end{enumerate}
+
+\section{Exercises (short)}
+\begin{enumerate}
+  \item Compare rule-based detection, supervised learning, and anomaly detection for one fraud scenario of your choice. State one advantage and one limitation of each.
+  \item Design a minimal feature set for detecting account takeover. Include account, device, sequence, and review-history signals.
+  \item Define a three-zone approve/review/reject threshold policy for a checkout fraud model and explain how review-team capacity changes your choice.
+\end{enumerate}
+
+\section{Mini-case (Odoo-linked, vendor-neutral)}
+\textbf{Scenario:} A hybrid commerce company uses a headless storefront, Odoo for orders and refunds, and a central data platform. The business is seeing rising chargebacks, coupon abuse, and suspicious refund patterns.
+
+\textbf{Task:} Design a trust \& safety workflow:
+\begin{itemize}
+  \item Define which events and records must be linked across storefront, payment, Odoo, and support systems.
+  \item Propose a hybrid detection design using rules, ML scoring, and at least one graph-style signal.
+  \item Specify the criteria for automatic approval, manual review, and automatic rejection in one high-risk flow such as refund approval or checkout authorization.
 \end{itemize}
