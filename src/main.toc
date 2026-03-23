@@ -20,7 +20,7 @@
 \contentsline {section}{\numberline {1.5}Data, Architecture, and Deployment Considerations}{4}{section.1.5}%
 \contentsline {section}{\numberline {1.6}Challenges and Responsible AI}{5}{section.1.6}%
 \contentsline {section}{\numberline {1.7}Multiple-choice questions (MCQs)}{5}{section.1.7}%
-\contentsline {chapter}{\numberline {2}Platforms, Marketplaces, and Business Models (Week 2)}{7}{chapter.2}%
+\contentsline {chapter}{\numberline {2}Platforms, Marketplaces, and Business Models}{7}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Learning objectives}{7}{section.2.1}%
 \contentsline {section}{\numberline {2.2}From storefront to platform}{7}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Value creation, value capture, and growth}{7}{section.2.3}%
@@ -42,12 +42,12 @@
 \contentsline {section}{\numberline {3.2}Why data foundations matter}{11}{section.3.2}%
 \contentsline {section}{\numberline {3.3}From business process to event model}{12}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Events versus state}{12}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Event taxonomies}{13}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.2}Event taxonomies}{12}{subsection.3.3.2}%
 \contentsline {section}{\numberline {3.4}Event schema design}{13}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Required design principles}{13}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}Example event record}{14}{subsection.3.4.2}%
 \contentsline {section}{\numberline {3.5}Identity resolution and entity modeling}{14}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Identifiers are not interchangeable}{15}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.1}Identifiers are not interchangeable}{14}{subsection.3.5.1}%
 \contentsline {subsection}{\numberline {3.5.2}Identity stitching}{15}{subsection.3.5.2}%
 \contentsline {subsection}{\numberline {3.5.3}Privacy-aware identity design}{15}{subsection.3.5.3}%
 \contentsline {section}{\numberline {3.6}Data quality as a product requirement}{16}{section.3.6}%
@@ -73,7 +73,7 @@
 \contentsline {section}{\numberline {3.13}Multiple-choice questions (MCQs)}{22}{section.3.13}%
 \contentsline {section}{\numberline {3.14}Exercises (short)}{23}{section.3.14}%
 \contentsline {section}{\numberline {3.15}Mini-case (Odoo-linked, vendor-neutral)}{23}{section.3.15}%
-\contentsline {chapter}{\numberline {4}Enterprise Architecture for E-Commerce (Week 4)}{25}{chapter.4}%
+\contentsline {chapter}{\numberline {4}Enterprise Architecture for E-Commerce}{25}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Learning objectives}{25}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Why enterprise architecture matters in e-commerce}{25}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Enterprise architecture as a set of views}{26}{section.4.3}%
@@ -104,7 +104,7 @@
 \contentsline {section}{\numberline {4.15}Multiple-choice questions (MCQs)}{34}{section.4.15}%
 \contentsline {section}{\numberline {4.16}Exercises (short)}{35}{section.4.16}%
 \contentsline {section}{\numberline {4.17}Mini-case (Odoo-linked, vendor-neutral)}{35}{section.4.17}%
-\contentsline {chapter}{\numberline {5}Enterprise Integration Patterns for E-Commerce (Week 5)}{37}{chapter.5}%
+\contentsline {chapter}{\numberline {5}Enterprise Integration Patterns for E-Commerce}{37}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Learning objectives}{37}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Why integration patterns matter}{37}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Integration styles}{38}{section.5.3}%
@@ -151,7 +151,7 @@
 \contentsline {section}{\numberline {5.16}Multiple-choice questions (MCQs)}{47}{section.5.16}%
 \contentsline {section}{\numberline {5.17}Exercises (short)}{48}{section.5.17}%
 \contentsline {section}{\numberline {5.18}Mini-case (Odoo-linked, vendor-neutral)}{48}{section.5.18}%
-\contentsline {chapter}{\numberline {6}ERP/CRM/SCM Integration in Commerce (Week 6)}{49}{chapter.6}%
+\contentsline {chapter}{\numberline {6}ERP/CRM/SCM Integration in Commerce}{49}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Learning objectives}{49}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Why ERP/CRM/SCM integration is central to commerce}{49}{section.6.2}%
 \contentsline {section}{\numberline {6.3}The enterprise systems perspective}{50}{section.6.3}%
@@ -298,7 +298,7 @@
 \contentsline {section}{\numberline {8.18}Multiple-choice questions (MCQs)}{86}{section.8.18}%
 \contentsline {section}{\numberline {8.19}Exercises (short)}{88}{section.8.19}%
 \contentsline {section}{\numberline {8.20}Mini-case (Odoo-linked, vendor-neutral)}{88}{section.8.20}%
-\contentsline {chapter}{\numberline {9}Pricing and Promotions with ML + Optimization (Week 9)}{89}{chapter.9}%
+\contentsline {chapter}{\numberline {9}Pricing and Promotions with ML + Optimization}{89}{chapter.9}%
 \contentsline {section}{\numberline {9.1}Learning objectives}{89}{section.9.1}%
 \contentsline {section}{\numberline {9.2}Why pricing is a core AI problem in commerce}{89}{section.9.2}%
 \contentsline {section}{\numberline {9.3}Pricing objectives}{90}{section.9.3}%
@@ -347,7 +347,7 @@
 \contentsline {section}{\numberline {9.18}Multiple-choice questions (MCQs)}{100}{section.9.18}%
 \contentsline {section}{\numberline {9.19}Exercises (short)}{102}{section.9.19}%
 \contentsline {section}{\numberline {9.20}Mini-case (Odoo-linked, vendor-neutral)}{102}{section.9.20}%
-\contentsline {chapter}{\numberline {10}Fraud, Risk, and Trust \& Safety (Week 10)}{103}{chapter.10}%
+\contentsline {chapter}{\numberline {10}Fraud, Risk, and Trust \& Safety}{103}{chapter.10}%
 \contentsline {section}{\numberline {10.1}Learning objectives}{103}{section.10.1}%
 \contentsline {section}{\numberline {10.2}Why fraud and trust \& safety matter}{103}{section.10.2}%
 \contentsline {section}{\numberline {10.3}Fraud and abuse categories}{104}{section.10.3}%
@@ -355,7 +355,7 @@
 \contentsline {subsection}{\numberline {10.3.2}Account takeover}{104}{subsection.10.3.2}%
 \contentsline {subsection}{\numberline {10.3.3}Promotion and coupon abuse}{104}{subsection.10.3.3}%
 \contentsline {subsection}{\numberline {10.3.4}Refund and return abuse}{104}{subsection.10.3.4}%
-\contentsline {subsection}{\numberline {10.3.5}Marketplace and seller abuse}{105}{subsection.10.3.5}%
+\contentsline {subsection}{\numberline {10.3.5}Marketplace and seller abuse}{104}{subsection.10.3.5}%
 \contentsline {section}{\numberline {10.4}Fraud as a machine learning problem}{105}{section.10.4}%
 \contentsline {subsection}{\numberline {10.4.1}Class imbalance}{105}{subsection.10.4.1}%
 \contentsline {subsection}{\numberline {10.4.2}Adversarial behavior}{105}{subsection.10.4.2}%
@@ -405,7 +405,7 @@
 \contentsline {section}{\numberline {10.18}Multiple-choice questions (MCQs)}{115}{section.10.18}%
 \contentsline {section}{\numberline {10.19}Exercises (short)}{116}{section.10.19}%
 \contentsline {section}{\numberline {10.20}Mini-case (Odoo-linked, vendor-neutral)}{116}{section.10.20}%
-\contentsline {chapter}{\numberline {11}Customer Service Automation with LLMs (Week 11)}{117}{chapter.11}%
+\contentsline {chapter}{\numberline {11}Customer Service Automation with LLMs}{117}{chapter.11}%
 \contentsline {section}{\numberline {11.1}Learning objectives}{117}{section.11.1}%
 \contentsline {section}{\numberline {11.2}Why customer service is a natural LLM use case}{117}{section.11.2}%
 \contentsline {section}{\numberline {11.3}Customer service tasks in e-commerce}{118}{section.11.3}%
@@ -457,7 +457,7 @@
 \contentsline {section}{\numberline {11.17}Multiple-choice questions (MCQs)}{129}{section.11.17}%
 \contentsline {section}{\numberline {11.18}Exercises (short)}{130}{section.11.18}%
 \contentsline {section}{\numberline {11.19}Mini-case (Odoo-linked, vendor-neutral)}{131}{section.11.19}%
-\contentsline {chapter}{\numberline {12}MLOps + DataOps for E-Commerce (Week 12)}{133}{chapter.12}%
+\contentsline {chapter}{\numberline {12}MLOps + DataOps for E-Commerce}{133}{chapter.12}%
 \contentsline {section}{\numberline {12.1}Learning objectives}{133}{section.12.1}%
 \contentsline {section}{\numberline {12.2}Why MLOps and DataOps matter in e-commerce}{133}{section.12.2}%
 \contentsline {section}{\numberline {12.3}From experimentation to production systems}{134}{section.12.3}%
@@ -564,3 +564,5 @@
 \contentsline {chapter}{\numberline {B}Template: System Design Document (placeholder)}{177}{appendix.B}%
 \contentsline {chapter}{\numberline {C}Template: Data Contract (placeholder)}{179}{appendix.C}%
 \contentsline {chapter}{\numberline {D}Template: Model Card and Risk Assessment (placeholder)}{181}{appendix.D}%
+\contentsline {chapter}{Acronyms and Key Abbreviations}{183}{appendix*.23}%
+\contentsline {chapter}{Sample Essay Questions and Model Answers}{187}{appendix*.25}%

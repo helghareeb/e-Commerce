@@ -19,6 +19,7 @@ The manuscript is written as a continuous book rather than a slide deck or disco
 
 - `src/main.tex`: main LaTeX entry point for the book.
 - `src/chapters/`: individual chapter source files.
+- `src/backmatter/`: unnumbered end-of-book reference and assessment chapters.
 - `src/main.pdf`: compiled output PDF.
 - `src/references_2.bib`: bibliography database used by the manuscript.
 - `NEXT-STEPS.md`: handoff notes and continuation guidance between sessions.
@@ -29,7 +30,9 @@ The repository currently contains:
 
 - an unnumbered preface;
 - a 14-chapter continuous manuscript;
-- appendices and bibliography support;
+- appendices;
+- unnumbered back-matter chapters for acronyms and sample essay questions;
+- bibliography support;
 - a compiled PDF in `src/main.pdf`.
 
 The chapter sequence covers:
@@ -49,6 +52,11 @@ The chapter sequence covers:
 13. Security, privacy, compliance, and responsible AI
 14. Capstone enterprise-grade AI e-commerce architecture
 
+The current back matter also includes:
+
+- `Acronyms and Key Abbreviations`
+- `Sample Essay Questions and Model Answers`
+
 ## Build
 
 Compile from the `src/` directory:
@@ -67,5 +75,6 @@ If only text changes are made without bibliography updates, two `pdflatex` passe
 
 - The manuscript now uses `src/references_2.bib` with BibTeX and `plainnat` for citations and references.
 - The front matter has been converted to a proper preface, so Chapter 1 is the first numbered chapter in the book.
+- The chapter titles no longer carry `(Week ...)` suffixes; the chapter numbers already provide sequencing.
 - Several long chapter titles use shortened running-head forms in LaTeX to keep page headers clean while preserving full chapter titles in the text.
 - Generated LaTeX artifacts such as `main.aux`, `main.out`, `main.toc`, and `main.pdf` are currently tracked in the repository.
