@@ -1,11 +1,383 @@
 \chapter{Security, Privacy, Compliance, and Responsible AI (Week 13)}
-\section{Scope (placeholder)}
+
+\section{Learning objectives}
+By the end of this chapter, students should be able to:
 \begin{itemize}
-  \item Payments/security basics, privacy-by-design, and data minimization.
-  \item Threat modeling for e-commerce and AI features (LLM-specific risks included).
-  \item Responsible AI: fairness, explainability, auditability, and human-in-the-loop controls.
+  \item explain how security, privacy, compliance, and responsible AI interact in e-commerce platforms;
+  \item identify major risks across payments, customer accounts, APIs, data pipelines, models, and LLM-enabled interfaces;
+  \item apply practical control patterns such as least privilege, data minimization, encryption, audit logging, and human oversight;
+  \item distinguish between technical controls, process controls, and governance controls;
+  \item design a risk assessment and operating model for AI features used in commerce.
 \end{itemize}
-\section{Discussion (placeholder)}
+
+\section{Why this chapter matters}
+Digital commerce systems sit at the intersection of money, identity, behavioral data, operational processes, and automated decision-making. That combination makes them attractive to attackers and highly visible to regulators. A mature commerce organization therefore does not treat security as a narrow infrastructure problem, or privacy as a legal afterthought, or responsible AI as a public-relations layer. These are architectural concerns that shape how systems are modeled, integrated, deployed, monitored, and governed.
+
+The stakes are especially high when AI is introduced into search, recommendation, pricing, fraud scoring, customer service, and content generation. These systems can scale decisions quickly, but they can also amplify mistakes quickly. A poorly secured recommendation service can expose user data. A careless LLM assistant can leak sensitive information. A biased risk model can block legitimate customers. A weak retention policy can keep personal data longer than justified. In production environments, these are not isolated failures. They often cascade across teams, vendors, and business processes.
+
+\section{Security as a business capability}
+Security in e-commerce is often discussed in technical language, but managers experience it through business outcomes: uptime, payment acceptance, customer trust, regulatory exposure, and loss prevention. A security program therefore needs to be framed as a business capability with clear ownership, metrics, and operating procedures.
+
+At a minimum, the enterprise must protect:
 \begin{itemize}
-  \item Risk assessment template for an AI feature.
+  \item customer identities, credentials, sessions, and account recovery channels;
+  \item payment data, refund flows, stored tokens, and settlement operations;
+  \item order data, addresses, invoices, and operational records;
+  \item APIs, integrations, partner connections, and event streams;
+  \item training data, feature tables, prompts, model endpoints, and evaluation artifacts;
+  \item internal administrative tools used by support, finance, merchandising, and operations.
 \end{itemize}
+
+Security should be understood as defense in depth. There is no single control that makes a commerce platform safe. The real objective is to create overlapping layers so that one control failure does not automatically become a business crisis.
+
+\section{Threat modeling for e-commerce platforms}
+Threat modeling is the discipline of asking what can go wrong before an incident proves it the hard way. In commerce systems, threat modeling is more useful when it is tied to business flows rather than abstract infrastructure diagrams. A practical starting point is to map critical journeys such as sign-up, login, browse, cart, checkout, payment, refund, support interaction, and seller onboarding.
+
+For each journey, teams should ask:
+\begin{itemize}
+  \item what assets are touched;
+  \item which actors can initiate or alter the flow;
+  \item what trust boundaries are crossed;
+  \item what external services or vendors are involved;
+  \item which failures would lead to financial loss, service disruption, data leakage, or compliance exposure.
+\end{itemize}
+
+Common threat categories in commerce include account takeover, credential stuffing, card testing, promo abuse, API scraping, inventory manipulation, refund abuse, business email compromise, insider misuse, and denial of service. AI-enabled components introduce additional risks such as prompt injection, sensitive context leakage, unsafe tool use, training data poisoning, and automated decision errors at scale.
+
+\subsection{Threat modeling example: intelligent customer support}
+Consider an LLM-powered support assistant with retrieval over order history, policy documents, and customer profile data. This system may expose several attack paths:
+\begin{itemize}
+  \item a user attempts to retrieve another customer's order details through prompt manipulation;
+  \item a malicious knowledge-base document contains adversarial instructions that alter model behavior;
+  \item the assistant triggers refund or coupon actions without sufficient verification;
+  \item logs capture sensitive personal data and become accessible to staff who do not need it;
+  \item agents over-trust generated responses and execute harmful actions without review.
+\end{itemize}
+
+This example shows why security and responsible AI must be co-designed. Traditional application controls are still required, but they are no longer sufficient by themselves.
+
+\section{Identity, authentication, and access control}
+Most major incidents in digital systems involve identity in some form. Attackers rarely begin by breaking encryption; they usually exploit weak authentication, poor session handling, excessive privileges, or flawed recovery flows.
+
+For customer-facing systems, core controls include:
+\begin{itemize}
+  \item strong password policies or passwordless flows;
+  \item multi-factor authentication for high-risk actions;
+  \item rate limiting and bot mitigation for login and recovery endpoints;
+  \item device, session, and anomaly-based risk checks;
+  \item secure handling of tokens, cookies, and session expiration.
+\end{itemize}
+
+For internal systems, the priority is least privilege. Staff should access only the data and actions necessary for their role. Support agents may need order history, but not full payment details. Merchandising teams may update catalog content, but not financial ledgers. Data scientists may query curated analytical datasets, but not unrestricted production tables with raw personal data.
+
+Role-based access control is often a useful starting point, but large enterprises usually need finer-grained policies. Attribute-based rules, approval workflows, just-in-time access, and strong audit logs become important as the operating environment grows more complex.
+
+\section{Payment security and transactional integrity}
+Payments are a special case because they combine fraud risk, compliance obligations, vendor dependencies, and customer trust. Even when a firm outsources payment processing to a specialized provider, it still owns the architecture around payment initiation, status handling, refunds, dispute workflows, and reconciliation.
+
+Key design principles include:
+\begin{itemize}
+  \item minimize the platform's direct exposure to sensitive card data;
+  \item tokenize wherever possible rather than storing primary account details;
+  \item isolate payment services from broader application concerns;
+  \item treat refund and chargeback processes as security-sensitive workflows;
+  \item reconcile payment state carefully across commerce, ERP, and finance systems.
+\end{itemize}
+
+Transactional integrity matters beyond card data. If an order is captured twice, a refund is processed without verification, or a payment callback is replayed, the platform can suffer both operational and reputational harm. Idempotency keys, signed callbacks, event replay protection, and well-defined state transitions are therefore central security mechanisms, not merely engineering niceties.
+
+\section{API and integration security}
+Modern commerce platforms depend heavily on APIs and integrations: payment gateways, tax engines, shipping carriers, marketplaces, ERP systems, recommendation services, identity platforms, and analytics pipelines. Every integration is also a security boundary.
+
+Secure integration design typically requires:
+\begin{itemize}
+  \item strong service authentication and secret management;
+  \item explicit authorization scopes for each API consumer;
+  \item request signing or mutual trust mechanisms for sensitive channels;
+  \item replay protection, schema validation, and rate limiting;
+  \item network segmentation and environment isolation;
+  \item monitoring of abnormal patterns in partner or service-to-service traffic.
+\end{itemize}
+
+The hardest integration problems are often organizational rather than cryptographic. Teams forget who owns a credential, fail to rotate keys, grant overly broad access to vendor systems, or let undocumented data exports proliferate. Mature integration security requires inventory discipline: every data flow, secret, endpoint, and external dependency should have an owner.
+
+\section{Data protection and privacy-by-design}
+Privacy-by-design means that systems are structured to reduce unnecessary data exposure before policies are written or incidents occur. The goal is not to eliminate data use. Commerce organizations need data for fulfillment, analytics, personalization, forecasting, and service quality. The goal is to align data collection and processing with clear purpose, proportionality, retention, and control.
+
+Core privacy design principles include:
+\begin{itemize}
+  \item collect only the data required for a justified purpose;
+  \item separate operational necessity from analytical convenience;
+  \item define retention windows and deletion mechanisms early;
+  \item avoid copying personal data into uncontrolled spreadsheets and side systems;
+  \item document lawful basis, consent dependencies, and processing purpose where relevant;
+  \item design customer-facing controls for access, correction, deletion, and preference management.
+\end{itemize}
+
+In practice, privacy failures often emerge from data sprawl rather than from a single dramatic breach. Data is replicated into logs, caches, notebooks, feature stores, exports, and test environments. Once copied, it becomes much harder to track, govern, or delete. Data architecture therefore matters directly to privacy outcomes.
+
+\subsection{Data minimization in AI systems}
+AI teams are often tempted to keep every field because future modeling value is uncertain. This creates tension with privacy principles. A more disciplined approach is to distinguish:
+\begin{itemize}
+  \item features required for the current decision use case;
+  \item features that are merely easy to collect;
+  \item sensitive attributes that require special scrutiny or exclusion;
+  \item derived features whose predictive power may act as proxies for protected or private attributes.
+\end{itemize}
+
+The question is not only whether data is available, but whether it should be used. This is where privacy, ethics, and model governance intersect.
+
+\section{Compliance in the commerce environment}
+Compliance is not a single global checklist. It is a layered set of obligations shaped by geography, sector, customer base, payment methods, and product category. Some obligations are clearly legal or regulatory. Others are contractual, such as merchant, payment-provider, or marketplace requirements. Still others come from internal policy commitments made to customers or partners.
+
+From an architectural perspective, compliance work usually translates into:
+\begin{itemize}
+  \item classification of data types and processing activities;
+  \item control mapping to systems, teams, and vendors;
+  \item evidence generation through logs, approvals, and documented processes;
+  \item periodic reviews of access, retention, change management, and incident handling;
+  \item traceability between declared policy and operational reality.
+\end{itemize}
+
+A common mistake is to treat compliance as a documentation layer added after deployment. That approach produces weak evidence and brittle controls. If deletion, approval, consent handling, auditability, or override workflows are not built into the system design, policy language will not compensate for the gap.
+
+\section{Responsible AI in e-commerce}
+Responsible AI is the practice of building and operating AI systems in ways that are fair, accountable, transparent, safe, and governable in their business context. In e-commerce, this is not abstract philosophy. AI decisions influence which products customers see, what prices they face, whether transactions are flagged, how support cases are resolved, and what marketing messages are delivered.
+
+Several properties matter:
+\begin{itemize}
+  \item fairness: comparable users should not be systematically harmed without justification;
+  \item explainability: teams should be able to explain the basis of important outcomes at the appropriate level;
+  \item accountability: a business owner should be responsible for model behavior and overrides;
+  \item auditability: inputs, outputs, versions, and decision paths should be reviewable after the fact;
+  \item human oversight: some decisions should remain reviewable or reversible by trained staff;
+  \item safety: systems should resist harmful content generation, unsafe actions, and inappropriate automation.
+\end{itemize}
+
+Responsible AI does not imply that every model must be fully interpretable in the same way. Rather, it means the level of explanation, testing, monitoring, and human control should match the risk of the use case.
+
+\subsection{High-risk and low-risk AI use cases}
+Not all AI applications deserve the same governance burden. Product-description generation and internal demand forecasting may be relatively low risk if the outputs are reviewed and their harms are limited. Fraud scoring, credit-like decisions, seller ranking, account suspension, dynamic pricing, and automated refund denial are more sensitive because they can materially affect users and business relationships.
+
+A risk-based governance model helps organizations avoid two failures:
+\begin{itemize}
+  \item under-governing important systems, which creates real harm;
+  \item over-governing trivial systems, which creates bureaucracy without proportional benefit.
+\end{itemize}
+
+\section{Bias, proxies, and unintended discrimination}
+Bias in commerce AI does not only arise from explicitly protected attributes. It often emerges indirectly through proxies, historical patterns, and feedback loops. Postal code, browsing device, purchase history, refund patterns, and engagement metrics may all encode social or economic differences. If these signals are used carelessly, the resulting model may reproduce or amplify unequal treatment.
+
+Examples include:
+\begin{itemize}
+  \item a fraud model disproportionately challenging transactions from certain neighborhoods or regions;
+  \item a promotion optimization engine steering premium offers toward already advantaged segments;
+  \item a ranking model reducing visibility for small sellers because historic click-through favors large brands;
+  \item a support triage model assigning slower service to users whose writing style or language differs from the majority training set.
+\end{itemize}
+
+Mitigating such risks requires more than deleting sensitive columns. Teams need dataset review, outcome analysis by segment, challenge testing, and business discussion about acceptable tradeoffs. Some use cases may require policy constraints that override pure predictive optimization.
+
+\section{Explainability, contestability, and customer trust}
+Commerce organizations often focus on model performance but neglect user recourse. Yet customers and sellers care deeply about contestability: if a decision affects them, can they understand it at a useful level, and can they challenge or appeal it?
+
+In practice, explainability has several audiences:
+\begin{itemize}
+  \item engineers need diagnostic explanations to debug systems;
+  \item business owners need performance explanations to manage tradeoffs;
+  \item auditors need traceable evidence of control operation;
+  \item customers need plain-language explanations and escalation paths when outcomes affect them materially.
+\end{itemize}
+
+An explanation does not always need to expose model internals. Often it is enough to explain the category of factors considered, the policy boundary involved, and the next steps available to the affected party. What matters is that the explanation is honest, actionable, and aligned with the actual system behavior.
+
+\section{LLM-specific risks and controls}
+Large language models create a distinct control challenge because they are probabilistic, context-dependent, and often connected to tools or internal knowledge bases. In commerce settings, they are typically used in support automation, seller assistance, catalog enrichment, policy summarization, and internal productivity workflows.
+
+Important risk categories include:
+\begin{itemize}
+  \item hallucinated answers about refunds, shipping, warranties, or policy;
+  \item prompt injection through customer messages, seller content, or retrieved documents;
+  \item leakage of personal or confidential data through prompts or logs;
+  \item unsafe action execution when the model is connected to tools;
+  \item over-automation that removes human review from sensitive decisions.
+\end{itemize}
+
+Controls for LLM systems should include:
+\begin{itemize}
+  \item scoped retrieval and access filtering;
+  \item prompt and tool guardrails;
+  \item red-team testing with adversarial scenarios;
+  \item response policies for sensitive domains such as refunds, legal questions, and account access;
+  \item human escalation thresholds;
+  \item monitoring of failure modes, not just average response quality.
+\end{itemize}
+
+The most important design choice is to decide what the model is allowed to do. Generating a draft is not the same as approving a refund. Summarizing a case is not the same as suspending a seller. Tool access should match the business risk.
+
+\section{Logging, monitoring, and auditability}
+Security, privacy, and responsible AI all depend on good records. If an enterprise cannot reconstruct what data was accessed, what model version produced an outcome, what prompt was sent, or which human approved an override, then investigation becomes guesswork.
+
+Good auditability requires:
+\begin{itemize}
+  \item structured logs with consistent identifiers across systems;
+  \item versioning of models, prompts, rules, and datasets;
+  \item records of approvals, overrides, and policy exceptions;
+  \item separation of operational logs from broad user-accessible analytics;
+  \item retention policies that preserve evidence without creating unnecessary data exposure.
+\end{itemize}
+
+Auditability is also essential for organizational learning. Incident reviews become much more valuable when teams can trace how a decision was made and which assumptions were embedded at the time.
+
+\section{Incident response and crisis handling}
+No system is perfectly secure or perfectly governed. The question is therefore not whether incidents will occur, but whether the organization can detect, contain, investigate, communicate, and recover effectively.
+
+An e-commerce incident response plan should define:
+\begin{itemize}
+  \item detection channels and severity criteria;
+  \item ownership across engineering, security, legal, operations, and communications;
+  \item containment steps for account abuse, data leakage, fraudulent activity, or harmful model behavior;
+  \item evidence preservation requirements;
+  \item decision rules for customer notification, regulator engagement, and vendor escalation;
+  \item post-incident review and control improvement workflows.
+\end{itemize}
+
+AI incidents require particular care because the root cause may span model behavior, training data, prompts, product design, or organizational incentives. A model rollback alone may not address the underlying governance failure.
+
+\section{Operating model: who owns what}
+The recurring failure in governance programs is unclear ownership. If everyone is responsible, no one is responsible. A practical commerce operating model usually assigns:
+\begin{itemize}
+  \item product owners to define acceptable use and business outcomes;
+  \item engineering teams to implement security and reliability controls;
+  \item data and ML teams to manage datasets, models, evaluation, and monitoring;
+  \item security and privacy specialists to set standards, review risks, and support investigations;
+  \item legal and compliance teams to interpret obligations and approve control approaches;
+  \item frontline operations to handle escalations, appeals, and exception workflows.
+\end{itemize}
+
+This does not imply strict handoffs. Good governance is collaborative. But decision rights and approval paths need to be explicit, especially for launching or materially changing AI features.
+
+\section{A practical risk assessment template}
+Before launching a new AI-enabled e-commerce feature, teams should be able to answer a concise set of questions:
+\begin{enumerate}
+  \item What decision or assistance function does the system perform?
+  \item Who is affected by the output: customer, seller, employee, or partner?
+  \item What data is used, and which fields are sensitive?
+  \item Could the system materially affect access, price, eligibility, safety, or reputation?
+  \item What failure modes are plausible, and how severe are they?
+  \item What human review, override, or appeal path exists?
+  \item What logs, metrics, and alerts will reveal misuse or drift?
+  \item What policy, compliance, or contractual obligations apply?
+  \item Which owner is accountable after go-live?
+\end{enumerate}
+
+This kind of template creates discipline without forcing every project through the same heavyweight process. It also gives instructors a concrete bridge between technical architecture and governance practice.
+
+\section{Managerial implications}
+Executives often ask whether stronger controls slow innovation. In reality, the absence of controls slows scaling. Teams that do not know which data they can use, which actions models may take, which approvals are required, or how incidents will be handled tend to move either recklessly or not at all.
+
+Well-designed governance increases execution quality in three ways. First, it reduces avoidable risk. Second, it clarifies decision rights and speeds launch readiness. Third, it improves trust with customers, partners, regulators, and internal stakeholders. In commerce, trust is not an abstract virtue. It affects conversion, retention, brand value, and partnership durability.
+
+\section{Hands-on lab: assessing an AI returns assistant}
+Consider an online retailer that wants to deploy an AI assistant for post-purchase support. The assistant can answer policy questions, summarize order status, and propose next-step actions for returns and exchanges. The business wants lower support cost and faster resolution times.
+
+Students should evaluate the feature across four dimensions:
+\begin{itemize}
+  \item security: can the assistant expose the wrong order or trigger unauthorized actions?
+  \item privacy: what personal data is retrieved, logged, or retained?
+  \item compliance: are policy promises, consumer rights, and escalation requirements reflected in the workflow?
+  \item responsible AI: could the assistant generate misleading answers, treat some users unfairly, or deny effective recourse?
+\end{itemize}
+
+A good student output would include:
+\begin{itemize}
+  \item a simple architecture diagram;
+  \item a list of assets and trust boundaries;
+  \item a risk register with severity and mitigations;
+  \item proposed controls for authentication, retrieval filtering, tool permissions, logging, and human escalation;
+  \item launch criteria and post-launch monitoring metrics.
+\end{itemize}
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item Which statement best captures privacy-by-design in e-commerce?
+  \begin{enumerate}
+    \item collect all potentially useful data and decide later what to retain;
+    \item minimize data collection and retention based on justified business purpose;
+    \item anonymize all customer data immediately after checkout;
+    \item prohibit analytics on operational systems entirely.
+  \end{enumerate}
+
+  \item Which of the following is the clearest example of a trust boundary in a commerce architecture?
+  \begin{enumerate}
+    \item a local function calling another function in the same process;
+    \item a service crossing into a third-party payment gateway;
+    \item a variable being reused inside a notebook;
+    \item a chart rendered in an internal dashboard.
+  \end{enumerate}
+
+  \item Why is least privilege important for internal commerce tools?
+  \begin{enumerate}
+    \item it guarantees zero security incidents;
+    \item it ensures every employee can inspect all customer records when needed;
+    \item it limits damage from misuse or compromised accounts by restricting access to necessary functions only;
+    \item it removes the need for audit logs.
+  \end{enumerate}
+
+  \item Which risk is most specific to LLM-enabled systems?
+  \begin{enumerate}
+    \item warehouse stockouts;
+    \item prompt injection via retrieved or user-supplied content;
+    \item currency conversion latency;
+    \item barcode duplication.
+  \end{enumerate}
+
+  \item Which governance approach is generally most practical for AI in commerce?
+  \begin{enumerate}
+    \item identical controls for all use cases regardless of risk;
+    \item no controls until a major incident occurs;
+    \item risk-based governance with stronger controls for higher-impact uses;
+    \item full manual review of every model output in all systems.
+  \end{enumerate}
+
+  \item What is the main reason auditability matters?
+  \begin{enumerate}
+    \item it makes models mathematically perfect;
+    \item it allows teams to reconstruct decisions, investigate incidents, and demonstrate control operation;
+    \item it eliminates the need for security monitoring;
+    \item it replaces compliance documentation.
+  \end{enumerate}
+
+  \item Which example best illustrates proxy discrimination risk?
+  \begin{enumerate}
+    \item a model uses a random seed during training;
+    \item a ranking system uses historical clicks that systematically favor dominant sellers;
+    \item a dashboard refreshes every hour instead of every minute;
+    \item a support script includes a greeting.
+  \end{enumerate}
+
+  \item What is the best interpretation of contestability?
+  \begin{enumerate}
+    \item the ability of customers or sellers to understand and challenge significant outcomes;
+    \item the requirement that every model be open-source;
+    \item the practice of hiding decision logic to reduce gaming;
+    \item the replacement of support teams with automation.
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+1. b
+
+2. b
+
+3. c
+
+4. b
+
+5. c
+
+6. b
+
+7. b
+
+8. a
