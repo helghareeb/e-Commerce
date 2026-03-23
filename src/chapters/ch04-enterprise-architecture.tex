@@ -1,13 +1,285 @@
 \chapter{Enterprise Architecture for E-Commerce (Week 4)}
-\section{Scope (placeholder)}
+
+\section{Learning objectives}
 \begin{itemize}
-  \item Capability maps, value streams, domain boundaries, and target architecture.
-  \item Reference views: business, application, data, and technology architectures.
+  \item Explain how enterprise architecture (EA) helps align business goals, operating models, and technology decisions in e-commerce.
+  \item Use capability maps, value streams, domain boundaries, and system-of-record thinking to structure a commerce platform.
+  \item Distinguish current-state architecture from target architecture and transition planning.
+  \item Analyze how AI capabilities fit into enterprise architecture without turning the architecture into a collection of isolated point solutions.
 \end{itemize}
-\section{Artifacts (placeholder)}
+
+\section{Why enterprise architecture matters in e-commerce}
+E-commerce systems evolve quickly.
+New channels, promotions, AI features, logistics partnerships, and regulatory constraints are introduced faster than many enterprise systems were originally designed to handle.
+Without architectural discipline, organizations often accumulate fragmented storefronts, duplicated customer records, inconsistent pricing logic, and analytics pipelines that are disconnected from operational truth.
+
+Enterprise architecture is useful because it provides a way to reason across these layers at once.
+It connects:
 \begin{itemize}
-  \item Deliverable: e-commerce capability map + domain model.
+  \item business strategy,
+  \item organizational capabilities,
+  \item application boundaries,
+  \item data ownership,
+  \item integration patterns,
+  \item and technology constraints.
 \end{itemize}
+
+In an AI-driven commerce setting, the architectural question is not only ``which model should we use?''
+It is also:
+\begin{itemize}
+  \item Which systems generate the data that the model depends on?
+  \item Which domain owns the business decision that the model influences?
+  \item Which workflow must remain reliable when the model is unavailable or uncertain?
+  \item How are predictions turned into operational actions in storefront, CRM, ERP, or support systems?
+\end{itemize}
+
+\section{Enterprise architecture as a set of views}
+An architecture description is easier to manage when it is divided into views.
+For e-commerce, four views are especially practical:
+\begin{itemize}
+  \item \textbf{Business architecture:} capabilities, value streams, organization roles, policies, and business outcomes.
+  \item \textbf{Application architecture:} major systems, services, platform modules, ownership boundaries, and interactions.
+  \item \textbf{Data architecture:} entities, identifiers, systems of record, analytical pipelines, and governance rules.
+  \item \textbf{Technology architecture:} hosting environment, integration infrastructure, observability stack, identity/security, and platform services.
+\end{itemize}
+
+These views should not be treated as isolated documents.
+They are projections of one system.
+For example, a business capability such as pricing must connect to application services, authoritative data sources, and runtime controls.
+
+\section{Capability maps}
+A capability map describes what an organization must be able to do, independent of how the capability is implemented today.
+That distinction matters because teams, products, and vendor choices can change while core business abilities remain relatively stable.
+
+\subsection{Core e-commerce capabilities}
+An AI-enabled commerce organization often needs capabilities such as:
+\begin{itemize}
+  \item customer acquisition and campaign orchestration,
+  \item product information and catalog management,
+  \item search, discovery, and merchandising,
+  \item personalization and recommendation,
+  \item pricing, promotions, and offer management,
+  \item cart, checkout, and payment orchestration,
+  \item order management and fulfillment coordination,
+  \item returns, refunds, and post-purchase support,
+  \item customer profile and loyalty management,
+  \item analytics, experimentation, and decision support,
+  \item security, privacy, fraud, and governance.
+\end{itemize}
+
+\subsection{Why capability maps are useful}
+Capability maps help teams avoid jumping directly into solution design.
+For example, if an organization says ``we need a recommendation engine,'' the architectural question should be expanded:
+\begin{itemize}
+  \item Is personalization a standalone capability, or is it part of a broader discovery capability?
+  \item Which parts of the recommendation workflow belong to the storefront experience layer, and which belong to a shared data platform?
+  \item Which existing operational capabilities must change to make recommendations effective, such as promotions, inventory awareness, or content quality?
+\end{itemize}
+
+Capability maps also expose imbalance.
+A company may invest heavily in customer acquisition and storefront design while underinvesting in returns, data governance, or seller operations.
+Architecture should reveal such weaknesses before they become scaling problems.
+
+\section{Value streams}
+Capabilities describe \emph{what} the organization can do.
+Value streams describe \emph{how value moves} through the business from trigger to outcome.
+
+\subsection{Typical e-commerce value streams}
+Important value streams include:
+\begin{itemize}
+  \item \textbf{Browse-to-buy:} discovery, consideration, cart, checkout, payment, confirmation.
+  \item \textbf{Order-to-cash:} order capture, validation, fulfillment, invoicing, settlement, financial posting.
+  \item \textbf{Procure-to-stock:} replenishment planning, supplier ordering, receiving, storage, inventory updates.
+  \item \textbf{Return-to-resolution:} return request, approval, pickup/drop-off, inspection, refund or exchange.
+  \item \textbf{Lead-to-account:} acquisition, registration, qualification, first purchase, retention.
+\end{itemize}
+
+\subsection{Why value streams matter architecturally}
+Value streams expose cross-domain handoffs.
+For example, ``browse-to-buy'' may touch search, catalog, pricing, promotions, checkout, payment, fraud, order management, and analytics.
+If the stream depends on unclear ownership or duplicated business rules, failures appear at handoff points rather than inside a single system.
+
+Value-stream mapping is especially valuable in hybrid commerce environments where storefront systems and ERP systems divide responsibility.
+Students should learn to ask not only which system executes a step, but which system is accountable for the business meaning of that step.
+
+\section{Domain boundaries and bounded contexts}
+Large commerce platforms become difficult to scale when everything is treated as one application or one shared database.
+Architecture therefore needs domain boundaries with explicit ownership.
+
+\subsection{Typical commerce domains}
+Common domains include:
+\begin{itemize}
+  \item \textbf{Catalog:} products, attributes, categories, media, content enrichment.
+  \item \textbf{Pricing and promotions:} price lists, discount rules, coupon logic, campaign offers.
+  \item \textbf{Inventory and availability:} stock position, reservations, safety stock, availability promises.
+  \item \textbf{Cart and checkout:} session basket state, shipping options, tax estimation, checkout workflow.
+  \item \textbf{Payments:} payment intents, authorization, capture, refund orchestration.
+  \item \textbf{Orders:} order lifecycle, status management, amendments, cancellations.
+  \item \textbf{Customer and identity:} profile, authentication, preferences, loyalty, segmentation.
+  \item \textbf{Fulfillment and logistics:} warehouse tasks, shipment creation, delivery events, returns routing.
+  \item \textbf{Analytics and experimentation:} event collection, metric definitions, experiment assignment.
+\end{itemize}
+
+\subsection{Good boundaries versus bad boundaries}
+A good boundary reduces coupling and clarifies ownership of behavior and data.
+A poor boundary creates ambiguity such as:
+\begin{itemize}
+  \item pricing rules duplicated in storefront, ERP, and marketing tools,
+  \item customer attributes updated independently in CRM and commerce applications,
+  \item order status interpreted differently by warehouse, finance, and support teams,
+  \item product IDs that differ between catalog, analytics, and inventory systems.
+\end{itemize}
+
+Architectural boundaries should therefore be tested against real business scenarios.
+If a business change requires editing logic in five systems with no clear owner, the boundary is likely wrong.
+
+\section{Systems of record and systems of engagement}
+Not every system should be authoritative for every type of data.
+One of the most important EA concepts in commerce is deciding the \emph{system of record} for each key entity.
+
+\subsection{Typical patterns}
+\begin{itemize}
+  \item The \textbf{commerce layer} often owns high-velocity interaction data such as carts, storefront sessions, and recommendation exposures.
+  \item The \textbf{ERP layer} often owns invoices, financial postings, stock movements, supplier records, and contractual B2B customer data.
+  \item A \textbf{PIM or catalog service} may own enriched product content while ERP owns procurement-oriented product master fields.
+  \item A \textbf{data platform} may own analytical aggregates and features but should not silently become the operational source of truth.
+\end{itemize}
+
+\subsection{Systems of engagement}
+Storefronts, mobile apps, support consoles, and seller portals are often systems of engagement rather than systems of record.
+They present, collect, and orchestrate information, but they may not be authoritative for final commercial truth.
+Confusing these roles leads to reconciliation failures.
+
+For example, a storefront may display an order as ``confirmed'' while ERP has not yet accepted it due to credit rules or stock constraints.
+Architecture must define which state is customer-facing, which state is financially binding, and how transitions are synchronized.
+
+\section{Reference architecture for AI-driven e-commerce}
+There is no single universal architecture, but a practical reference pattern often includes the following layers:
+\begin{itemize}
+  \item \textbf{Experience layer:} web, mobile, agent interfaces, seller/admin portals.
+  \item \textbf{Commerce services layer:} catalog, search, pricing, cart, checkout, order orchestration, customer services.
+  \item \textbf{Enterprise systems layer:} ERP, CRM, WMS, finance, procurement, supplier management.
+  \item \textbf{Integration layer:} APIs, event streams, workflow orchestration, master-data synchronization.
+  \item \textbf{Data and AI layer:} event collection, warehouse/lakehouse, feature pipelines, experimentation, model training, model serving.
+  \item \textbf{Cross-cutting controls:} identity, security, privacy, audit, observability, governance.
+\end{itemize}
+
+\subsection{Where AI fits}
+AI should be mapped to business capabilities rather than inserted as an isolated layer that ``does intelligence.''
+Examples include:
+\begin{itemize}
+  \item search ranking and recommendations within discovery,
+  \item fraud scoring within checkout and payments,
+  \item demand forecasting within inventory and replenishment,
+  \item case summarization and response assistance within support,
+  \item anomaly detection within operations and finance.
+\end{itemize}
+
+This mapping matters because it keeps accountability clear.
+The discovery domain owns business outcomes for search and recommendation even if the underlying models are developed by a centralized data team.
+
+\section{Current state, target state, and transition architecture}
+Architecture is not useful if it only documents the present.
+Organizations need a target state that guides investment and sequencing.
+
+\subsection{Current-state analysis}
+Current-state architecture should identify:
+\begin{itemize}
+  \item duplicated systems and overlapping responsibilities,
+  \item brittle integrations and manual reconciliation steps,
+  \item data ownership conflicts,
+  \item missing capabilities,
+  \item and operational pain points such as latency, outages, or inconsistent KPIs.
+\end{itemize}
+
+\subsection{Target architecture}
+Target architecture is a future-state design that expresses intended business and technical structure.
+It is not a vendor brochure and not a line-by-line implementation plan.
+It should answer:
+\begin{itemize}
+  \item Which domains and systems will own which capabilities?
+  \item Which integrations will be synchronous, asynchronous, or batch?
+  \item Which entities will be mastered where?
+  \item Which platforms are shared across business units?
+  \item Which AI capabilities will be productized versus embedded locally?
+\end{itemize}
+
+\subsection{Transition architecture}
+Most organizations cannot move directly from current state to target state.
+Transition architecture defines intermediate steps.
+Examples include:
+\begin{itemize}
+  \item separating catalog and pricing ownership before replacing checkout,
+  \item introducing a shared event stream before centralizing experimentation,
+  \item establishing a customer identity service before rolling out cross-channel personalization.
+\end{itemize}
+
+This is important in enterprise settings because a theoretically elegant target architecture may fail if the migration path is not operationally realistic.
+
+\section{Architectural concerns specific to AI}
+AI adds architectural concerns beyond model selection.
+Representative concerns include:
+\begin{itemize}
+  \item \textbf{Training-serving consistency:} features must mean the same thing offline and online.
+  \item \textbf{Latency budgets:} recommendation or fraud decisions may need sub-second responses.
+  \item \textbf{Fallback behavior:} the commerce workflow must continue safely if a model is unavailable.
+  \item \textbf{Observability:} systems must track not only uptime but also prediction quality, drift, and business impact.
+  \item \textbf{Governance:} model changes may alter business policy and therefore require approval, auditability, and rollback procedures.
+\end{itemize}
+
+In many organizations, the failure is not that models are weak.
+The failure is that model outputs are not architecturally integrated into business workflows with clear ownership and control points.
+
+\section{Operating model and team topology}
+Architecture is influenced by team structure.
+A domain with clear technical boundaries but no accountable product owner often performs badly in practice.
+
+\subsection{Typical team patterns}
+\begin{itemize}
+  \item \textbf{Domain-aligned product teams:} own specific business capabilities such as checkout or catalog.
+  \item \textbf{Platform teams:} provide shared infrastructure such as identity, observability, experimentation, or data platforms.
+  \item \textbf{Enterprise systems teams:} maintain ERP, CRM, accounting, and operational master-data platforms.
+  \item \textbf{Central AI or data teams:} develop shared methods, governance, and model platforms while collaborating with domain teams on use cases.
+\end{itemize}
+
+An architecture is more likely to succeed when ownership in the diagrams matches ownership in the organization.
+If a system is ``owned by everyone,'' it is usually owned by no one.
+
+\section{Artifacts for students and architects}
+A minimal EA artifact set for an e-commerce program may include:
+\begin{itemize}
+  \item a capability map,
+  \item one or more value stream maps,
+  \item a domain map with ownership boundaries,
+  \item a system-context diagram,
+  \item a system-of-record matrix for key entities,
+  \item and a target-state architecture note with transition priorities.
+\end{itemize}
+
+These artifacts should be consistent with each other.
+If the domain map says pricing is a shared domain but the system-of-record matrix shows three authoritative pricing systems, the architecture still contains a contradiction.
+
+\section{Hands-on artifacts}
+The key deliverable for this chapter is a compact but defensible architecture package:
+\begin{itemize}
+  \item an e-commerce capability map,
+  \item a domain model showing clear ownership,
+  \item and a short target-architecture note that explains systems of record and integration choices.
+\end{itemize}
+
+\section{Managerial implications}
+Enterprise architecture is sometimes dismissed as documentation overhead.
+In e-commerce, that is a mistake.
+Architectural ambiguity produces real costs:
+\begin{itemize}
+  \item slow product delivery because every change triggers cross-team negotiation,
+  \item financial reconciliation issues from conflicting commercial truth,
+  \item duplicated AI initiatives that solve the same problem inconsistently,
+  \item and weak governance when no domain clearly owns a high-impact decision.
+\end{itemize}
+
+Good architecture does not eliminate complexity.
+It makes complexity explicit, owned, and therefore manageable.
 
 \section{Multiple-choice questions (MCQs)}
 \begin{enumerate}
