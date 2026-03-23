@@ -528,9 +528,39 @@
 \contentsline {section}{\numberline {14.19}Hands-on lab: assessing an AI returns assistant}{189}{section.14.19}%
 \contentsline {section}{\numberline {14.20}Multiple-choice questions (MCQs)}{189}{section.14.20}%
 \contentsline {chapter}{\numberline {15}Capstone: Enterprise-Grade AI E-Commerce Architecture (Week 14)}{193}{chapter.15}%
-\contentsline {section}{\numberline {15.1}Scope (placeholder)}{193}{section.15.1}%
-\contentsline {section}{\numberline {15.2}Capstone deliverables (placeholder)}{193}{section.15.2}%
-\contentsline {chapter}{\numberline {A}Datasets and Synthetic Data for Teaching (placeholder)}{195}{appendix.A}%
-\contentsline {chapter}{\numberline {B}Template: System Design Document (placeholder)}{197}{appendix.B}%
-\contentsline {chapter}{\numberline {C}Template: Data Contract (placeholder)}{199}{appendix.C}%
-\contentsline {chapter}{\numberline {D}Template: Model Card and Risk Assessment (placeholder)}{201}{appendix.D}%
+\contentsline {section}{\numberline {15.1}Capstone scenario}{193}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Purpose of the capstone}{193}{section.15.2}%
+\contentsline {section}{\numberline {15.3}The company context}{194}{section.15.3}%
+\contentsline {section}{\numberline {15.4}Capstone design question}{194}{section.15.4}%
+\contentsline {section}{\numberline {15.5}Expected architectural scope}{194}{section.15.5}%
+\contentsline {section}{\numberline {15.6}Business capabilities and value streams}{195}{section.15.6}%
+\contentsline {section}{\numberline {15.7}Reference solution shape}{195}{section.15.7}%
+\contentsline {subsection}{\numberline {15.7.1}Channel layer}{195}{subsection.15.7.1}%
+\contentsline {subsection}{\numberline {15.7.2}Commerce services layer}{196}{subsection.15.7.2}%
+\contentsline {subsection}{\numberline {15.7.3}Enterprise systems layer}{196}{subsection.15.7.3}%
+\contentsline {section}{\numberline {15.8}Integration architecture}{197}{section.15.8}%
+\contentsline {subsection}{\numberline {15.8.1}Synchronous interactions}{197}{subsection.15.8.1}%
+\contentsline {subsection}{\numberline {15.8.2}Asynchronous interactions}{197}{subsection.15.8.2}%
+\contentsline {subsection}{\numberline {15.8.3}Integration design decisions}{197}{subsection.15.8.3}%
+\contentsline {section}{\numberline {15.9}Data and analytics architecture}{198}{section.15.9}%
+\contentsline {section}{\numberline {15.10}AI use-case portfolio}{198}{section.15.10}%
+\contentsline {subsection}{\numberline {15.10.1}Recommended initial use cases}{198}{subsection.15.10.1}%
+\contentsline {subsection}{\numberline {15.10.2}Use-case selection logic}{199}{subsection.15.10.2}%
+\contentsline {section}{\numberline {15.11}Target operating model}{199}{section.15.11}%
+\contentsline {section}{\numberline {15.12}Security, privacy, and responsible AI controls}{199}{section.15.12}%
+\contentsline {section}{\numberline {15.13}MLOps and production readiness}{200}{section.15.13}%
+\contentsline {section}{\numberline {15.14}Evaluation framework}{200}{section.15.14}%
+\contentsline {subsection}{\numberline {15.14.1}Business value}{200}{subsection.15.14.1}%
+\contentsline {subsection}{\numberline {15.14.2}Technical fitness}{201}{subsection.15.14.2}%
+\contentsline {subsection}{\numberline {15.14.3}Operational credibility}{201}{subsection.15.14.3}%
+\contentsline {section}{\numberline {15.15}Capstone deliverables}{201}{section.15.15}%
+\contentsline {subsection}{\numberline {15.15.1}Optional technical annexes}{202}{subsection.15.15.1}%
+\contentsline {section}{\numberline {15.16}Suggested delivery sequence}{202}{section.15.16}%
+\contentsline {section}{\numberline {15.17}Common failure modes in student capstones}{203}{section.15.17}%
+\contentsline {section}{\numberline {15.18}Worked example: hybrid headless commerce with Odoo backbone}{203}{section.15.18}%
+\contentsline {section}{\numberline {15.19}Final reflection}{204}{section.15.19}%
+\contentsline {section}{\numberline {15.20}Multiple-choice questions (MCQs)}{204}{section.15.20}%
+\contentsline {chapter}{\numberline {A}Datasets and Synthetic Data for Teaching (placeholder)}{207}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Template: System Design Document (placeholder)}{209}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Template: Data Contract (placeholder)}{211}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Template: Model Card and Risk Assessment (placeholder)}{213}{appendix.D}%

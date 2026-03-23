@@ -1,18 +1,421 @@
 \chapter{Capstone: Enterprise-Grade AI E-Commerce Architecture (Week 14)}
-\section*{Capstone scenario (agreed)}
+
+\section{Capstone scenario}
 \begin{itemize}
-  \item Scenario: end-to-end ``AI commerce + Odoo'' reference architecture for a single company.
-  \item Goal: demonstrate EA alignment, ERP integration, and measurable AI value with operational readiness.
-  \item Business model: hybrid (B2C + B2B).
-  \item Commerce front-end: both (compare Odoo Website/eCommerce vs a separate headless storefront integrating to Odoo).
-  \item AI stack: both (ML for recs/fraud/pricing + LLMs for support/ops).
+  \item Scenario: an end-to-end ``AI commerce + Odoo'' reference architecture for a single company.
+  \item Goal: demonstrate enterprise architecture alignment, ERP integration, and measurable AI value with operational readiness.
+  \item Business model: hybrid B2C + B2B commerce.
+  \item Commerce front-end: compare Odoo Website/eCommerce with a separate headless storefront integrated to Odoo.
+  \item AI stack: combine classical ML, deep learning, and LLM-based service automation where justified.
 \end{itemize}
-\section{Scope (placeholder)}
+
+\section{Purpose of the capstone}
+The capstone is the point at which isolated topics become a system. Earlier chapters covered platforms, data foundations, enterprise architecture, integration, ERP connectivity, recommender systems, pricing, fraud, LLM support, MLOps, security, and governance. In real enterprises, however, these elements do not operate as separate course modules. They coexist inside one business operating model.
+
+This chapter therefore asks students to think like architects and delivery leads rather than like narrow component specialists. The challenge is not to maximize sophistication in a single subsystem. The challenge is to produce a coherent, defendable, enterprise-grade design that can actually be implemented, operated, governed, and improved over time.
+
+\section{The company context}
+Assume a regional retail company is expanding into a digitally mature omni-channel business. It sells directly to consumers through its branded storefront, serves business customers through a wholesale portal, and manages inventory through physical distribution centers and retail locations. The company wants to improve growth, operational efficiency, and customer experience while standardizing enterprise processes on Odoo as the ERP reference platform.
+
+Management has set the following priorities:
 \begin{itemize}
-  \item End-to-end architecture: channels, services, data platform, ML/LLM layer, ERP integration.
-  \item Evaluation: business metrics, technical metrics, and operational readiness.
+  \item increase online conversion and average order value;
+  \item improve cross-sell and upsell performance;
+  \item reduce fraud losses and operational false positives;
+  \item shorten support resolution time while maintaining policy compliance;
+  \item improve inventory visibility and order orchestration across channels;
+  \item establish a governed AI operating model that can scale beyond a single experiment.
 \end{itemize}
-\section{Capstone deliverables (placeholder)}
+
+The company does not want a collection of point solutions. It wants a platform that can support new channels, new models, and new business units without repeated architectural fragmentation.
+
+\section{Capstone design question}
+Students must answer one central question:
+
+\emph{How should a hybrid B2C/B2B commerce enterprise design an end-to-end architecture that integrates commerce channels, Odoo-based enterprise operations, a shared data platform, and AI capabilities while remaining secure, governable, and commercially measurable?}
+
+This question is intentionally broader than a software implementation exercise. It requires decisions about system boundaries, ownership, integration patterns, data products, operating model, risk controls, and business metrics.
+
+\section{Expected architectural scope}
+The capstone architecture should include the following layers:
 \begin{itemize}
-  \item Architecture pack (diagrams), backlog, data contracts, and evaluation plan.
+  \item customer and business-facing channels;
+  \item commerce application services;
+  \item enterprise systems such as ERP, CRM, WMS, and finance processes;
+  \item integration patterns across synchronous and asynchronous flows;
+  \item data ingestion, storage, analytics, and feature computation layers;
+  \item ML and LLM services for prioritized use cases;
+  \item security, privacy, governance, and MLOps capabilities;
+  \item operational monitoring, support, and incident management processes.
 \end{itemize}
+
+Students are not expected to implement every component. They are expected to choose, justify, and connect the right components into a credible operating architecture.
+
+\section{Business capabilities and value streams}
+The architecture should be grounded in business capabilities rather than in vendor features. Typical capabilities in this capstone include:
+\begin{itemize}
+  \item product and catalog management;
+  \item customer identity and account management;
+  \item search, browse, and personalization;
+  \item cart, checkout, payment, and order capture;
+  \item inventory visibility and fulfillment orchestration;
+  \item returns, refunds, and service case management;
+  \item pricing, promotions, and commercial policy management;
+  \item fraud prevention and trust \& safety;
+  \item analytics, experimentation, and decision support.
+\end{itemize}
+
+Students should also map one or more value streams such as acquire-to-order, order-to-cash, service-to-resolution, and forecast-to-replenish. This helps ensure that the design is evaluated in business flow terms rather than in isolated boxes and arrows.
+
+\section{Reference solution shape}
+There is no single correct architecture, but a strong solution usually contains the following structure.
+
+\subsection{Channel layer}
+The company may operate:
+\begin{itemize}
+  \item a branded web storefront for B2C;
+  \item a self-service portal for B2B customers with negotiated pricing and account hierarchies;
+  \item mobile or app-based touchpoints;
+  \item customer service channels such as chat, email, and call-center tooling;
+  \item selected marketplace syndication for growth or inventory liquidation.
+\end{itemize}
+
+Teams should decide whether the storefront is tightly coupled to Odoo eCommerce or implemented as a headless experience consuming shared commerce APIs. The tradeoff is speed and coherence versus flexibility and independent evolution.
+
+\subsection{Commerce services layer}
+The commerce core typically includes:
+\begin{itemize}
+  \item catalog and content services;
+  \item pricing and promotion services;
+  \item cart and checkout services;
+  \item order management functions;
+  \item customer profile and session services;
+  \item search and recommendation services.
+\end{itemize}
+
+These services do not all need to be separate deployable units, but the architecture should make their responsibilities clear. Students should explicitly describe what is system-of-record behavior versus what is derived, cached, or optimized behavior.
+
+\subsection{Enterprise systems layer}
+Odoo, in this capstone, acts as the operational backbone for core business processes such as:
+\begin{itemize}
+  \item sales order management;
+  \item inventory and warehouse operations;
+  \item procurement and supplier coordination;
+  \item invoicing and financial postings;
+  \item CRM records and service case processes where relevant.
+\end{itemize}
+
+The capstone should explain how Odoo fits into the end-to-end process without turning it into the only intelligence layer. The enterprise platform is where transactional discipline and process consistency live. AI services should augment that backbone, not replace it.
+
+\section{Integration architecture}
+Earlier chapters discussed APIs, events, iPaaS, and service boundaries. The capstone should show how those patterns are applied coherently.
+
+\subsection{Synchronous interactions}
+Use synchronous interactions where immediate user response is needed, such as:
+\begin{itemize}
+  \item product detail retrieval;
+  \item price and promotion lookup;
+  \item payment authorization;
+  \item stock availability checks for checkout decisions;
+  \item case lookup in customer service.
+\end{itemize}
+
+\subsection{Asynchronous interactions}
+Use asynchronous flows where resilience, scale, and decoupling are more important, such as:
+\begin{itemize}
+  \item order-created and payment-settled events;
+  \item inventory updates;
+  \item recommendation feedback capture;
+  \item fraud review outcomes;
+  \item customer interaction events for analytics and retraining;
+  \item downstream ERP, warehouse, and finance processing.
+\end{itemize}
+
+\subsection{Integration design decisions}
+Students should explicitly justify:
+\begin{itemize}
+  \item which systems publish canonical events;
+  \item how idempotency and replay are handled;
+  \item where data contracts are enforced;
+  \item how errors and partial failures are reconciled;
+  \item how master data is synchronized across commerce and enterprise systems.
+\end{itemize}
+
+\section{Data and analytics architecture}
+The capstone must include a shared data layer because nearly every business objective depends on reliable, cross-functional data. A typical target state includes:
+\begin{itemize}
+  \item behavioral event collection from channels;
+  \item operational data from commerce and Odoo processes;
+  \item curated analytical models for orders, customers, products, and inventory;
+  \item experiment and campaign measurement tables;
+  \item feature pipelines for ML use cases;
+  \item dashboards and semantic metrics for business teams.
+\end{itemize}
+
+Students should address several practical questions:
+\begin{itemize}
+  \item How are customer and account identities resolved across B2C and B2B contexts?
+  \item Which data products are authoritative for financial, operational, and behavioral analysis?
+  \item How are privacy requirements reflected in retention, access, and minimization policies?
+  \item Which features need real-time freshness and which can be batch-computed?
+\end{itemize}
+
+\section{AI use-case portfolio}
+The capstone should not include AI simply because it is fashionable. Students should define a prioritized portfolio tied to business value and operational feasibility.
+
+\subsection{Recommended initial use cases}
+A practical first-wave portfolio could include:
+\begin{itemize}
+  \item recommender systems for personalized ranking, related products, and bundle suggestions;
+  \item pricing and promotion analytics for elasticity-aware offers and margin protection;
+  \item fraud scoring for payments, refund abuse, and account takeover signals;
+  \item LLM-assisted support for case summarization, policy-grounded responses, and agent assistance;
+  \item demand forecasting for replenishment and allocation support.
+\end{itemize}
+
+\subsection{Use-case selection logic}
+Students should explain why these use cases were selected using criteria such as:
+\begin{itemize}
+  \item expected business value;
+  \item availability and quality of data;
+  \item operational readiness;
+  \item legal and governance exposure;
+  \item dependency on upstream process maturity;
+  \item ease of measuring success.
+\end{itemize}
+
+\section{Target operating model}
+Architectures fail when ownership is vague. The capstone should define a cross-functional operating model with clear responsibilities.
+
+A workable structure often includes:
+\begin{itemize}
+  \item product management to define business objectives and backlog priorities;
+  \item commerce engineering to own channel and transaction experiences;
+  \item enterprise applications teams to own Odoo processes and integrations;
+  \item data engineering to own data pipelines, contracts, and curated datasets;
+  \item ML engineering or applied science to own models, experimentation, and monitoring;
+  \item security, privacy, and compliance functions to govern sensitive use cases;
+  \item operations and support teams to handle exceptions, overrides, and escalations.
+\end{itemize}
+
+Students should define who approves a new model release, who handles drift or incident alerts, who owns data quality remediation, and who is accountable for business guardrails such as margin, fraud friction, or support policy accuracy.
+
+\section{Security, privacy, and responsible AI controls}
+The capstone should embed controls rather than append them as a checklist. At minimum, the design should address:
+\begin{itemize}
+  \item identity and access control across customer, partner, and staff roles;
+  \item payment and transaction security;
+  \item encryption, secret handling, and audit logging;
+  \item data minimization and retention;
+  \item model and LLM governance for high-impact use cases;
+  \item human review and override paths;
+  \item incident response and recovery planning.
+\end{itemize}
+
+Students should be able to identify where controls live in the architecture and who operates them. A well-argued capstone will also distinguish low-risk AI use cases from high-risk ones and apply proportionate governance.
+
+\section{MLOps and production readiness}
+Any capstone that proposes production AI should describe how it will be operated after launch. The architecture should therefore include:
+\begin{itemize}
+  \item reproducible training and evaluation workflows;
+  \item model registration and release approval;
+  \item monitoring for technical, model, and business metrics;
+  \item retraining or rollback triggers;
+  \item feature consistency controls between training and serving;
+  \item logging and traceability for audits and incident analysis.
+\end{itemize}
+
+Students should resist the temptation to present AI as a static asset. Production systems change, and the operating model must reflect that reality.
+
+\section{Evaluation framework}
+The capstone should be judged across three dimensions: business value, technical fitness, and operational credibility.
+
+\subsection{Business value}
+Possible business evaluation metrics include:
+\begin{itemize}
+  \item conversion rate;
+  \item average order value;
+  \item gross margin impact;
+  \item recommendation-assisted revenue share;
+  \item fraud loss and false-positive burden;
+  \item support containment and resolution time;
+  \item fulfillment accuracy and stockout reduction.
+\end{itemize}
+
+\subsection{Technical fitness}
+Technical evaluation may include:
+\begin{itemize}
+  \item architectural coherence;
+  \item correctness of system boundaries;
+  \item integration pattern suitability;
+  \item scalability and resilience reasoning;
+  \item data architecture quality;
+  \item observability and recovery design.
+\end{itemize}
+
+\subsection{Operational credibility}
+Operational evaluation should ask:
+\begin{itemize}
+  \item Can this design actually be implemented by a real organization?
+  \item Are roles and ownership explicit?
+  \item Are governance and security controls embedded?
+  \item Are launch phases and dependencies realistic?
+  \item Are tradeoffs acknowledged honestly?
+\end{itemize}
+
+\section{Capstone deliverables}
+Students should submit an architecture pack rather than a single diagram. A strong pack usually contains:
+\begin{itemize}
+  \item an executive summary of the business problem and target outcomes;
+  \item a capability map and one or more value streams;
+  \item a current-state pain-point summary;
+  \item a target-state architecture diagram;
+  \item an integration and event-flow diagram;
+  \item a data and AI architecture view;
+  \item a security and governance control view;
+  \item a rollout roadmap with phases and dependencies;
+  \item a KPI and evaluation plan;
+  \item a risk register with mitigations and open assumptions.
+\end{itemize}
+
+\subsection{Optional technical annexes}
+Depending on course expectations, teams may also include:
+\begin{itemize}
+  \item sample API contracts;
+  \item event schemas;
+  \item data contracts;
+  \item a model card or risk assessment for one AI use case;
+  \item a RACI matrix for operating responsibilities;
+  \item a sample experiment design for a recommender or support assistant.
+\end{itemize}
+
+\section{Suggested delivery sequence}
+A practical capstone sequence can be organized into stages:
+\begin{enumerate}
+  \item define the business strategy, operating context, and priority value streams;
+  \item map business capabilities and pain points in the current state;
+  \item define the target architecture and key system boundaries;
+  \item select AI use cases and justify them with measurable value hypotheses;
+  \item specify integration, data, and governance mechanisms;
+  \item define rollout phases, metrics, and risks;
+  \item present tradeoffs and defend the design to a review panel.
+\end{enumerate}
+
+This sequencing helps students avoid producing visually impressive but strategically thin diagrams.
+
+\section{Common failure modes in student capstones}
+Several recurring problems weaken otherwise promising solutions:
+\begin{itemize}
+  \item treating every system as equally important rather than identifying the architectural core;
+  \item proposing AI use cases without sufficient data, ownership, or evaluation logic;
+  \item ignoring ERP and operational process realities in favor of front-end innovation;
+  \item omitting security, privacy, and governance until the last page;
+  \item drawing integrations without clarifying system-of-record boundaries;
+  \item assuming that good offline model performance automatically means business value.
+\end{itemize}
+
+The strongest capstones are not the most complicated ones. They are the ones with the clearest logic and the most explicit tradeoffs.
+
+\section{Worked example: hybrid headless commerce with Odoo backbone}
+One strong reference pattern for this scenario is a headless commerce front-end serving both B2C and B2B experiences, backed by shared commerce APIs and integrated to Odoo for transactional and operational processes.
+
+In this pattern:
+\begin{itemize}
+  \item the storefront delivers flexible customer experience and experimentation velocity;
+  \item pricing, promotion, and catalog services expose reusable APIs to both channels;
+  \item Odoo handles order orchestration, inventory, procurement, invoicing, and finance synchronization;
+  \item an event bus distributes order, payment, inventory, and behavior events;
+  \item a data platform supports experimentation, recommender training, fraud analytics, and management reporting;
+  \item LLM-based support tools assist agents but do not execute sensitive actions without policy controls.
+\end{itemize}
+
+This design is not automatically superior to Odoo-native commerce. Its value lies in decoupling experience evolution from enterprise process stability. Students should also be able to argue when that extra complexity is not worth it.
+
+\section{Final reflection}
+The purpose of the capstone is not to prove that one tool or architecture style is universally best. It is to show that enterprise e-commerce is a system of systems. Channels, enterprise operations, data products, AI services, controls, and organizational responsibilities must align if the business wants durable value.
+
+Students who complete this chapter well should be able to move from local optimization to enterprise reasoning. They should be able to explain not only what the architecture contains, but why it is shaped the way it is, how it creates value, where it can fail, and how the organization would operate it responsibly.
+
+\section{Multiple-choice questions (MCQs)}
+\begin{enumerate}
+  \item What is the main objective of the capstone chapter?
+  \begin{enumerate}
+    \item to maximize the mathematical complexity of one ML model;
+    \item to combine the course topics into a coherent enterprise-grade solution design;
+    \item to replace enterprise systems with a single commerce interface;
+    \item to avoid making tradeoffs by including every possible feature.
+  \end{enumerate}
+
+  \item In a strong capstone, business capabilities are useful because they:
+  \begin{enumerate}
+    \item replace the need for architecture diagrams entirely;
+    \item ensure vendor selection is the only design concern;
+    \item connect system design to business operations and value streams;
+    \item eliminate the need for governance.
+  \end{enumerate}
+
+  \item Which of the following is the clearest reason to use asynchronous integration?
+  \begin{enumerate}
+    \item when immediate interactive response is unnecessary and resilience or decoupling is important;
+    \item when user login pages need fast rendering;
+    \item when a report is printed locally;
+    \item when a password reset token is generated in memory.
+  \end{enumerate}
+
+  \item Why should AI use cases be prioritized rather than added indiscriminately?
+  \begin{enumerate}
+    \item because AI has no value in commerce;
+    \item because use cases differ in value, data readiness, risk, and measurability;
+    \item because only one model may exist in an enterprise;
+    \item because ERP systems prohibit analytics.
+  \end{enumerate}
+
+  \item Which statement best describes the role of Odoo in this capstone?
+  \begin{enumerate}
+    \item it must replace all channel and AI systems;
+    \item it acts as the transactional and process backbone for core enterprise operations;
+    \item it is useful only for generating dashboards;
+    \item it removes the need for integration architecture.
+  \end{enumerate}
+
+  \item Which item is most important for operational credibility?
+  \begin{enumerate}
+    \item a diagram with many unlabeled arrows;
+    \item explicit ownership, rollout logic, controls, and measurable success criteria;
+    \item a claim that the architecture will scale infinitely;
+    \item avoiding any mention of risk.
+  \end{enumerate}
+
+  \item What is a common failure mode in student capstones?
+  \begin{enumerate}
+    \item clearly identifying systems of record;
+    \item embedding governance and security into the target architecture;
+    \item proposing AI features without data, ownership, or evaluation plans;
+    \item acknowledging tradeoffs explicitly.
+  \end{enumerate}
+
+  \item What should a capstone architecture pack include beyond a single target-state diagram?
+  \begin{enumerate}
+    \item only a bibliography;
+    \item only a source-code repository;
+    \item supporting artifacts such as value streams, data views, rollout roadmap, KPIs, and risks;
+    \item only a marketing slogan.
+  \end{enumerate}
+\end{enumerate}
+
+\subsection*{Answer key}
+1. b
+
+2. c
+
+3. a
+
+4. b
+
+5. b
+
+6. b
+
+7. c
+
+8. c
