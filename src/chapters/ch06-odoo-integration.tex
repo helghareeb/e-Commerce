@@ -1,15 +1,314 @@
 \chapter{ERP/CRM/SCM Integration in Commerce (Week 6)}
-\section{Scope (placeholder)}
+
+\section{Learning objectives}
 \begin{itemize}
-  \item Odoo overview (high-level): key modules relevant to commerce (Sales, Inventory, Accounting, CRM).
-  \item Order-to-cash, inventory, fulfillment, returns, and customer data flows.
-  \item Master data management (MDM) and data ownership across domains.
-\end{itemize}
-\section{Artifacts (placeholder)}
-\begin{itemize}
-  \item Deliverable: integration context diagram + data contracts (high level), including an Odoo boundary.
+  \item Explain how commerce platforms integrate with ERP, CRM, and supply-chain systems across operational workflows.
+  \item Identify systems of record for key entities such as customer, product, price list, order, invoice, and shipment.
+  \item Analyze master data management, process ownership, and consistency risks in hybrid commerce architectures.
+  \item Design integration flows for order-to-cash, returns, and B2B pricing using Odoo as a reference ERP environment.
 \end{itemize}
 
+\section{Why ERP/CRM/SCM integration is central to commerce}
+Modern e-commerce experiences are often built in specialized commerce platforms, but commercial truth does not live only in the storefront.
+Financial commitments, stock movements, supplier processes, customer account structures, invoicing, and back-office controls typically depend on enterprise systems such as ERP, CRM, and warehouse or supply-chain platforms.
+
+This means a commerce platform cannot be architected only as a customer-facing product.
+It must also participate in enterprise operating flows.
+If that integration is weak, the result is familiar:
+\begin{itemize}
+  \item orders that appear confirmed online but fail in back-office processing,
+  \item inventory figures that differ between storefront and warehouse,
+  \item duplicate customer records across channels,
+  \item B2B price lists that drift between sales and commerce systems,
+  \item returns and refunds that create reconciliation problems in finance.
+\end{itemize}
+
+The core architectural task is not simply to ``connect Odoo'' or any ERP.
+It is to define ownership, process boundaries, and trustworthy data movement across the enterprise stack.
+
+\section{The enterprise systems perspective}
+In a hybrid commerce architecture, enterprise systems typically serve different roles.
+
+\subsection{ERP}
+ERP systems coordinate structured operational and financial processes.
+Using Odoo as a reference point, relevant modules often include:
+\begin{itemize}
+  \item \textbf{Sales:} quotations, sales orders, customer terms, sales workflows,
+  \item \textbf{Inventory:} stock moves, reservations, warehouse operations, replenishment,
+  \item \textbf{Accounting:} invoices, credit notes, payments, reconciliation,
+  \item \textbf{CRM:} leads, opportunities, account history, commercial context.
+\end{itemize}
+
+\subsection{CRM}
+CRM systems focus on relationship history, account management, sales interactions, lead qualification, and customer-service context.
+In some organizations CRM and ERP overlap.
+What matters architecturally is not the product label but the business responsibility assigned to the system.
+
+\subsection{SCM and warehouse systems}
+Supply-chain and warehouse platforms manage sourcing, supplier coordination, inbound logistics, warehouse execution, and delivery orchestration.
+In smaller environments these functions may be embedded in ERP.
+In larger environments they may be split into specialized systems such as WMS, TMS, or procurement platforms.
+
+\section{Commerce versus enterprise ownership}
+A recurring source of failure in commerce architecture is treating ownership as a technical detail rather than a business decision.
+Teams must decide which domain owns each important entity and process state.
+
+\subsection{Common ownership patterns}
+\begin{itemize}
+  \item The \textbf{commerce layer} often owns web sessions, carts, checkout state, personalization context, and channel-specific merchandising behavior.
+  \item The \textbf{ERP layer} often owns invoices, accounting entries, stock movements, contractual customer records, and internal fulfillment commitments.
+  \item The \textbf{CRM layer} may own lead status, sales activity, account segmentation, and service interactions.
+  \item The \textbf{data platform} may own analytical aggregates and experimentation outputs but should not silently become the master for operational entities.
+\end{itemize}
+
+\subsection{Why ownership must be explicit}
+If pricing is editable in both storefront and ERP, or if both commerce and CRM create customer records independently, inconsistencies are not accidental.
+They are structural.
+Integration design cannot fix a domain-ownership problem after the fact; it must start by making ownership explicit.
+
+\section{Systems of record for key entities}
+One of the most important artifacts in enterprise commerce architecture is a system-of-record matrix.
+Representative entity choices include the following.
+
+\subsection{Customer}
+Customer identity is often split across systems:
+\begin{itemize}
+  \item the storefront may own channel account credentials and preferences,
+  \item ERP may own bill-to and ship-to parties for financial processing,
+  \item CRM may own relationship context, lead lifecycle, and account history.
+\end{itemize}
+
+The correct design is usually not ``one system owns everything.''
+Instead, different aspects of customer identity are mastered in different places and linked through governed identifiers.
+
+\subsection{Product}
+Product ownership is also frequently split:
+\begin{itemize}
+  \item ERP may own procurement and internal stock-keeping information,
+  \item a catalog or PIM layer may own rich digital merchandising content,
+  \item analytics may derive behavioral product features.
+\end{itemize}
+
+The architecture must distinguish the commercial product definition from channel presentation and from analytical enrichment.
+
+\subsection{Price list}
+Price lists are especially sensitive in B2B environments.
+Negotiated terms, tax logic, discount hierarchies, and approval rules often belong closer to ERP or enterprise sales processes than to storefront presentation logic.
+If the storefront computes pricing independently while ERP maintains contractual prices, disputes are inevitable.
+
+\subsection{Order}
+The commerce platform often captures the initial order intent, but the enterprise question is whether ERP becomes the authoritative record for downstream operational and financial lifecycle.
+This must be decided explicitly.
+Some organizations treat commerce as the order system of record and export to ERP.
+Others treat the storefront order as a pre-order until ERP accepts and materializes it.
+
+\subsection{Invoice and payment reconciliation}
+Invoices, ledger effects, and payment reconciliation usually belong in ERP or finance-owned systems.
+Even if the storefront shows payment confirmation, the enterprise system remains authoritative for accounting truth.
+
+\subsection{Shipment}
+Shipment truth may belong in warehouse or logistics systems even if ERP or storefront mirrors the status.
+The architecture should distinguish customer-facing delivery status from the internal system that owns shipment execution and exception handling.
+
+\section{Master data management (MDM)}
+Master data management is the discipline of defining and governing shared core entities across systems.
+In commerce, the most common shared entities include customer, product, supplier, location, and price list.
+
+\subsection{Why MDM matters}
+Without MDM, organizations accumulate:
+\begin{itemize}
+  \item duplicate customer records created by multiple channels,
+  \item product records with inconsistent category or attribute definitions,
+  \item seller or supplier entities that differ across procurement and commerce tools,
+  \item incompatible codes used by analytics, ERP, and storefront systems.
+\end{itemize}
+
+\subsection{Practical MDM principles}
+\begin{itemize}
+  \item Define authoritative identifiers and mapping rules.
+  \item Separate creation rights from consumption rights.
+  \item Document which attributes are mastered where.
+  \item Maintain reconciliation workflows for conflicts and duplicates.
+  \item Treat data stewardship as an operating responsibility, not an afterthought.
+\end{itemize}
+
+MDM is often perceived as bureaucratic.
+In reality, it is a scaling mechanism for preventing repeated operational confusion.
+
+\section{Order-to-cash in integrated commerce}
+Order-to-cash is one of the most important enterprise commerce value streams because it crosses customer experience, logistics, and finance.
+
+\subsection{Typical flow}
+A simplified integrated order-to-cash process may include:
+\begin{enumerate}
+  \item customer places an order in the storefront,
+  \item payment is authorized or payment terms are validated,
+  \item order is persisted in commerce services,
+  \item order is exported or synchronized to ERP,
+  \item inventory is reserved or confirmed,
+  \item picking, packing, and shipment are triggered,
+  \item invoice is issued,
+  \item payment is captured or reconciled,
+  \item order and fulfillment statuses propagate back to customer-facing systems.
+\end{enumerate}
+
+\subsection{Architectural decisions inside the flow}
+Key design choices include:
+\begin{itemize}
+  \item whether the storefront can confirm an order before ERP acceptance,
+  \item whether stock is reserved in real time or reconciled later,
+  \item whether ERP or commerce owns status transitions,
+  \item how payment confirmation maps to invoicing and revenue recognition,
+  \item which events trigger downstream systems such as warehouse or support tools.
+\end{itemize}
+
+\subsection{Failure modes}
+Common failure modes include:
+\begin{itemize}
+  \item the order is captured online but fails to post in ERP,
+  \item payment succeeds but the order export fails,
+  \item the storefront shows available stock that has already been consumed elsewhere,
+  \item fulfillment completes but shipment status never propagates back to customer channels,
+  \item invoice creation and refund processing become inconsistent during cancellations.
+\end{itemize}
+
+These are not edge cases.
+They are the expected complexity of distributed commercial workflows.
+
+\section{Inventory, fulfillment, and availability}
+Inventory integration is especially difficult because availability is both operationally critical and highly time-sensitive.
+
+\subsection{Inventory concepts that should not be conflated}
+\begin{itemize}
+  \item \textbf{On-hand inventory:} physical stock currently available in storage.
+  \item \textbf{Reserved inventory:} stock allocated to pending commitments.
+  \item \textbf{Available-to-promise:} stock that can still be sold considering current commitments and business rules.
+  \item \textbf{Future availability:} stock expected from replenishment or transfer.
+\end{itemize}
+
+If the storefront treats all four as the same number, overselling and customer disappointment become likely.
+
+\subsection{Synchronization strategies}
+Common strategies include:
+\begin{itemize}
+  \item near-real-time events for stock adjustments,
+  \item short-lived availability caches,
+  \item reservation services for high-demand items,
+  \item periodic reconciliation against warehouse truth.
+\end{itemize}
+
+The right design depends on volume, latency needs, and oversell tolerance.
+Enterprise architecture should make these tradeoffs explicit rather than hiding them behind ``inventory sync'' language.
+
+\section{Returns and refunds}
+Post-purchase flows are often under-modeled in early architecture work, yet they are essential to both customer trust and accounting correctness.
+
+\subsection{Typical return flow}
+A return process may involve:
+\begin{enumerate}
+  \item customer initiates a return,
+  \item policy eligibility is checked,
+  \item return merchandise authorization is created,
+  \item item is received or inspected,
+  \item stock is adjusted,
+  \item refund or credit note is issued,
+  \item customer and finance systems are updated.
+\end{enumerate}
+
+\subsection{Architectural risks}
+Returns create risks when:
+\begin{itemize}
+  \item the storefront approves a return that finance policy rejects,
+  \item inventory is restocked before inspection rules are applied,
+  \item refunds are triggered twice through retries or manual intervention,
+  \item credit notes in ERP do not align with customer-facing refund status.
+\end{itemize}
+
+These flows require the same rigor as order creation, including idempotency, state control, and clear ownership.
+
+\section{B2B pricing and account structures}
+B2B commerce introduces additional integration complexity because customer relationships are not purely transactional.
+They often involve negotiated pricing, approval chains, sales-assist workflows, credit limits, and account hierarchies.
+
+\subsection{Price lists and negotiated terms}
+B2B price lists may depend on:
+\begin{itemize}
+  \item customer account,
+  \item contract terms,
+  \item region,
+  \item product family,
+  \item volume thresholds,
+  \item approval status.
+\end{itemize}
+
+These rules are frequently managed in ERP or enterprise sales processes.
+The storefront may present the result, but it should not become a shadow source of truth for contractual pricing.
+
+\subsection{Account hierarchies}
+One B2B customer may represent:
+\begin{itemize}
+  \item a legal entity,
+  \item several branches,
+  \item multiple buyers,
+  \item different shipping destinations,
+  \item separate billing relationships.
+\end{itemize}
+
+Architecture must therefore support organization-level identity and policy, not only individual user accounts.
+
+\section{Using Odoo as a reference ERP}
+Odoo is useful as a reference platform because it illustrates how enterprise workflows span modules rather than living in a single monolithic screen.
+
+\subsection{Illustrative Odoo-aligned mapping}
+\begin{itemize}
+  \item \textbf{Sales:} quotations, orders, commercial terms, B2B account workflows.
+  \item \textbf{Inventory:} stock movements, reservations, warehouse updates.
+  \item \textbf{Accounting:} invoices, payments, credit notes, reconciliation.
+  \item \textbf{CRM:} opportunity context, customer engagement history, account management.
+\end{itemize}
+
+The point of using Odoo here is not vendor lock-in.
+It is to give students a concrete enterprise reference for how commerce-facing systems interact with structured back-office processes.
+
+\subsection{What should remain vendor-neutral}
+Even when Odoo is the teaching reference, the following concepts remain general:
+\begin{itemize}
+  \item system-of-record analysis,
+  \item event and API contracts,
+  \item master-data governance,
+  \item process ownership,
+  \item enterprise reconciliation and auditability.
+\end{itemize}
+
+\section{Integration risks and mitigation strategies}
+Representative risks in ERP/CRM/SCM integration include:
+\begin{itemize}
+  \item \textbf{Duplicate sources of truth:} mitigated by explicit ownership and reconciliation.
+  \item \textbf{Latency mismatch:} mitigated by choosing appropriate sync versus async boundaries.
+  \item \textbf{Identifier mismatch:} mitigated by governed master identifiers and mapping tables.
+  \item \textbf{Status divergence:} mitigated by explicit lifecycle models and state-mapping rules.
+  \item \textbf{Operational blind spots:} mitigated by observability, error queues, and business-level monitoring.
+\end{itemize}
+
+Students should notice that these risks are architectural and organizational, not only technical.
+
+\section{Artifacts for this chapter}
+The expected architecture artifacts for ERP/CRM/SCM integration include:
+\begin{itemize}
+  \item an integration context diagram showing commerce, ERP, CRM, warehouse, payments, and analytics boundaries,
+  \item a system-of-record matrix for shared entities,
+  \item a small set of data contracts for critical events or APIs,
+  \item and a short narrative for order-to-cash and returns ownership.
+\end{itemize}
+
+\section{Managerial implications}
+Enterprise integration decisions affect more than system design.
+They shape service reliability, customer trust, financial control, and the ability to scale channels.
+If commerce and ERP are tightly coupled in every user interaction, customer experience becomes hostage to back-office latency.
+If they are too loosely coupled without governance, the company loses commercial coherence.
+
+The correct architectural aim is not maximal coupling or maximal decoupling.
+It is controlled coordination with explicit ownership and recoverable failure handling.
 
 \section{Multiple-choice questions (MCQs)}
 \begin{enumerate}

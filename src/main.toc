@@ -1,187 +1,223 @@
-\contentsline {chapter}{\numberline {1}Weekly Plan Overview}{19}{chapter.1}%
-\contentsline {chapter}{\numberline {2}An Introduction to E-Commerce with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}{21}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introduction to E-Commerce}{21}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}E-Commerce Business Models and Value Chain}{22}{subsection.2.1.1}%
-\contentsline {section}{\numberline {2.2}Foundations of AI, Machine Learning, and Deep Learning}{22}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Definitions and Relationships}{22}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Types of Learning and E-Commerce Examples}{23}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Machine Learning Across the E-Commerce Lifecycle}{23}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Personalized Recommendations}{23}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Search and Ranking}{23}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Segmentation, churn, and CLV}{23}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Dynamic Pricing and Promotion Optimization}{23}{subsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.3.5}Demand Forecasting and Inventory Management}{24}{subsection.2.3.5}%
-\contentsline {subsection}{\numberline {2.3.6}Fraud Detection and Transaction Security}{24}{subsection.2.3.6}%
-\contentsline {subsection}{\numberline {2.3.7}Customer Service and Conversational Commerce}{24}{subsection.2.3.7}%
-\contentsline {section}{\numberline {2.4}Deep Learning in E-Commerce}{24}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Neural Recommendation Systems}{24}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}NLP for Product Text and Reviews}{24}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Computer Vision and Visual Search}{24}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5}Data, Architecture, and Deployment Considerations}{24}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Challenges and Responsible AI}{25}{section.2.6}%
-\contentsline {section}{\numberline {2.7}Multiple-choice questions (MCQs)}{25}{section.2.7}%
-\contentsline {chapter}{\numberline {3}Platforms, Marketplaces, and Business Models (Week 2)}{27}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Learning objectives}{27}{section.3.1}%
-\contentsline {section}{\numberline {3.2}From storefront to platform}{27}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Value creation, value capture, and growth}{27}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Value creation and matching}{27}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Value capture models}{28}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Network effects}{28}{subsection.3.3.3}%
-\contentsline {section}{\numberline {3.4}Governance and trust as system requirements}{28}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Business model patterns (and architectural implications)}{28}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}B2C retail}{28}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}B2B commerce}{29}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Marketplace}{29}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Digital services (subscriptions)}{29}{subsection.3.5.4}%
-\contentsline {section}{\numberline {3.6}Where AI fits (system-level view)}{29}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Hands-on (placeholder)}{29}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Case studies (placeholder)}{29}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Multiple-choice questions (MCQs)}{30}{section.3.9}%
-\contentsline {chapter}{\numberline {4}E-Commerce Data Foundations: Events, Experimentation, and Metrics (Week 3)}{31}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Learning objectives}{31}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Why data foundations matter}{31}{section.4.2}%
-\contentsline {section}{\numberline {4.3}From business process to event model}{32}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Events versus state}{32}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Event taxonomies}{33}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Event schema design}{33}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Required design principles}{33}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Example event record}{34}{subsection.4.4.2}%
-\contentsline {section}{\numberline {4.5}Identity resolution and entity modeling}{34}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Identifiers are not interchangeable}{35}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Identity stitching}{35}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Privacy-aware identity design}{35}{subsection.4.5.3}%
-\contentsline {section}{\numberline {4.6}Data quality as a product requirement}{36}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Data contracts}{36}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Validation and observability}{36}{subsection.4.6.2}%
-\contentsline {section}{\numberline {4.7}Attribution and its limits}{37}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Common attribution models}{37}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Selection bias and measurement bias}{37}{subsection.4.7.2}%
-\contentsline {section}{\numberline {4.8}Metrics layers and decision quality}{38}{section.4.8}%
-\contentsline {subsection}{\numberline {4.8.1}North Star and supporting metrics}{38}{subsection.4.8.1}%
-\contentsline {subsection}{\numberline {4.8.2}Metric dimensions}{38}{subsection.4.8.2}%
-\contentsline {subsection}{\numberline {4.8.3}Retention and cohort logic}{39}{subsection.4.8.3}%
-\contentsline {section}{\numberline {4.9}Experimentation in e-commerce}{39}{section.4.9}%
-\contentsline {subsection}{\numberline {4.9.1}A/B testing fundamentals}{39}{subsection.4.9.1}%
-\contentsline {subsection}{\numberline {4.9.2}Common experimental pitfalls}{39}{subsection.4.9.2}%
-\contentsline {subsection}{\numberline {4.9.3}Bandits and adaptive experimentation}{40}{subsection.4.9.3}%
-\contentsline {section}{\numberline {4.10}From analytics to machine learning features}{40}{section.4.10}%
-\contentsline {section}{\numberline {4.11}Hands-on lab: build a minimal metrics layer}{40}{section.4.11}%
-\contentsline {subsection}{\numberline {4.11.1}Lab scenario}{41}{subsection.4.11.1}%
-\contentsline {subsection}{\numberline {4.11.2}Lab tasks}{41}{subsection.4.11.2}%
-\contentsline {subsection}{\numberline {4.11.3}Expected learning outcome}{41}{subsection.4.11.3}%
-\contentsline {section}{\numberline {4.12}Managerial and architectural implications}{41}{section.4.12}%
-\contentsline {section}{\numberline {4.13}Multiple-choice questions (MCQs)}{42}{section.4.13}%
-\contentsline {section}{\numberline {4.14}Exercises (short)}{43}{section.4.14}%
-\contentsline {section}{\numberline {4.15}Mini-case (Odoo-linked, vendor-neutral)}{43}{section.4.15}%
-\contentsline {chapter}{\numberline {5}Enterprise Architecture for E-Commerce (Week 4)}{45}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Learning objectives}{45}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Why enterprise architecture matters in e-commerce}{45}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Enterprise architecture as a set of views}{46}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Capability maps}{46}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Core e-commerce capabilities}{47}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Why capability maps are useful}{47}{subsection.5.4.2}%
-\contentsline {section}{\numberline {5.5}Value streams}{47}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Typical e-commerce value streams}{48}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}Why value streams matter architecturally}{48}{subsection.5.5.2}%
-\contentsline {section}{\numberline {5.6}Domain boundaries and bounded contexts}{48}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Typical commerce domains}{48}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Good boundaries versus bad boundaries}{49}{subsection.5.6.2}%
-\contentsline {section}{\numberline {5.7}Systems of record and systems of engagement}{49}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Typical patterns}{49}{subsection.5.7.1}%
-\contentsline {subsection}{\numberline {5.7.2}Systems of engagement}{50}{subsection.5.7.2}%
-\contentsline {section}{\numberline {5.8}Reference architecture for AI-driven e-commerce}{50}{section.5.8}%
-\contentsline {subsection}{\numberline {5.8.1}Where AI fits}{50}{subsection.5.8.1}%
-\contentsline {section}{\numberline {5.9}Current state, target state, and transition architecture}{51}{section.5.9}%
-\contentsline {subsection}{\numberline {5.9.1}Current-state analysis}{51}{subsection.5.9.1}%
-\contentsline {subsection}{\numberline {5.9.2}Target architecture}{51}{subsection.5.9.2}%
-\contentsline {subsection}{\numberline {5.9.3}Transition architecture}{51}{subsection.5.9.3}%
-\contentsline {section}{\numberline {5.10}Architectural concerns specific to AI}{52}{section.5.10}%
-\contentsline {section}{\numberline {5.11}Operating model and team topology}{52}{section.5.11}%
-\contentsline {subsection}{\numberline {5.11.1}Typical team patterns}{52}{subsection.5.11.1}%
-\contentsline {section}{\numberline {5.12}Artifacts for students and architects}{52}{section.5.12}%
-\contentsline {section}{\numberline {5.13}Hands-on artifacts}{53}{section.5.13}%
-\contentsline {section}{\numberline {5.14}Managerial implications}{53}{section.5.14}%
-\contentsline {section}{\numberline {5.15}Multiple-choice questions (MCQs)}{54}{section.5.15}%
-\contentsline {section}{\numberline {5.16}Exercises (short)}{55}{section.5.16}%
-\contentsline {section}{\numberline {5.17}Mini-case (Odoo-linked, vendor-neutral)}{55}{section.5.17}%
-\contentsline {chapter}{\numberline {6}Enterprise Integration Patterns for E-Commerce (Week 5)}{57}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Learning objectives}{57}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Why integration patterns matter}{57}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Integration styles}{58}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Synchronous request-response}{58}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Asynchronous events}{58}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Batch and file-based integration}{58}{subsection.6.3.3}%
-\contentsline {section}{\numberline {6.4}Choosing the right integration style}{59}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Questions to ask}{59}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Typical choices in commerce}{59}{subsection.6.4.2}%
-\contentsline {section}{\numberline {6.5}API-first integration}{60}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}Good API design principles}{60}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}Commands versus queries}{60}{subsection.6.5.2}%
-\contentsline {section}{\numberline {6.6}Idempotency}{60}{section.6.6}%
-\contentsline {subsection}{\numberline {6.6.1}Why idempotency is required}{60}{subsection.6.6.1}%
-\contentsline {subsection}{\numberline {6.6.2}Idempotency keys}{60}{subsection.6.6.2}%
-\contentsline {section}{\numberline {6.7}Events and event-driven architecture}{61}{section.6.7}%
-\contentsline {subsection}{\numberline {6.7.1}Domain events versus technical events}{61}{subsection.6.7.1}%
-\contentsline {subsection}{\numberline {6.7.2}Benefits of event-driven integration}{61}{subsection.6.7.2}%
-\contentsline {subsection}{\numberline {6.7.3}Costs of event-driven integration}{61}{subsection.6.7.3}%
-\contentsline {section}{\numberline {6.8}Reliability patterns in distributed workflows}{62}{section.6.8}%
-\contentsline {subsection}{\numberline {6.8.1}Retries and backoff}{62}{subsection.6.8.1}%
-\contentsline {subsection}{\numberline {6.8.2}Dead-letter handling}{62}{subsection.6.8.2}%
-\contentsline {subsection}{\numberline {6.8.3}Timeouts and circuit breakers}{62}{subsection.6.8.3}%
-\contentsline {subsection}{\numberline {6.8.4}Reconciliation jobs}{62}{subsection.6.8.4}%
-\contentsline {section}{\numberline {6.9}The outbox pattern}{62}{section.6.9}%
-\contentsline {subsection}{\numberline {6.9.1}How the outbox pattern works}{63}{subsection.6.9.1}%
-\contentsline {subsection}{\numberline {6.9.2}Why it matters in commerce}{63}{subsection.6.9.2}%
-\contentsline {section}{\numberline {6.10}Message contracts and schema governance}{63}{section.6.10}%
-\contentsline {subsection}{\numberline {6.10.1}What a contract should define}{63}{subsection.6.10.1}%
-\contentsline {subsection}{\numberline {6.10.2}Backward compatibility}{64}{subsection.6.10.2}%
-\contentsline {section}{\numberline {6.11}Observability for integrations}{64}{section.6.11}%
-\contentsline {subsection}{\numberline {6.11.1}Minimum signals}{64}{subsection.6.11.1}%
-\contentsline {subsection}{\numberline {6.11.2}Correlation and traceability}{64}{subsection.6.11.2}%
-\contentsline {section}{\numberline {6.12}iPaaS, ESB, brokers, and workflow orchestration}{65}{section.6.12}%
-\contentsline {subsection}{\numberline {6.12.1}iPaaS and ESB concepts}{65}{subsection.6.12.1}%
-\contentsline {subsection}{\numberline {6.12.2}Event brokers and streams}{65}{subsection.6.12.2}%
-\contentsline {subsection}{\numberline {6.12.3}Workflow orchestration}{65}{subsection.6.12.3}%
-\contentsline {section}{\numberline {6.13}Integration anti-patterns}{65}{section.6.13}%
-\contentsline {section}{\numberline {6.14}Hands-on lab: modeling an order lifecycle}{66}{section.6.14}%
-\contentsline {subsection}{\numberline {6.14.1}Lab scenario}{66}{subsection.6.14.1}%
-\contentsline {subsection}{\numberline {6.14.2}Lab tasks}{66}{subsection.6.14.2}%
-\contentsline {subsection}{\numberline {6.14.3}Expected learning outcome}{66}{subsection.6.14.3}%
-\contentsline {section}{\numberline {6.15}Managerial and architectural implications}{66}{section.6.15}%
-\contentsline {section}{\numberline {6.16}Multiple-choice questions (MCQs)}{67}{section.6.16}%
-\contentsline {section}{\numberline {6.17}Exercises (short)}{68}{section.6.17}%
-\contentsline {section}{\numberline {6.18}Mini-case (Odoo-linked, vendor-neutral)}{68}{section.6.18}%
-\contentsline {chapter}{\numberline {7}ERP/CRM/SCM Integration in Commerce (Week 6)}{69}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Scope (placeholder)}{69}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Artifacts (placeholder)}{69}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Multiple-choice questions (MCQs)}{69}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Exercises (short)}{70}{section.7.4}%
-\contentsline {section}{\numberline {7.5}Mini-case (Odoo-linked, vendor-neutral)}{71}{section.7.5}%
-\contentsline {chapter}{\numberline {8}Recommenders I: Classical Methods + Learning-to-Rank (Week 7)}{73}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Scope (placeholder)}{73}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Hands-on lab (placeholder)}{73}{section.8.2}%
-\contentsline {chapter}{\numberline {9}Recommenders II: Deep Learning, Embeddings, and Retrieval (Week 8)}{75}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Scope (placeholder)}{75}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Hands-on lab (placeholder)}{75}{section.9.2}%
-\contentsline {chapter}{\numberline {10}Pricing and Promotions with ML + Optimization (Week 9)}{77}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Scope (placeholder)}{77}{section.10.1}%
-\contentsline {section}{\numberline {10.2}Hands-on lab (placeholder)}{77}{section.10.2}%
-\contentsline {chapter}{\numberline {11}Fraud, Risk, and Trust \& Safety (Week 10)}{79}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Scope (placeholder)}{79}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Hands-on lab (placeholder)}{79}{section.11.2}%
-\contentsline {chapter}{\numberline {12}Customer Service Automation with LLMs (Week 11)}{81}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Scope (placeholder)}{81}{section.12.1}%
-\contentsline {section}{\numberline {12.2}Hands-on lab (placeholder)}{81}{section.12.2}%
-\contentsline {chapter}{\numberline {13}MLOps + DataOps for E-Commerce (Week 12)}{83}{chapter.13}%
-\contentsline {section}{\numberline {13.1}Scope (placeholder)}{83}{section.13.1}%
-\contentsline {section}{\numberline {13.2}Artifacts (placeholder)}{83}{section.13.2}%
-\contentsline {chapter}{\numberline {14}Security, Privacy, Compliance, and Responsible AI (Week 13)}{85}{chapter.14}%
-\contentsline {section}{\numberline {14.1}Scope (placeholder)}{85}{section.14.1}%
-\contentsline {section}{\numberline {14.2}Discussion (placeholder)}{85}{section.14.2}%
-\contentsline {chapter}{\numberline {15}Capstone: Enterprise-Grade AI E-Commerce Architecture (Week 14)}{87}{chapter.15}%
-\contentsline {section}{\numberline {15.1}Scope (placeholder)}{87}{section.15.1}%
-\contentsline {section}{\numberline {15.2}Capstone deliverables (placeholder)}{87}{section.15.2}%
-\contentsline {chapter}{\numberline {A}Datasets and Synthetic Data for Teaching (placeholder)}{89}{appendix.A}%
-\contentsline {chapter}{\numberline {B}Template: System Design Document (placeholder)}{91}{appendix.B}%
-\contentsline {chapter}{\numberline {C}Template: Data Contract (placeholder)}{93}{appendix.C}%
-\contentsline {chapter}{\numberline {D}Template: Model Card and Risk Assessment (placeholder)}{95}{appendix.D}%
+\contentsline {chapter}{\numberline {1}Weekly Plan Overview}{21}{chapter.1}%
+\contentsline {chapter}{\numberline {2}An Introduction to E-Commerce with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}{23}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction to E-Commerce}{23}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}E-Commerce Business Models and Value Chain}{24}{subsection.2.1.1}%
+\contentsline {section}{\numberline {2.2}Foundations of AI, Machine Learning, and Deep Learning}{24}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Definitions and Relationships}{24}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Types of Learning and E-Commerce Examples}{25}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Machine Learning Across the E-Commerce Lifecycle}{25}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Personalized Recommendations}{25}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Search and Ranking}{25}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Segmentation, churn, and CLV}{25}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Dynamic Pricing and Promotion Optimization}{25}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Demand Forecasting and Inventory Management}{26}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}Fraud Detection and Transaction Security}{26}{subsection.2.3.6}%
+\contentsline {subsection}{\numberline {2.3.7}Customer Service and Conversational Commerce}{26}{subsection.2.3.7}%
+\contentsline {section}{\numberline {2.4}Deep Learning in E-Commerce}{26}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Neural Recommendation Systems}{26}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}NLP for Product Text and Reviews}{26}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Computer Vision and Visual Search}{26}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Data, Architecture, and Deployment Considerations}{26}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Challenges and Responsible AI}{27}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Multiple-choice questions (MCQs)}{27}{section.2.7}%
+\contentsline {chapter}{\numberline {3}Platforms, Marketplaces, and Business Models (Week 2)}{29}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Learning objectives}{29}{section.3.1}%
+\contentsline {section}{\numberline {3.2}From storefront to platform}{29}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Value creation, value capture, and growth}{29}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Value creation and matching}{29}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Value capture models}{30}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Network effects}{30}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Governance and trust as system requirements}{30}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Business model patterns (and architectural implications)}{30}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}B2C retail}{30}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}B2B commerce}{31}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Marketplace}{31}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Digital services (subscriptions)}{31}{subsection.3.5.4}%
+\contentsline {section}{\numberline {3.6}Where AI fits (system-level view)}{31}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Hands-on (placeholder)}{31}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Case studies (placeholder)}{31}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Multiple-choice questions (MCQs)}{32}{section.3.9}%
+\contentsline {chapter}{\numberline {4}E-Commerce Data Foundations: Events, Experimentation, and Metrics (Week 3)}{33}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Learning objectives}{33}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Why data foundations matter}{33}{section.4.2}%
+\contentsline {section}{\numberline {4.3}From business process to event model}{34}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Events versus state}{34}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Event taxonomies}{35}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Event schema design}{35}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Required design principles}{35}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Example event record}{36}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Identity resolution and entity modeling}{36}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Identifiers are not interchangeable}{37}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Identity stitching}{37}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Privacy-aware identity design}{37}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Data quality as a product requirement}{38}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Data contracts}{38}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Validation and observability}{38}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Attribution and its limits}{39}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Common attribution models}{39}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Selection bias and measurement bias}{39}{subsection.4.7.2}%
+\contentsline {section}{\numberline {4.8}Metrics layers and decision quality}{40}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}North Star and supporting metrics}{40}{subsection.4.8.1}%
+\contentsline {subsection}{\numberline {4.8.2}Metric dimensions}{40}{subsection.4.8.2}%
+\contentsline {subsection}{\numberline {4.8.3}Retention and cohort logic}{41}{subsection.4.8.3}%
+\contentsline {section}{\numberline {4.9}Experimentation in e-commerce}{41}{section.4.9}%
+\contentsline {subsection}{\numberline {4.9.1}A/B testing fundamentals}{41}{subsection.4.9.1}%
+\contentsline {subsection}{\numberline {4.9.2}Common experimental pitfalls}{41}{subsection.4.9.2}%
+\contentsline {subsection}{\numberline {4.9.3}Bandits and adaptive experimentation}{42}{subsection.4.9.3}%
+\contentsline {section}{\numberline {4.10}From analytics to machine learning features}{42}{section.4.10}%
+\contentsline {section}{\numberline {4.11}Hands-on lab: build a minimal metrics layer}{42}{section.4.11}%
+\contentsline {subsection}{\numberline {4.11.1}Lab scenario}{43}{subsection.4.11.1}%
+\contentsline {subsection}{\numberline {4.11.2}Lab tasks}{43}{subsection.4.11.2}%
+\contentsline {subsection}{\numberline {4.11.3}Expected learning outcome}{43}{subsection.4.11.3}%
+\contentsline {section}{\numberline {4.12}Managerial and architectural implications}{43}{section.4.12}%
+\contentsline {section}{\numberline {4.13}Multiple-choice questions (MCQs)}{44}{section.4.13}%
+\contentsline {section}{\numberline {4.14}Exercises (short)}{45}{section.4.14}%
+\contentsline {section}{\numberline {4.15}Mini-case (Odoo-linked, vendor-neutral)}{45}{section.4.15}%
+\contentsline {chapter}{\numberline {5}Enterprise Architecture for E-Commerce (Week 4)}{47}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Learning objectives}{47}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Why enterprise architecture matters in e-commerce}{47}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Enterprise architecture as a set of views}{48}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Capability maps}{48}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Core e-commerce capabilities}{49}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Why capability maps are useful}{49}{subsection.5.4.2}%
+\contentsline {section}{\numberline {5.5}Value streams}{49}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Typical e-commerce value streams}{50}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Why value streams matter architecturally}{50}{subsection.5.5.2}%
+\contentsline {section}{\numberline {5.6}Domain boundaries and bounded contexts}{50}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Typical commerce domains}{50}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Good boundaries versus bad boundaries}{51}{subsection.5.6.2}%
+\contentsline {section}{\numberline {5.7}Systems of record and systems of engagement}{51}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Typical patterns}{51}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Systems of engagement}{52}{subsection.5.7.2}%
+\contentsline {section}{\numberline {5.8}Reference architecture for AI-driven e-commerce}{52}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Where AI fits}{52}{subsection.5.8.1}%
+\contentsline {section}{\numberline {5.9}Current state, target state, and transition architecture}{53}{section.5.9}%
+\contentsline {subsection}{\numberline {5.9.1}Current-state analysis}{53}{subsection.5.9.1}%
+\contentsline {subsection}{\numberline {5.9.2}Target architecture}{53}{subsection.5.9.2}%
+\contentsline {subsection}{\numberline {5.9.3}Transition architecture}{53}{subsection.5.9.3}%
+\contentsline {section}{\numberline {5.10}Architectural concerns specific to AI}{54}{section.5.10}%
+\contentsline {section}{\numberline {5.11}Operating model and team topology}{54}{section.5.11}%
+\contentsline {subsection}{\numberline {5.11.1}Typical team patterns}{54}{subsection.5.11.1}%
+\contentsline {section}{\numberline {5.12}Artifacts for students and architects}{54}{section.5.12}%
+\contentsline {section}{\numberline {5.13}Hands-on artifacts}{55}{section.5.13}%
+\contentsline {section}{\numberline {5.14}Managerial implications}{55}{section.5.14}%
+\contentsline {section}{\numberline {5.15}Multiple-choice questions (MCQs)}{56}{section.5.15}%
+\contentsline {section}{\numberline {5.16}Exercises (short)}{57}{section.5.16}%
+\contentsline {section}{\numberline {5.17}Mini-case (Odoo-linked, vendor-neutral)}{57}{section.5.17}%
+\contentsline {chapter}{\numberline {6}Enterprise Integration Patterns for E-Commerce (Week 5)}{59}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Learning objectives}{59}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Why integration patterns matter}{59}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Integration styles}{60}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Synchronous request-response}{60}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Asynchronous events}{60}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Batch and file-based integration}{60}{subsection.6.3.3}%
+\contentsline {section}{\numberline {6.4}Choosing the right integration style}{61}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Questions to ask}{61}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Typical choices in commerce}{61}{subsection.6.4.2}%
+\contentsline {section}{\numberline {6.5}API-first integration}{62}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Good API design principles}{62}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Commands versus queries}{62}{subsection.6.5.2}%
+\contentsline {section}{\numberline {6.6}Idempotency}{62}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Why idempotency is required}{62}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Idempotency keys}{62}{subsection.6.6.2}%
+\contentsline {section}{\numberline {6.7}Events and event-driven architecture}{63}{section.6.7}%
+\contentsline {subsection}{\numberline {6.7.1}Domain events versus technical events}{63}{subsection.6.7.1}%
+\contentsline {subsection}{\numberline {6.7.2}Benefits of event-driven integration}{63}{subsection.6.7.2}%
+\contentsline {subsection}{\numberline {6.7.3}Costs of event-driven integration}{63}{subsection.6.7.3}%
+\contentsline {section}{\numberline {6.8}Reliability patterns in distributed workflows}{64}{section.6.8}%
+\contentsline {subsection}{\numberline {6.8.1}Retries and backoff}{64}{subsection.6.8.1}%
+\contentsline {subsection}{\numberline {6.8.2}Dead-letter handling}{64}{subsection.6.8.2}%
+\contentsline {subsection}{\numberline {6.8.3}Timeouts and circuit breakers}{64}{subsection.6.8.3}%
+\contentsline {subsection}{\numberline {6.8.4}Reconciliation jobs}{64}{subsection.6.8.4}%
+\contentsline {section}{\numberline {6.9}The outbox pattern}{64}{section.6.9}%
+\contentsline {subsection}{\numberline {6.9.1}How the outbox pattern works}{65}{subsection.6.9.1}%
+\contentsline {subsection}{\numberline {6.9.2}Why it matters in commerce}{65}{subsection.6.9.2}%
+\contentsline {section}{\numberline {6.10}Message contracts and schema governance}{65}{section.6.10}%
+\contentsline {subsection}{\numberline {6.10.1}What a contract should define}{65}{subsection.6.10.1}%
+\contentsline {subsection}{\numberline {6.10.2}Backward compatibility}{66}{subsection.6.10.2}%
+\contentsline {section}{\numberline {6.11}Observability for integrations}{66}{section.6.11}%
+\contentsline {subsection}{\numberline {6.11.1}Minimum signals}{66}{subsection.6.11.1}%
+\contentsline {subsection}{\numberline {6.11.2}Correlation and traceability}{66}{subsection.6.11.2}%
+\contentsline {section}{\numberline {6.12}iPaaS, ESB, brokers, and workflow orchestration}{67}{section.6.12}%
+\contentsline {subsection}{\numberline {6.12.1}iPaaS and ESB concepts}{67}{subsection.6.12.1}%
+\contentsline {subsection}{\numberline {6.12.2}Event brokers and streams}{67}{subsection.6.12.2}%
+\contentsline {subsection}{\numberline {6.12.3}Workflow orchestration}{67}{subsection.6.12.3}%
+\contentsline {section}{\numberline {6.13}Integration anti-patterns}{67}{section.6.13}%
+\contentsline {section}{\numberline {6.14}Hands-on lab: modeling an order lifecycle}{68}{section.6.14}%
+\contentsline {subsection}{\numberline {6.14.1}Lab scenario}{68}{subsection.6.14.1}%
+\contentsline {subsection}{\numberline {6.14.2}Lab tasks}{68}{subsection.6.14.2}%
+\contentsline {subsection}{\numberline {6.14.3}Expected learning outcome}{68}{subsection.6.14.3}%
+\contentsline {section}{\numberline {6.15}Managerial and architectural implications}{68}{section.6.15}%
+\contentsline {section}{\numberline {6.16}Multiple-choice questions (MCQs)}{69}{section.6.16}%
+\contentsline {section}{\numberline {6.17}Exercises (short)}{70}{section.6.17}%
+\contentsline {section}{\numberline {6.18}Mini-case (Odoo-linked, vendor-neutral)}{70}{section.6.18}%
+\contentsline {chapter}{\numberline {7}ERP/CRM/SCM Integration in Commerce (Week 6)}{71}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Learning objectives}{71}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Why ERP/CRM/SCM integration is central to commerce}{71}{section.7.2}%
+\contentsline {section}{\numberline {7.3}The enterprise systems perspective}{72}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}ERP}{72}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}CRM}{72}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.3.3}SCM and warehouse systems}{72}{subsection.7.3.3}%
+\contentsline {section}{\numberline {7.4}Commerce versus enterprise ownership}{72}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Common ownership patterns}{73}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Why ownership must be explicit}{73}{subsection.7.4.2}%
+\contentsline {section}{\numberline {7.5}Systems of record for key entities}{73}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Customer}{73}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Product}{73}{subsection.7.5.2}%
+\contentsline {subsection}{\numberline {7.5.3}Price list}{74}{subsection.7.5.3}%
+\contentsline {subsection}{\numberline {7.5.4}Order}{74}{subsection.7.5.4}%
+\contentsline {subsection}{\numberline {7.5.5}Invoice and payment reconciliation}{74}{subsection.7.5.5}%
+\contentsline {subsection}{\numberline {7.5.6}Shipment}{74}{subsection.7.5.6}%
+\contentsline {section}{\numberline {7.6}Master data management (MDM)}{74}{section.7.6}%
+\contentsline {subsection}{\numberline {7.6.1}Why MDM matters}{74}{subsection.7.6.1}%
+\contentsline {subsection}{\numberline {7.6.2}Practical MDM principles}{75}{subsection.7.6.2}%
+\contentsline {section}{\numberline {7.7}Order-to-cash in integrated commerce}{75}{section.7.7}%
+\contentsline {subsection}{\numberline {7.7.1}Typical flow}{75}{subsection.7.7.1}%
+\contentsline {subsection}{\numberline {7.7.2}Architectural decisions inside the flow}{76}{subsection.7.7.2}%
+\contentsline {subsection}{\numberline {7.7.3}Failure modes}{76}{subsection.7.7.3}%
+\contentsline {section}{\numberline {7.8}Inventory, fulfillment, and availability}{76}{section.7.8}%
+\contentsline {subsection}{\numberline {7.8.1}Inventory concepts that should not be conflated}{76}{subsection.7.8.1}%
+\contentsline {subsection}{\numberline {7.8.2}Synchronization strategies}{77}{subsection.7.8.2}%
+\contentsline {section}{\numberline {7.9}Returns and refunds}{77}{section.7.9}%
+\contentsline {subsection}{\numberline {7.9.1}Typical return flow}{77}{subsection.7.9.1}%
+\contentsline {subsection}{\numberline {7.9.2}Architectural risks}{77}{subsection.7.9.2}%
+\contentsline {section}{\numberline {7.10}B2B pricing and account structures}{78}{section.7.10}%
+\contentsline {subsection}{\numberline {7.10.1}Price lists and negotiated terms}{78}{subsection.7.10.1}%
+\contentsline {subsection}{\numberline {7.10.2}Account hierarchies}{78}{subsection.7.10.2}%
+\contentsline {section}{\numberline {7.11}Using Odoo as a reference ERP}{79}{section.7.11}%
+\contentsline {subsection}{\numberline {7.11.1}Illustrative Odoo-aligned mapping}{79}{subsection.7.11.1}%
+\contentsline {subsection}{\numberline {7.11.2}What should remain vendor-neutral}{79}{subsection.7.11.2}%
+\contentsline {section}{\numberline {7.12}Integration risks and mitigation strategies}{79}{section.7.12}%
+\contentsline {section}{\numberline {7.13}Artifacts for this chapter}{80}{section.7.13}%
+\contentsline {section}{\numberline {7.14}Managerial implications}{80}{section.7.14}%
+\contentsline {section}{\numberline {7.15}Multiple-choice questions (MCQs)}{80}{section.7.15}%
+\contentsline {section}{\numberline {7.16}Exercises (short)}{81}{section.7.16}%
+\contentsline {section}{\numberline {7.17}Mini-case (Odoo-linked, vendor-neutral)}{81}{section.7.17}%
+\contentsline {chapter}{\numberline {8}Recommenders I: Classical Methods + Learning-to-Rank (Week 7)}{83}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Scope (placeholder)}{83}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Hands-on lab (placeholder)}{83}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Recommenders II: Deep Learning, Embeddings, and Retrieval (Week 8)}{85}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Scope (placeholder)}{85}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Hands-on lab (placeholder)}{85}{section.9.2}%
+\contentsline {chapter}{\numberline {10}Pricing and Promotions with ML + Optimization (Week 9)}{87}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Scope (placeholder)}{87}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Hands-on lab (placeholder)}{87}{section.10.2}%
+\contentsline {chapter}{\numberline {11}Fraud, Risk, and Trust \& Safety (Week 10)}{89}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Scope (placeholder)}{89}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Hands-on lab (placeholder)}{89}{section.11.2}%
+\contentsline {chapter}{\numberline {12}Customer Service Automation with LLMs (Week 11)}{91}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Scope (placeholder)}{91}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Hands-on lab (placeholder)}{91}{section.12.2}%
+\contentsline {chapter}{\numberline {13}MLOps + DataOps for E-Commerce (Week 12)}{93}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Scope (placeholder)}{93}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Artifacts (placeholder)}{93}{section.13.2}%
+\contentsline {chapter}{\numberline {14}Security, Privacy, Compliance, and Responsible AI (Week 13)}{95}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Scope (placeholder)}{95}{section.14.1}%
+\contentsline {section}{\numberline {14.2}Discussion (placeholder)}{95}{section.14.2}%
+\contentsline {chapter}{\numberline {15}Capstone: Enterprise-Grade AI E-Commerce Architecture (Week 14)}{97}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Scope (placeholder)}{97}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Capstone deliverables (placeholder)}{97}{section.15.2}%
+\contentsline {chapter}{\numberline {A}Datasets and Synthetic Data for Teaching (placeholder)}{99}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Template: System Design Document (placeholder)}{101}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Template: Data Contract (placeholder)}{103}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Template: Model Card and Risk Assessment (placeholder)}{105}{appendix.D}%
