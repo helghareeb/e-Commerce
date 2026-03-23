@@ -1,0 +1,127 @@
+\contentsline {chapter}{\numberline {1}Weekly Plan Overview}{17}{chapter.1}%
+\contentsline {chapter}{\numberline {2}An Introduction to E-Commerce with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}{19}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction to E-Commerce}{19}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}E-Commerce Business Models and Value Chain}{20}{subsection.2.1.1}%
+\contentsline {section}{\numberline {2.2}Foundations of AI, Machine Learning, and Deep Learning}{20}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Definitions and Relationships}{20}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Types of Learning and E-Commerce Examples}{21}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Machine Learning Across the E-Commerce Lifecycle}{21}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Personalized Recommendations}{21}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Search and Ranking}{21}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Segmentation, churn, and CLV}{21}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Dynamic Pricing and Promotion Optimization}{21}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Demand Forecasting and Inventory Management}{22}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}Fraud Detection and Transaction Security}{22}{subsection.2.3.6}%
+\contentsline {subsection}{\numberline {2.3.7}Customer Service and Conversational Commerce}{22}{subsection.2.3.7}%
+\contentsline {section}{\numberline {2.4}Deep Learning in E-Commerce}{22}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Neural Recommendation Systems}{22}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}NLP for Product Text and Reviews}{22}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Computer Vision and Visual Search}{22}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Data, Architecture, and Deployment Considerations}{22}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Challenges and Responsible AI}{23}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Multiple-choice questions (MCQs)}{23}{section.2.7}%
+\contentsline {chapter}{\numberline {3}Platforms, Marketplaces, and Business Models (Week 2)}{25}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Learning objectives}{25}{section.3.1}%
+\contentsline {section}{\numberline {3.2}From storefront to platform}{25}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Value creation, value capture, and growth}{25}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Value creation and matching}{25}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Value capture models}{26}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Network effects}{26}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Governance and trust as system requirements}{26}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Business model patterns (and architectural implications)}{26}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}B2C retail}{26}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}B2B commerce}{27}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Marketplace}{27}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Digital services (subscriptions)}{27}{subsection.3.5.4}%
+\contentsline {section}{\numberline {3.6}Where AI fits (system-level view)}{27}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Hands-on (placeholder)}{27}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Case studies (placeholder)}{27}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Multiple-choice questions (MCQs)}{28}{section.3.9}%
+\contentsline {chapter}{\numberline {4}E-Commerce Data Foundations: Events, Experimentation, and Metrics (Week 3)}{29}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Learning objectives}{29}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Why data foundations matter}{29}{section.4.2}%
+\contentsline {section}{\numberline {4.3}From business process to event model}{30}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Events versus state}{30}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Event taxonomies}{31}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Event schema design}{31}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Required design principles}{31}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Example event record}{32}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Identity resolution and entity modeling}{32}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Identifiers are not interchangeable}{33}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Identity stitching}{33}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Privacy-aware identity design}{33}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Data quality as a product requirement}{34}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Data contracts}{34}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Validation and observability}{34}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Attribution and its limits}{35}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Common attribution models}{35}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Selection bias and measurement bias}{35}{subsection.4.7.2}%
+\contentsline {section}{\numberline {4.8}Metrics layers and decision quality}{36}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}North Star and supporting metrics}{36}{subsection.4.8.1}%
+\contentsline {subsection}{\numberline {4.8.2}Metric dimensions}{36}{subsection.4.8.2}%
+\contentsline {subsection}{\numberline {4.8.3}Retention and cohort logic}{37}{subsection.4.8.3}%
+\contentsline {section}{\numberline {4.9}Experimentation in e-commerce}{37}{section.4.9}%
+\contentsline {subsection}{\numberline {4.9.1}A/B testing fundamentals}{37}{subsection.4.9.1}%
+\contentsline {subsection}{\numberline {4.9.2}Common experimental pitfalls}{37}{subsection.4.9.2}%
+\contentsline {subsection}{\numberline {4.9.3}Bandits and adaptive experimentation}{38}{subsection.4.9.3}%
+\contentsline {section}{\numberline {4.10}From analytics to machine learning features}{38}{section.4.10}%
+\contentsline {section}{\numberline {4.11}Hands-on lab: build a minimal metrics layer}{38}{section.4.11}%
+\contentsline {subsection}{\numberline {4.11.1}Lab scenario}{39}{subsection.4.11.1}%
+\contentsline {subsection}{\numberline {4.11.2}Lab tasks}{39}{subsection.4.11.2}%
+\contentsline {subsection}{\numberline {4.11.3}Expected learning outcome}{39}{subsection.4.11.3}%
+\contentsline {section}{\numberline {4.12}Managerial and architectural implications}{39}{section.4.12}%
+\contentsline {section}{\numberline {4.13}Multiple-choice questions (MCQs)}{40}{section.4.13}%
+\contentsline {section}{\numberline {4.14}Exercises (short)}{41}{section.4.14}%
+\contentsline {section}{\numberline {4.15}Mini-case (Odoo-linked, vendor-neutral)}{41}{section.4.15}%
+\contentsline {chapter}{\numberline {5}Enterprise Architecture for E-Commerce (Week 4)}{43}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Scope (placeholder)}{43}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Artifacts (placeholder)}{43}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Multiple-choice questions (MCQs)}{43}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Exercises (short)}{44}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Mini-case (Odoo-linked, vendor-neutral)}{45}{section.5.5}%
+\contentsline {chapter}{\numberline {6}Enterprise Integration Patterns for E-Commerce (Week 5)}{47}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Scope (placeholder)}{47}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Hands-on lab (placeholder)}{47}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Multiple-choice questions (MCQs)}{47}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Exercises (short)}{48}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Mini-case (Odoo-linked, vendor-neutral)}{49}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Multiple-choice questions (MCQs)}{49}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Exercises (short)}{50}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Mini-case (Odoo-linked, vendor-neutral)}{50}{section.6.8}%
+\contentsline {chapter}{\numberline {7}ERP/CRM/SCM Integration in Commerce (Week 6)}{51}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Scope (placeholder)}{51}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Artifacts (placeholder)}{51}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Multiple-choice questions (MCQs)}{51}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Exercises (short)}{52}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Mini-case (Odoo-linked, vendor-neutral)}{53}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Multiple-choice questions (MCQs)}{53}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Exercises (short)}{54}{section.7.7}%
+\contentsline {section}{\numberline {7.8}Mini-case (Odoo-linked, vendor-neutral)}{54}{section.7.8}%
+\contentsline {chapter}{\numberline {8}Recommenders I: Classical Methods + Learning-to-Rank (Week 7)}{55}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Scope (placeholder)}{55}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Hands-on lab (placeholder)}{55}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Recommenders II: Deep Learning, Embeddings, and Retrieval (Week 8)}{57}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Scope (placeholder)}{57}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Hands-on lab (placeholder)}{57}{section.9.2}%
+\contentsline {chapter}{\numberline {10}Pricing and Promotions with ML + Optimization (Week 9)}{59}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Scope (placeholder)}{59}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Hands-on lab (placeholder)}{59}{section.10.2}%
+\contentsline {chapter}{\numberline {11}Fraud, Risk, and Trust \& Safety (Week 10)}{61}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Scope (placeholder)}{61}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Hands-on lab (placeholder)}{61}{section.11.2}%
+\contentsline {chapter}{\numberline {12}Customer Service Automation with LLMs (Week 11)}{63}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Scope (placeholder)}{63}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Hands-on lab (placeholder)}{63}{section.12.2}%
+\contentsline {chapter}{\numberline {13}MLOps + DataOps for E-Commerce (Week 12)}{65}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Scope (placeholder)}{65}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Artifacts (placeholder)}{65}{section.13.2}%
+\contentsline {chapter}{\numberline {14}Security, Privacy, Compliance, and Responsible AI (Week 13)}{67}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Scope (placeholder)}{67}{section.14.1}%
+\contentsline {section}{\numberline {14.2}Discussion (placeholder)}{67}{section.14.2}%
+\contentsline {chapter}{\numberline {15}Capstone: Enterprise-Grade AI E-Commerce Architecture (Week 14)}{69}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Scope (placeholder)}{69}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Capstone deliverables (placeholder)}{69}{section.15.2}%
+\contentsline {chapter}{\numberline {A}Datasets and Synthetic Data for Teaching (placeholder)}{71}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Template: System Design Document (placeholder)}{73}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Template: Data Contract (placeholder)}{75}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Template: Model Card and Risk Assessment (placeholder)}{77}{appendix.D}%

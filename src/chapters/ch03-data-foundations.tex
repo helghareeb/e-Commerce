@@ -1,13 +1,380 @@
 \chapter{E-Commerce Data Foundations: Events, Experimentation, and Metrics (Week 3)}
-\section{Scope (placeholder)}
+
+\section{Learning objectives}
 \begin{itemize}
-  \item Event schema design, identity resolution, attribution caveats, and data quality.
-  \item A/B testing, bandits, and experimentation at scale (conceptual).
+  \item Design an event-driven data model for storefront, marketplace, and mobile commerce scenarios.
+  \item Distinguish identifiers, identities, sessions, and entities across operational and analytical systems.
+  \item Explain how attribution, data quality, and metric definitions affect decision-making and ML performance.
+  \item Plan controlled experiments and understand when adaptive approaches such as bandits are appropriate.
 \end{itemize}
-\section{Hands-on lab (placeholder)}
+
+\section{Why data foundations matter}
+AI systems in e-commerce are only as reliable as the data substrate beneath them.
+Recommendation models, pricing systems, fraud detectors, and executive dashboards all depend on the same underlying facts: who did what, when, in which context, and with what downstream outcome.
+If those facts are delayed, duplicated, ambiguously defined, or disconnected across systems, both analytics and machine learning become fragile.
+
+This chapter treats data foundations as a \emph{system design} problem rather than a reporting problem.
+The goal is not merely to ``collect more data,'' but to create a coherent measurement layer that can support:
 \begin{itemize}
-  \item Build an event log + simple metrics layer for conversion and retention.
+  \item Product analytics and funnel analysis
+  \item Operational reporting across commerce and ERP systems
+  \item Reliable feature generation for ML models
+  \item Controlled online experimentation
+  \item Governance, auditing, and cross-functional alignment
 \end{itemize}
+
+\section{From business process to event model}
+E-commerce platforms contain several interacting process layers:
+\begin{itemize}
+  \item \textbf{Customer interaction layer:} impressions, searches, clicks, scrolls, add-to-cart, checkout steps, support interactions.
+  \item \textbf{Commercial transaction layer:} order placement, payment authorization, invoicing, shipment, cancellation, return, refund.
+  \item \textbf{Operational layer:} inventory adjustments, picking, packing, supplier replenishment, carrier status changes.
+  \item \textbf{Experimentation layer:} exposure to treatments, eligibility checks, metric assignment, and holdouts.
+\end{itemize}
+
+Each layer emits events, but those events serve different purposes.
+A page view event captures human behavior.
+An order-created event captures a business transaction.
+A shipment-delivered event captures operational state.
+An experiment-exposed event captures causal assignment context.
+Strong data design begins by separating these concerns while still linking them with stable keys.
+
+\subsection{Events versus state}
+Students often confuse \emph{events} with \emph{tables of current state}.
+The distinction is fundamental:
+\begin{itemize}
+  \item \textbf{State} answers ``what is true now?'' Examples: current inventory, current product price, current loyalty tier.
+  \item \textbf{Events} answer ``what happened?'' Examples: product viewed, cart updated, payment failed, order shipped.
+\end{itemize}
+
+State is necessary for operations, but events are essential for causality, sequence modeling, root-cause analysis, and reconstructing past behavior.
+For example, a fraud model may need the sequence of failed payment attempts before an order was placed, not just the final order record.
+Similarly, retention analysis depends on when a user returned, not merely whether the user is currently ``active.''
+
+\subsection{Event taxonomies}
+A useful event taxonomy groups events into classes that are stable even when the user interface changes.
+For a commerce platform, a practical taxonomy may include:
+\begin{itemize}
+  \item \textbf{Discovery events:} homepage viewed, category viewed, search submitted, filter applied, result clicked.
+  \item \textbf{Consideration events:} product viewed, review expanded, comparison opened, wishlist updated.
+  \item \textbf{Intent events:} add-to-cart, remove-from-cart, coupon applied, shipping option selected.
+  \item \textbf{Transaction events:} checkout started, payment submitted, order completed, order canceled.
+  \item \textbf{Post-purchase events:} shipment delivered, return requested, refund issued, support ticket opened.
+\end{itemize}
+
+This style of taxonomy makes analytics more robust than mirroring UI element names directly.
+If a button label changes from ``Buy Now'' to ``Checkout,'' the business meaning should still map to a stable event family rather than creating an entirely new measurement definition.
+
+\section{Event schema design}
+An event is only analytically useful if its schema is consistent.
+At minimum, most commerce events should include:
+\begin{itemize}
+  \item \textbf{Event name:} stable business-oriented label such as \texttt{product\_viewed} or \texttt{checkout\_started}
+  \item \textbf{Event time:} when the event actually occurred
+  \item \textbf{Ingestion time:} when the event reached the data platform
+  \item \textbf{Actor identifiers:} user ID, guest ID, device ID, session ID, seller ID where relevant
+  \item \textbf{Entity identifiers:} product ID, SKU ID, cart ID, order ID, payment ID
+  \item \textbf{Context fields:} channel, app version, locale, campaign, experiment assignment, page type
+  \item \textbf{Properties:} quantity, price, discount, position in ranking, search query, payment method
+\end{itemize}
+
+\subsection{Required design principles}
+\begin{itemize}
+  \item \textbf{Business semantics before UI semantics:} schemas should reflect domain meaning, not implementation accidents.
+  \item \textbf{Stable field names:} renaming fields casually breaks dashboards, pipelines, and models.
+  \item \textbf{Explicit units:} store price currency, quantity units, and time zones unambiguously.
+  \item \textbf{Immutable raw events:} avoid rewriting the historical log except for tightly governed correction procedures.
+  \item \textbf{Versioned schemas:} consumers must know when a producer changed meaning or structure.
+\end{itemize}
+
+\subsection{Example event record}
+The following conceptual record shows how a product view may be represented:
+\begin{verbatim}
+event_name       = product_viewed
+event_time       = 2026-03-23T14:03:11Z
+ingestion_time   = 2026-03-23T14:03:13Z
+user_id          = null
+guest_id         = g_1842
+session_id       = s_88fa
+product_id       = p_501
+sku_id           = sku_501_bl_m
+page_type        = product_detail
+channel          = mobile_app
+campaign_id      = spring_push_7
+rank_position    = 4
+experiment_id    = rec_widget_v3
+variant          = treatment
+\end{verbatim}
+
+The example illustrates an important practice: authenticated and anonymous identifiers may coexist.
+This supports both guest behavior analysis and later identity stitching when a guest eventually logs in or purchases.
+
+\section{Identity resolution and entity modeling}
+One of the hardest problems in e-commerce analytics is deciding what a ``customer'' means across channels and systems.
+The same person may appear as:
+\begin{itemize}
+  \item an anonymous web browser cookie,
+  \item a mobile-app installation,
+  \item a logged-in storefront account,
+  \item a CRM contact,
+  \item an ERP customer or partner record,
+  \item a marketplace buyer account,
+  \item or multiple records created through operational errors.
+\end{itemize}
+
+\subsection{Identifiers are not interchangeable}
+Different identifiers serve different roles:
+\begin{itemize}
+  \item \textbf{User/account ID:} application-level identity for authentication and personalization.
+  \item \textbf{Customer/partner ID:} commercial identity used in ERP, billing, and support.
+  \item \textbf{Session ID:} short-lived grouping of interactions.
+  \item \textbf{Device or browser ID:} technical identifier for anonymous continuity.
+  \item \textbf{Order ID:} transaction-level identity.
+  \item \textbf{Household or organization ID:} aggregation identity for B2B or family accounts.
+\end{itemize}
+
+If analysts casually join these identifiers as though they were equivalent, metrics become unstable.
+For example, ``active customers'' may mean active accounts in one report but active billing entities in another.
+That inconsistency can distort conversion rates, retention cohorts, and lifetime value estimates.
+
+\subsection{Identity stitching}
+Identity stitching is the process of linking records that likely belong to the same real-world actor.
+Common rules include:
+\begin{itemize}
+  \item linking a guest cart to a logged-in account after authentication,
+  \item attaching a mobile device history to a user after sign-in,
+  \item associating storefront orders with an ERP customer once order export completes,
+  \item maintaining a separate unresolved pool when confidence is low.
+\end{itemize}
+
+The core design principle is to preserve raw evidence and build linkage logic transparently.
+Many downstream problems arise when teams overwrite raw IDs with guessed ``master'' identities and can no longer audit how the match occurred.
+
+\subsection{Privacy-aware identity design}
+Identity resolution must also respect privacy and compliance constraints.
+A technically convenient identifier is not automatically a legally or ethically appropriate one.
+Good practice includes:
+\begin{itemize}
+  \item minimizing collection of directly identifying information,
+  \item separating analytical IDs from operational personal data where possible,
+  \item documenting retention periods,
+  \item and ensuring that consent and deletion workflows can propagate to analytical systems.
+\end{itemize}
+
+\section{Data quality as a product requirement}
+Data quality problems in commerce are rarely abstract.
+They directly alter revenue reporting, experiment reads, and ML labels.
+Representative failure modes include:
+\begin{itemize}
+  \item \textbf{Missing events:} checkout steps are undercounted, making conversion funnels look healthier than reality.
+  \item \textbf{Duplicate events:} add-to-cart counts inflate intent metrics and derived model features.
+  \item \textbf{Late events:} daily dashboards and training jobs disagree because the data arrive after aggregation windows close.
+  \item \textbf{Semantic drift:} an event name remains unchanged while the product team silently changes its meaning.
+  \item \textbf{Broken joins:} product IDs in clickstream logs no longer match product IDs in the catalog or ERP.
+\end{itemize}
+
+\subsection{Data contracts}
+An effective way to reduce these failures is to define \emph{data contracts} between producers and consumers.
+A data contract specifies:
+\begin{itemize}
+  \item event name and schema,
+  \item field definitions and allowed values,
+  \item freshness expectations,
+  \item ownership and escalation path,
+  \item versioning policy,
+  \item and validation rules.
+\end{itemize}
+
+This shifts governance left.
+Instead of discovering breakage after dashboards fail, producers must acknowledge downstream dependencies before changing event payloads.
+
+\subsection{Validation and observability}
+Data platforms should monitor more than pipeline uptime.
+Useful checks include:
+\begin{itemize}
+  \item row-count anomalies by event family,
+  \item null-rate spikes in required fields,
+  \item duplicate-rate thresholds by event key,
+  \item cross-system reconciliation between orders, payments, and shipments,
+  \item and schema drift alerts when producers add or remove fields.
+\end{itemize}
+
+In mature teams, these checks are treated as production monitoring.
+Broken analytics should be considered an operational incident, not a minor inconvenience.
+
+\section{Attribution and its limits}
+Attribution asks which touchpoints influenced an outcome such as purchase, repeat visit, or subscription renewal.
+In e-commerce, this sounds straightforward but is often confounded by user behavior, cross-device journeys, channel interactions, and pre-existing intent.
+
+\subsection{Common attribution models}
+\begin{itemize}
+  \item \textbf{Last-touch attribution:} credits the final recorded touchpoint before conversion.
+  \item \textbf{First-touch attribution:} credits the earliest touchpoint in the conversion path.
+  \item \textbf{Multi-touch heuristics:} divide credit across several interactions.
+  \item \textbf{Incrementality-based approaches:} estimate causal lift rather than merely assigning credit.
+\end{itemize}
+
+Heuristic attribution is useful for operational reporting, but it should not be confused with causal inference.
+A campaign that appears near the end of many journeys may receive last-touch credit even if it did not truly create incremental demand.
+
+\subsection{Selection bias and measurement bias}
+Attribution systems are affected by:
+\begin{itemize}
+  \item \textbf{Selection bias:} users exposed to an experience may differ systematically from users who are not.
+  \item \textbf{Survivorship bias:} only recorded users or channels appear in the analysis.
+  \item \textbf{Cross-device loss:} a user researches on one device and purchases on another without a reliable link.
+  \item \textbf{Channel interference:} paid and organic channels interact, making isolated credit assignments misleading.
+\end{itemize}
+
+This is why attribution reporting is a descriptive tool, whereas experimentation is the primary causal tool.
+
+\section{Metrics layers and decision quality}
+Executives often ask for ``the conversion rate'' as though it were a single obvious number.
+In reality, metric definitions encode business rules.
+Without a shared metrics layer, each team may compute the same KPI differently.
+
+\subsection{North Star and supporting metrics}
+Many commerce organizations choose a high-level outcome metric such as gross merchandise value, contribution margin, or retained active buyers.
+That metric must then be decomposed into leading indicators:
+\begin{itemize}
+  \item traffic volume,
+  \item product-detail engagement,
+  \item add-to-cart rate,
+  \item checkout completion rate,
+  \item repeat purchase rate,
+  \item return rate,
+  \item and support burden.
+\end{itemize}
+
+For educational purposes, it is useful to connect these metrics to event definitions explicitly.
+For instance:
+\[
+\text{Add-to-cart rate}=\frac{\#\text{sessions with add\_to\_cart}}{\#\text{sessions with product\_view}}
+\]
+This formula is simple, but each term still depends on sessionization rules, bot filtering, and event validity criteria.
+
+\subsection{Metric dimensions}
+Commerce metrics usually need to be sliced by:
+\begin{itemize}
+  \item channel (web, app, store-assisted, marketplace),
+  \item customer segment (new, returning, VIP, B2B account tier),
+  \item geography and locale,
+  \item device class,
+  \item product category and seller,
+  \item experiment cohort.
+\end{itemize}
+
+A robust metrics layer therefore requires both canonical definitions and dimensional consistency.
+It should be possible to explain why a number changes, not just to report the number itself.
+
+\subsection{Retention and cohort logic}
+Retention metrics are especially sensitive to definition.
+Possible questions include:
+\begin{itemize}
+  \item Did the user return to browse?
+  \item Did the user make another purchase?
+  \item Did the organization place another order from any employee account?
+  \item Did the customer remain active despite returns or failed payments?
+\end{itemize}
+
+Each version may be legitimate, but each reflects a different product and business question.
+Good analytical practice is to name retention metrics with explicit behavioral criteria rather than using ambiguous shorthand.
+
+\section{Experimentation in e-commerce}
+Offline evaluation is valuable, but it cannot fully predict live business impact.
+Ranking changes alter user behavior.
+Promotions affect demand patterns.
+Fraud rules shift attacker behavior.
+For these reasons, e-commerce systems rely heavily on online experiments.
+
+\subsection{A/B testing fundamentals}
+An A/B test compares a treatment against a control by random assignment.
+The point of randomization is not to guarantee improvement; it is to make the groups comparable in expectation so that observed differences can be interpreted causally.
+
+Key design choices include:
+\begin{itemize}
+  \item \textbf{Unit of randomization:} user, session, device, seller, or region.
+  \item \textbf{Exposure logic:} where and when eligibility is checked.
+  \item \textbf{Primary KPI:} the main outcome the experiment is intended to improve.
+  \item \textbf{Guardrails:} metrics that protect against harmful side effects such as latency, return rate, or support contacts.
+  \item \textbf{Analysis window:} how long outcomes are observed after exposure.
+\end{itemize}
+
+\subsection{Common experimental pitfalls}
+\begin{itemize}
+  \item \textbf{Contamination:} the same user sees both variants through multiple devices or sessions.
+  \item \textbf{Novelty effects:} short-term excitement masks weak long-term performance.
+  \item \textbf{Interference:} one user's treatment influences another user, seller, or market.
+  \item \textbf{Metric leakage:} the treatment changes how events are logged rather than how users behave.
+  \item \textbf{Underpowered tests:} sample sizes are too small to detect meaningful differences.
+\end{itemize}
+
+These pitfalls illustrate why experimentation is partly a data-engineering problem.
+If exposure logs and outcome metrics do not align, the test result is not credible.
+
+\subsection{Bandits and adaptive experimentation}
+Multi-armed bandits are useful when the platform wants to balance learning with near-term reward.
+Compared with standard A/B tests, bandits typically allocate more traffic to arms that appear to perform better.
+This can be attractive for:
+\begin{itemize}
+  \item promotions on fast-moving catalogs,
+  \item ranking widgets with many interchangeable treatments,
+  \item high-traffic surfaces where opportunity cost is large.
+\end{itemize}
+
+However, bandits are not a universal replacement for A/B testing.
+They complicate interpretation, can interact badly with delayed rewards, and are less appropriate when decision-makers need a clean causal estimate for a fixed policy choice.
+In practice, many organizations use A/B tests for clear comparisons and adaptive methods for optimization on mature surfaces.
+
+\section{From analytics to machine learning features}
+The same event stream that supports dashboards often becomes the basis for ML features.
+Examples include:
+\begin{itemize}
+  \item recent category views for recommendation,
+  \item failed login or payment attempts for fraud detection,
+  \item coupon usage history for promotion targeting,
+  \item time since last order for churn models,
+  \item return behavior and order defects for seller-quality models.
+\end{itemize}
+
+This creates an important dependency: if event semantics drift, model features drift as well.
+A model can degrade not only because user behavior changes, but because the measurement pipeline changed underneath it.
+For this reason, feature definitions should be traceable to governed event definitions.
+
+\section{Hands-on lab: build a minimal metrics layer}
+The aim of the lab is to help students bridge raw event logs and business-facing KPIs.
+
+\subsection{Lab scenario}
+Assume a storefront emits five core events:
+\texttt{session\_started}, \texttt{product\_viewed}, \texttt{add\_to\_cart}, \texttt{checkout\_started}, and \texttt{order\_completed}.
+Students are given a small synthetic log containing timestamps, session IDs, customer IDs where available, product IDs, and order IDs.
+
+\subsection{Lab tasks}
+\begin{enumerate}
+  \item Create a canonical event table with required fields, event validation flags, and ingestion metadata.
+  \item Build daily metrics for sessions, product views, add-to-cart rate, checkout-start rate, purchase conversion rate, and day-7 repeat purchase.
+  \item Define at least three data-quality checks and show how failing checks affect one KPI.
+  \item Create a simple cohort table for first purchase date and compute repeat purchase behavior by cohort.
+  \item Simulate an experiment exposure field and compute the primary KPI by control versus treatment.
+\end{enumerate}
+
+\subsection{Expected learning outcome}
+By the end of the lab, students should be able to explain why a metric is not just an aggregation, but the result of event design choices, identity assumptions, and validation rules.
+
+\section{Managerial and architectural implications}
+Data foundations are not owned by analysts alone.
+They require coordination across product, engineering, data, and enterprise systems teams.
+Architecturally, the following questions matter:
+\begin{itemize}
+  \item Which identifiers are authoritative, and where are they mastered?
+  \item Which events belong in the clickstream versus operational event streams?
+  \item How are storefront events linked to ERP objects such as orders, invoices, and shipments?
+  \item What happens when a schema changes in the storefront while ERP integrations remain stable, or vice versa?
+  \item Who approves metric definitions that drive executive dashboards and model targets?
+\end{itemize}
+
+These are governance questions, but they also influence software boundaries.
+Weak ownership at this layer creates confusion throughout the commerce stack.
 
 \section{Multiple-choice questions (MCQs)}
 \begin{enumerate}
