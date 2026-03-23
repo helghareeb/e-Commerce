@@ -1,0 +1,178 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[Lecture 12]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\subtitle{Lecture 12: MLOps + DataOps for E-Commerce}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item Why MLOps and DataOps matter in e-commerce
+    \item From experimentation to production systems
+    \item What MLOps covers
+    \item Reproducibility
+    \item Pipelines and orchestration
+    \item Managerial implications
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning objectives}
+  By the end of this lecture, you should be able to:
+  \begin{itemize}
+    \item Explain why production ML in e-commerce requires disciplined operational practices beyond model training.
+    \item Distinguish MLOps concerns from DataOps concerns while understanding their overlap in end-to-end commerce systems.
+    \item Analyze training-serving skew, feature consistency, monitoring, drift, and deployment risk in production ML workflows.
+    \item Design an ML system artifact set that includes reproducibility, observability, and governance requirements.
+  \end{itemize}
+\end{frame}
+
+\section{Why MLOps and DataOps matter in e-commerce}
+
+\begin{frame}{Why MLOps and DataOps matter in e-commerce}
+  \begin{itemize}
+    \item How is the model trained repeatedly?
+    \item How are features computed consistently?
+    \item How is the model deployed safely?
+    \item How is degradation detected?
+    \item How is the system rolled back when behavior becomes harmful?
+  \end{itemize}
+\end{frame}
+
+\section{From experimentation to production systems}
+
+\begin{frame}{From experimentation to production systems}
+  \begin{itemize}
+    \item \textbf{The production gap:} missing or delayed features,; inconsistent identifiers across systems,
+    \item \textbf{Why e-commerce is especially operational:} product assortments change,; promotions alter behavior,
+  \end{itemize}
+\end{frame}
+
+\section{What MLOps covers}
+
+\begin{frame}{What MLOps covers}
+  \begin{itemize}
+    \item \textbf{Typical MLOps responsibilities:} versioning code, data references, and model artifacts,; training pipelines,
+    \item \textbf{What DataOps covers:} data pipeline reliability,; data contracts and validation,
+  \end{itemize}
+\end{frame}
+
+\section{Reproducibility}
+
+\begin{frame}{Reproducibility}
+  \begin{itemize}
+    \item \textbf{What should be reproducible:} source code version,; feature definitions,
+    \item \textbf{Why this matters in commerce:} new data,; a model change,
+  \end{itemize}
+\end{frame}
+
+\section{Pipelines and orchestration}
+
+\begin{frame}{Pipelines and orchestration}
+  \begin{itemize}
+    \item \textbf{Typical pipeline stages:} ingest and validate raw data,; transform features,
+    \item \textbf{Batch and streaming coexistence:} batch pipelines for training and aggregate features,; streaming or near-real-time pipelines for serving-time context such as session behavior, current inventory, or recent fraud indicators.
+  \end{itemize}
+\end{frame}
+
+\section{Feature consistency and training-serving skew}
+
+\begin{frame}{Feature consistency and training-serving skew}
+  \begin{itemize}
+    \item \textbf{How skew happens:} using different code paths offline and online,; stale or delayed online feature values,
+    \item \textbf{Why skew is dangerous:} a fraud model may receive delayed account-age features online,; a recommender may use a stale inventory flag,
+    \item \textbf{Feature stores as a concept:} Feature stores are often introduced to reduce this risk by standardizing feature definitions and access patterns across training and serving.
+  \end{itemize}
+\end{frame}
+
+\section{Model registry and release management}
+
+\begin{frame}{Model registry and release management}
+  \begin{itemize}
+    \item \textbf{Why a registry matters:} which model versions exist,; which one is approved,
+    \item \textbf{Release strategies:} shadow deployment,; canary rollout,
+  \end{itemize}
+\end{frame}
+
+\section{Monitoring production ML systems}
+
+\begin{frame}{Monitoring production ML systems}
+  \begin{itemize}
+    \item \textbf{Technical monitoring:} latency,; throughput,
+    \item \textbf{Model monitoring:} score distribution shifts,; calibration changes,
+    \item \textbf{Business monitoring:} click-through and conversion for recommenders,; fraud-dollar capture and false-positive burden,
+  \end{itemize}
+\end{frame}
+
+\section{Data drift and concept drift}
+
+\begin{frame}{Data drift and concept drift}
+  \begin{itemize}
+    \item \textbf{Data drift:} seasonal traffic changes,; new product categories,
+    \item \textbf{Concept drift:} the same browsing behavior stops indicating purchase intent after a UI redesign,; fraud patterns evolve so past indicators weaken,
+    \item \textbf{Response to drift:} alerting,; retraining,
+  \end{itemize}
+\end{frame}
+
+\section{CI/CD for ML}
+
+\begin{frame}{CI/CD for ML}
+  \begin{itemize}
+    \item \textbf{What CI for ML should validate:} unit tests for transformations,; schema and feature checks,
+    \item \textbf{What CD for ML should consider:} compatibility with serving infrastructure,; readiness of online features,
+  \end{itemize}
+\end{frame}
+
+\section{Experiment tracking and model comparison}
+
+\begin{frame}{Experiment tracking and model comparison}
+  \begin{itemize}
+    \item \textbf{What to track:} dataset reference,; feature set version,
+    \item \textbf{Why this matters:} Without structured experiment tracking, teams can neither compare models honestly nor explain why a deployed model was chosen.
+  \end{itemize}
+\end{frame}
+
+\section{Governance and approvals}
+
+\begin{frame}{Governance and approvals}
+  \begin{itemize}
+    \item \textbf{Examples of governed models:} fraud and abuse scoring,; dynamic pricing,
+    \item \textbf{Typical governance artifacts:} model cards,; risk assessment notes,
+  \end{itemize}
+\end{frame}
+
+\section{Incident response for ML systems}
+
+\begin{frame}{Incident response for ML systems}
+  \begin{itemize}
+    \item \textbf{Examples of ML incidents:} a recommender starts surfacing unavailable items,; a fraud model causes a spike in false declines,
+    \item \textbf{Preparedness:} clear runbooks,; fallback modes,
+  \end{itemize}
+\end{frame}
+
+\section{Managerial implications}
+
+\begin{frame}{Managerial implications}
+  \begin{itemize}
+    \item Organizations often underestimate the operational cost of ML.
+    \item The model may be only a small fraction of the total system effort.
+    \item Most production pain comes from weak data contracts, poor observability, inconsistent features, and unclear ownership.
+  \end{itemize}
+\end{frame}
+
+\end{document}

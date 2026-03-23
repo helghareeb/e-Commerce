@@ -1,0 +1,192 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[Lecture 11]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\subtitle{Lecture 11: Customer Service Automation with LLMs}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item Why customer service is a natural LLM use case
+    \item Customer service tasks in e-commerce
+    \item Rules, classical NLP, and LLMs
+    \item Retrieval-augmented generation (RAG)
+    \item Tool use and operational actions
+    \item Hands-on lab: a grounded FAQ and service assistant
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning objectives}
+  By the end of this lecture, you should be able to:
+  \begin{itemize}
+    \item Explain how LLMs change the design space of customer service automation in e-commerce.
+    \item Distinguish when to use rules, classical NLP, retrieval, and LLM-based systems.
+    \item Design a retrieval-augmented generation (RAG) assistant with tool use, workflow orchestration, and escalation paths.
+    \item Evaluate LLM service systems using operational, quality, and risk-oriented criteria rather than only surface fluency.
+  \end{itemize}
+\end{frame}
+
+\section{Why customer service is a natural LLM use case}
+
+\begin{frame}{Why customer service is a natural LLM use case}
+  \begin{itemize}
+    \item answering policy questions,
+    \item helping customers track orders,
+    \item explaining returns and refunds,
+    \item resolving account issues,
+    \item supporting product questions,
+    \item handling multilingual or multi-channel interactions.
+  \end{itemize}
+\end{frame}
+
+\section{Customer service tasks in e-commerce}
+
+\begin{frame}{Customer service tasks in e-commerce}
+  \begin{itemize}
+    \item \textbf{Informational tasks:} store policy questions,; shipping timelines,
+    \item \textbf{Transactional tasks:} checking order status,; canceling an order,
+    \item \textbf{Judgment-heavy tasks:} refund exceptions,; suspicious behavior review,
+  \end{itemize}
+\end{frame}
+
+\section{Rules, classical NLP, and LLMs}
+
+\begin{frame}{Rules, classical NLP, and LLMs}
+  \begin{itemize}
+    \item \textbf{When rules are best:} the workflow is deterministic,; the action must be tightly controlled,
+    \item \textbf{When classical NLP may still be enough:} intent routing,; spam detection,
+    \item \textbf{When LLMs are most valuable:} flexible language interpretation,; synthesis from multiple knowledge sources,
+  \end{itemize}
+\end{frame}
+
+\section{Retrieval-augmented generation (RAG)}
+
+\begin{frame}{Retrieval-augmented generation (RAG)}
+  \begin{itemize}
+    \item \textbf{Why RAG matters:} support knowledge changes frequently,; policy and catalog information must remain current,
+    \item \textbf{Knowledge sources:} return and shipping policies,; help-center content,
+    \item \textbf{Retrieval quality:} RAG only works well if retrieval quality is strong.
+  \end{itemize}
+\end{frame}
+
+\section{Tool use and operational actions}
+
+\begin{frame}{Tool use and operational actions}
+  \begin{itemize}
+    \item \textbf{Examples of service tools:} get order status,; get shipment tracking,
+    \item \textbf{Why tools are necessary:} Without tools, the LLM can only talk the workflow.
+    \item \textbf{Action control:} authentication confirmation,; policy checks,
+  \end{itemize}
+\end{frame}
+
+\section{Workflow orchestration}
+
+\begin{frame}{Workflow orchestration}
+  \begin{itemize}
+    \item \textbf{Typical service flow:} classify the issue or infer likely task,; retrieve relevant policy or account context,
+    \item \textbf{Why orchestration matters:} skip required policy checks,; fail to collect missing information,
+  \end{itemize}
+\end{frame}
+
+\section{Conversation memory and context}
+
+\begin{frame}{Conversation memory and context}
+  \begin{itemize}
+    \item \textbf{Useful forms of context:} current conversation history,; prior support interactions,
+    \item \textbf{Context hygiene:} pulling irrelevant records,; mixing incompatible customer identities,
+  \end{itemize}
+\end{frame}
+
+\section{Grounding, citations, and answer control}
+
+\begin{frame}{Grounding, citations, and answer control}
+  \begin{itemize}
+    \item \textbf{Why citations help:} increase operator trust,; help reviewers audit output,
+    \item \textbf{Controlled answer styles:} concise answer first,; explicit next step,
+  \end{itemize}
+\end{frame}
+
+\section{Escalation and human handoff}
+
+\begin{frame}{Escalation and human handoff}
+  \begin{itemize}
+    \item \textbf{Escalation triggers:} the policy is ambiguous,; the required action is high risk,
+    \item \textbf{Good handoff design:} summary of customer intent,; relevant retrieved documents,
+  \end{itemize}
+\end{frame}
+
+\section{Evaluation of LLM service systems}
+
+\begin{frame}{Evaluation of LLM service systems}
+  \begin{itemize}
+    \item \textbf{Evaluation dimensions:} factual correctness,; policy compliance,
+    \item \textbf{Offline versus online evaluation:} containment rate,; escalation rate,
+    \item \textbf{Human review in evaluation:} whether the response was grounded,; whether the tone was appropriate,
+  \end{itemize}
+\end{frame}
+
+\section{Guardrails and safety}
+
+\begin{frame}{Guardrails and safety}
+  \begin{itemize}
+    \item \textbf{Common risk areas:} fabricated order or refund status,; privacy leakage across customer accounts,
+    \item \textbf{Guardrail mechanisms:} scoped retrieval and identity verification,; tool permissions by action type,
+  \end{itemize}
+\end{frame}
+
+\section{Prompt injection and retrieval risks}
+
+\begin{frame}{Prompt injection and retrieval risks}
+  \begin{itemize}
+    \item \textbf{Examples of injection risk:} a seller document includes hidden instructions not meant for the assistant,; a support message tries to override policy behavior,
+    \item \textbf{Mitigations:} restricting retrieval sources,; separating system instructions from retrieved content,
+  \end{itemize}
+\end{frame}
+
+\section{A practical architecture for LLM support}
+
+\begin{frame}{A practical architecture for LLM support}
+  \begin{itemize}
+    \item \textbf{Read and write separation:} \textbf{read tools:} retrieve order status, policy, case history,; \textbf{write tools:} cancel order, create refund request, open ticket.
+    \item \textbf{Role of CRM and ERP integration:} CRM for case history and customer context,; ERP or commerce systems for order and refund truth,
+  \end{itemize}
+\end{frame}
+
+\section{Hands-on lab: a grounded FAQ and service assistant}
+
+\begin{frame}{Hands-on lab: a grounded FAQ and service assistant}
+  \begin{itemize}
+    \item \textbf{Lab scenario:} Students are given a small local knowledge base containing return policy, shipping policy, warranty terms, and a mock order-status data source.
+    \item \textbf{Lab tasks:} Build a retrieval-based assistant over the local policy documents.; Add source citations to every policy answer.
+    \item \textbf{Expected learning outcome:} By the end of the lab, students should be able to explain why a useful LLM support assistant is a policy-aware workflow, not just a conversational model.
+  \end{itemize}
+\end{frame}
+
+\section{Managerial implications}
+
+\begin{frame}{Managerial implications}
+  \begin{itemize}
+    \item automate routine, well-grounded service work,
+    \item support human agents on harder cases,
+    \item maintain clear accountability for sensitive actions,
+    \item and measure quality continuously.
+  \end{itemize}
+\end{frame}
+
+\end{document}

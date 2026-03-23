@@ -1,0 +1,166 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[Lecture 06]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\subtitle{Lecture 06: ERP/CRM/SCM Integration in Commerce}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item Why ERP/CRM/SCM integration is central to commerce
+    \item The enterprise systems perspective
+    \item Commerce versus enterprise ownership
+    \item Systems of record for key entities
+    \item Master data management (MDM)
+    \item Managerial implications
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning objectives}
+  By the end of this lecture, you should be able to:
+  \begin{itemize}
+    \item Explain how commerce platforms integrate with ERP, CRM, and supply-chain systems across operational workflows.
+    \item Identify systems of record for key entities such as customer, product, price list, order, invoice, and shipment.
+    \item Analyze master data management, process ownership, and consistency risks in hybrid commerce architectures.
+    \item Design integration flows for order-to-cash, returns, and B2B pricing using Odoo as a reference ERP environment.
+  \end{itemize}
+\end{frame}
+
+\section{Why ERP/CRM/SCM integration is central to commerce}
+
+\begin{frame}{Why ERP/CRM/SCM integration is central to commerce}
+  \begin{itemize}
+    \item orders that appear confirmed online but fail in back-office processing,
+    \item inventory figures that differ between storefront and warehouse,
+    \item duplicate customer records across channels,
+    \item B2B price lists that drift between sales and commerce systems,
+    \item returns and refunds that create reconciliation problems in finance.
+  \end{itemize}
+\end{frame}
+
+\section{The enterprise systems perspective}
+
+\begin{frame}{The enterprise systems perspective}
+  \begin{itemize}
+    \item \textbf{ERP:} \textbf{Sales:} quotations, sales orders, customer terms, sales workflows,; \textbf{Inventory:} stock moves, reservations, warehouse operations, replenishment,
+    \item \textbf{CRM:} CRM systems focus on relationship history, account management, sales interactions, lead qualification, and customer-service context.
+    \item \textbf{SCM and warehouse systems:} Supply-chain and warehouse platforms manage sourcing, supplier coordination, inbound logistics, warehouse execution, and delivery orchestration.
+  \end{itemize}
+\end{frame}
+
+\section{Commerce versus enterprise ownership}
+
+\begin{frame}{Commerce versus enterprise ownership}
+  \begin{itemize}
+    \item \textbf{Common ownership patterns:} The \textbf{commerce layer} often owns web sessions, carts, checkout state, personalization context, and channel-specific merchandising behavior.; The \textbf{ERP layer} often owns invoices, accounting entries, stock movements, contractual customer records, and internal fulfillment commitments.
+    \item \textbf{Why ownership must be explicit:} If pricing is editable in both storefront and ERP, or if both commerce and CRM create customer records independently, inconsistencies are not accidental.
+  \end{itemize}
+\end{frame}
+
+\section{Systems of record for key entities}
+
+\begin{frame}{Systems of record for key entities}
+  \begin{itemize}
+    \item \textbf{Customer:} the storefront may own channel account credentials and preferences,; ERP may own bill-to and ship-to parties for financial processing,
+    \item \textbf{Product:} ERP may own procurement and internal stock-keeping information,; a catalog or PIM layer may own rich digital merchandising content,
+    \item \textbf{Price list:} Price lists are especially sensitive in B2B environments.
+    \item \textbf{Order:} The commerce platform often captures the initial order intent, but the enterprise question is whether ERP becomes the authoritative record for downstream operational and financial lifecycle.
+    \item \textbf{Invoice and payment reconciliation:} Invoices, ledger effects, and payment reconciliation usually belong in ERP or finance-owned systems.
+    \item \textbf{Shipment:} Shipment truth may belong in warehouse or logistics systems even if ERP or storefront mirrors the status.
+  \end{itemize}
+\end{frame}
+
+\section{Master data management (MDM)}
+
+\begin{frame}{Master data management (MDM)}
+  \begin{itemize}
+    \item \textbf{Why MDM matters:} duplicate customer records created by multiple channels,; product records with inconsistent category or attribute definitions,
+    \item \textbf{Practical MDM principles:} Define authoritative identifiers and mapping rules.; Separate creation rights from consumption rights.
+  \end{itemize}
+\end{frame}
+
+\section{Order-to-cash in integrated commerce}
+
+\begin{frame}{Order-to-cash in integrated commerce}
+  \begin{itemize}
+    \item \textbf{Typical flow:} customer places an order in the storefront,; payment is authorized or payment terms are validated,
+    \item \textbf{Architectural decisions inside the flow:} whether the storefront can confirm an order before ERP acceptance,; whether stock is reserved in real time or reconciled later,
+    \item \textbf{Failure modes:} the order is captured online but fails to post in ERP,; payment succeeds but the order export fails,
+  \end{itemize}
+\end{frame}
+
+\section{Inventory, fulfillment, and availability}
+
+\begin{frame}{Inventory, fulfillment, and availability}
+  \begin{itemize}
+    \item \textbf{Inventory concepts that should not be conflated:} \textbf{On-hand inventory:} physical stock currently available in storage.; \textbf{Reserved inventory:} stock allocated to pending commitments.
+    \item \textbf{Synchronization strategies:} near-real-time events for stock adjustments,; short-lived availability caches,
+  \end{itemize}
+\end{frame}
+
+\section{Returns and refunds}
+
+\begin{frame}{Returns and refunds}
+  \begin{itemize}
+    \item \textbf{Typical return flow:} customer initiates a return,; policy eligibility is checked,
+    \item \textbf{Architectural risks:} the storefront approves a return that finance policy rejects,; inventory is restocked before inspection rules are applied,
+  \end{itemize}
+\end{frame}
+
+\section{B2B pricing and account structures}
+
+\begin{frame}{B2B pricing and account structures}
+  \begin{itemize}
+    \item \textbf{Price lists and negotiated terms:} customer account,; contract terms,
+    \item \textbf{Account hierarchies:} a legal entity,; several branches,
+  \end{itemize}
+\end{frame}
+
+\section{Using Odoo as a reference ERP}
+
+\begin{frame}{Using Odoo as a reference ERP}
+  \begin{itemize}
+    \item \textbf{Illustrative Odoo-aligned mapping:} \textbf{Sales:} quotations, orders, commercial terms, B2B account workflows.; \textbf{Inventory:} stock movements, reservations, warehouse updates.
+    \item \textbf{What should remain vendor-neutral:} system-of-record analysis,; event and API contracts,
+  \end{itemize}
+\end{frame}
+
+\section{Integration risks and mitigation strategies}
+
+\begin{frame}{Integration risks and mitigation strategies}
+  \begin{itemize}
+    \item \textbf{Duplicate sources of truth:} mitigated by explicit ownership and reconciliation.
+    \item \textbf{Latency mismatch:} mitigated by choosing appropriate sync versus async boundaries.
+    \item \textbf{Identifier mismatch:} mitigated by governed master identifiers and mapping tables.
+    \item \textbf{Status divergence:} mitigated by explicit lifecycle models and state-mapping rules.
+    \item \textbf{Operational blind spots:} mitigated by observability, error queues, and business-level monitoring.
+  \end{itemize}
+\end{frame}
+
+\section{Managerial implications}
+
+\begin{frame}{Managerial implications}
+  \begin{itemize}
+    \item Enterprise integration decisions affect more than system design.
+    \item They shape service reliability, customer trust, financial control, and the ability to scale channels.
+    \item If commerce and ERP are tightly coupled in every user interaction, customer experience becomes hostage to back-office latency.
+  \end{itemize}
+\end{frame}
+
+\end{document}

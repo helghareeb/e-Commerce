@@ -1,0 +1,106 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[Lecture 02]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\subtitle{Lecture 02: Platforms, Marketplaces, and Business Models}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item From storefront to platform
+    \item Value creation, value capture, and growth
+    \item Governance and trust as system requirements
+    \item Business model patterns (and architectural implications)
+    \item Where AI fits (system-level view)
+    \item Hands-on (placeholder)
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning objectives}
+  By the end of this lecture, you should be able to:
+  \begin{itemize}
+    \item Distinguish e-commerce \emph{channels} (storefronts) from \emph{platforms} (ecosystems) and \emph{marketplaces} (multi-seller).
+    \item Analyze platform economics: network effects, multi-homing, and pricing of participation.
+    \item Translate business model choices into architectural requirements (identity, trust, data, integration, ERP).
+  \end{itemize}
+\end{frame}
+
+\section{From storefront to platform}
+
+\begin{frame}{From storefront to platform}
+  \begin{itemize}
+    \item \textbf{Storefront:} a single merchant selling to buyers (B2C/B2B) via a web/app channel.
+    \item \textbf{Platform:} a system that enables interactions among multiple participant groups (e.g., buyers, sellers, advertisers, logistics providers).
+    \item \textbf{Marketplace:} a platform where multiple sellers list items and transactions are mediated by platform policies and infrastructure.
+  \end{itemize}
+\end{frame}
+
+\section{Value creation, value capture, and growth}
+
+\begin{frame}{Value creation, value capture, and growth}
+  \begin{itemize}
+    \item \textbf{Value creation and matching:} Platforms create value by reducing search and transaction costs, increasing variety, and improving trust; AI frequently strengthens these effects by improving matching and decision support.
+    \item \textbf{Value capture models:} Take rate (commission on completed transactions); Subscription (seller or buyer membership tiers)
+    \item \textbf{Network effects:} \textbf{Direct network effects:} more users attract more users (e.g., social commerce communities).; \textbf{Indirect network effects:} more buyers attract more sellers and vice versa (classic marketplace dynamic).
+  \end{itemize}
+\end{frame}
+
+\section{Governance and trust as system requirements}
+
+\begin{frame}{Governance and trust as system requirements}
+  \begin{itemize}
+    \item Seller onboarding, verification, and compliance workflows (KYC/KYB where relevant).
+    \item Catalog integrity: listing policies, moderation, and counterfeit detection.
+    \item Reviews/ratings, dispute resolution, refunds/returns policy enforcement.
+    \item Trust \& safety operations: rule+ML detection, case management, and human-in-the-loop escalation.
+  \end{itemize}
+\end{frame}
+
+\section{Business model patterns (and architectural implications)}
+
+\begin{frame}{Business model patterns (and architectural implications)}
+  \begin{itemize}
+    \item \textbf{B2C retail:} Key systems: PIM/catalog, promotions, payments, fulfillment, customer support.; ERP/CRM integration: order-to-cash, inventory, accounting, returns.
+    \item \textbf{B2B commerce:} Quotes, negotiated pricing, approval workflows, invoicing, credit limits.; Integration-heavy: procurement, supplier management, and EDI/API flows.
+    \item \textbf{Marketplace:} Split catalog ownership (platform vs sellers), seller tools, payout/settlement.; Additional "control plane": seller policies, listing moderation, abuse prevention.
+    \item \textbf{Digital services (subscriptions):} Recurring billing, entitlements, and churn/retention analytics.; Usage-based pricing requires event design and metering.
+  \end{itemize}
+\end{frame}
+
+\section{Where AI fits (system-level view)}
+
+\begin{frame}{Where AI fits (system-level view)}
+  \begin{itemize}
+    \item \textbf{Matching layer:} search, recommendations, ranking.
+    \item \textbf{Trust layer:} fraud/abuse detection, content moderation.
+    \item \textbf{Operations layer:} forecasting, replenishment, routing.
+    \item \textbf{Experience layer:} personalization and conversational commerce.
+  \end{itemize}
+\end{frame}
+
+\section{Hands-on (placeholder)}
+
+\begin{frame}{Hands-on (placeholder)}
+  \begin{itemize}
+    \item Create a one-page \emph{platform blueprint}: participant groups, value exchange, pricing model, and required capabilities.
+    \item Map capabilities to an EA view and identify which capabilities are ERP-owned vs commerce-owned.
+  \end{itemize}
+\end{frame}
+
+\end{document}

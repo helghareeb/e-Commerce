@@ -1,0 +1,205 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[Lecture 10]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\subtitle{Lecture 10: Fraud, Risk, and Trust \& Safety}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item Why fraud and trust \& safety matter
+    \item Fraud and abuse categories
+    \item Fraud as a machine learning problem
+    \item Signals and features for fraud detection
+    \item Rule-based systems
+    \item Hands-on lab: risk scoring and thresholding
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning objectives}
+  By the end of this lecture, you should be able to:
+  \begin{itemize}
+    \item Identify major categories of fraud and abuse in e-commerce, including payment fraud, account takeover, promotion abuse, and refund abuse.
+    \item Explain why fraud detection is a cost-sensitive, adversarial, and highly imbalanced decision problem.
+    \item Compare supervised learning, anomaly detection, graph-based methods, and rule+ML hybrid approaches.
+    \item Design a trust-and-safety workflow that combines scoring, thresholds, review operations, and business guardrails.
+  \end{itemize}
+\end{frame}
+
+\section{Why fraud and trust \& safety matter}
+
+\begin{frame}{Why fraud and trust \& safety matter}
+  \begin{itemize}
+    \item payment costs,
+    \item customer trust,
+    \item seller trust in marketplaces,
+    \item operational review burden,
+    \item promotional efficiency,
+    \item regulatory and compliance exposure.
+  \end{itemize}
+\end{frame}
+
+\section{Fraud and abuse categories}
+
+\begin{frame}{Fraud and abuse categories}
+  \begin{itemize}
+    \item \textbf{Payment fraud:} Payment fraud often involves stolen cards, synthetic identities, mule accounts, or coordinated abuse of payment flows.
+    \item \textbf{Account takeover:} Account takeover occurs when an attacker gains control of an existing customer account.
+    \item \textbf{Promotion and coupon abuse:} creating multiple accounts to redeem new-user offers,; coordinated coupon sharing,
+    \item \textbf{Refund and return abuse:} Refund abuse includes false non-delivery claims, empty-box returns, repeated wardrobing behavior, and manipulation of return policies.
+    \item \textbf{Marketplace and seller abuse:} counterfeit listings,; fake reviews,
+  \end{itemize}
+\end{frame}
+
+\section{Fraud as a machine learning problem}
+
+\begin{frame}{Fraud as a machine learning problem}
+  \begin{itemize}
+    \item \textbf{Class imbalance:} Fraudulent events are typically a small fraction of all transactions.
+    \item \textbf{Adversarial behavior:} Once a platform changes a rule or scoring model, attackers may alter devices, payment instruments, shipping behavior, or timing patterns.
+    \item \textbf{Label delay and label noise:} Ground truth often arrives late.
+    \item \textbf{Asymmetric costs:} False negatives lose money and trust.
+  \end{itemize}
+\end{frame}
+
+\section{Signals and features for fraud detection}
+
+\begin{frame}{Signals and features for fraud detection}
+  \begin{itemize}
+    \item \textbf{Transaction signals:} order value,; payment method,
+    \item \textbf{Account signals:} account age,; prior successful orders,
+    \item \textbf{Device and network signals:} device fingerprint,; IP reputation,
+    \item \textbf{Behavioral and sequence signals:} login and checkout timing,; session depth,
+  \end{itemize}
+\end{frame}
+
+\section{Rule-based systems}
+
+\begin{frame}{Rule-based systems}
+  \begin{itemize}
+    \item \textbf{Examples of useful rules:} block transactions from known bad cards or IPs,; trigger review if order value exceeds a threshold and account age is very low,
+    \item \textbf{Strengths and weaknesses:} deterministic policy enforcement,; emergency response,
+  \end{itemize}
+\end{frame}
+
+\section{Supervised learning}
+
+\begin{frame}{Supervised learning}
+  \begin{itemize}
+    \item \textbf{Typical model families:} logistic regression,; tree-based ensembles,
+    \item \textbf{Why supervised learning helps:} aggregating many weak predictors,; ranking risk more smoothly than rigid rules,
+    \item \textbf{Operational caution:} the quality of labels,; the recency of training data,
+  \end{itemize}
+\end{frame}
+
+\section{Anomaly detection}
+
+\begin{frame}{Anomaly detection}
+  \begin{itemize}
+    \item \textbf{What anomaly methods look for:} unusual transaction timing,; atypical device usage,
+    \item \textbf{Strengths and weaknesses:} Anomaly methods are useful for surfacing suspicious patterns and complementing supervised systems.
+  \end{itemize}
+\end{frame}
+
+\section{Graph-based fraud analysis}
+
+\begin{frame}{Graph-based fraud analysis}
+  \begin{itemize}
+    \item \textbf{Why graph structure matters:} many accounts linked to one device,; many cards shipping to related addresses,
+    \item \textbf{Graph features and graph ML:} connected-component and degree features,; shared-entity counts,
+  \end{itemize}
+\end{frame}
+
+\section{Hybrid rules + ML systems}
+
+\begin{frame}{Hybrid rules + ML systems}
+  \begin{itemize}
+    \item \textbf{Why hybrids work:} enforce mandatory blocks,; assign risk scores,
+    \item \textbf{Example decision flow:} apply deterministic policy rules,; compute risk score from supervised and anomaly signals,
+  \end{itemize}
+\end{frame}
+
+\section{Thresholds and decision economics}
+
+\begin{frame}{Thresholds and decision economics}
+  \begin{itemize}
+    \item \textbf{Approve, review, reject:} \textbf{Approve:} low-risk transactions proceed automatically.; \textbf{Review:} medium-risk cases go to human review or secondary checks.
+    \item \textbf{Cost-sensitive tuning:} fraud loss,; customer lifetime value,
+  \end{itemize}
+\end{frame}
+
+\section{Human-in-the-loop review}
+
+\begin{frame}{Human-in-the-loop review}
+  \begin{itemize}
+    \item \textbf{What reviewers need:} transaction history,; device and network context,
+    \item \textbf{Feedback loop:} rule refinement,; model retraining,
+  \end{itemize}
+\end{frame}
+
+\section{Fraud evaluation metrics}
+
+\begin{frame}{Fraud evaluation metrics}
+  \begin{itemize}
+    \item \textbf{Useful metrics:} precision,; recall,
+    \item \textbf{Business interpretation:} A model with strong recall but excessive false positives may block good customers.
+  \end{itemize}
+\end{frame}
+
+\section{Drift, adaptation, and monitoring}
+
+\begin{frame}{Drift, adaptation, and monitoring}
+  \begin{itemize}
+    \item \textbf{What to monitor:} score distribution shifts,; feature drift,
+    \item \textbf{Why monitoring is essential:} fraud patterns shift,; product flows change,
+  \end{itemize}
+\end{frame}
+
+\section{Trust \& safety beyond payment fraud}
+
+\begin{frame}{Trust \& safety beyond payment fraud}
+  \begin{itemize}
+    \item \textbf{Examples beyond transactions:} review authenticity,; marketplace seller compliance,
+    \item \textbf{Why this matters architecturally:} commerce events,; ERP refund records,
+  \end{itemize}
+\end{frame}
+
+\section{Hands-on lab: risk scoring and thresholding}
+
+\begin{frame}{Hands-on lab: risk scoring and thresholding}
+  \begin{itemize}
+    \item \textbf{Lab scenario:} Students are given a synthetic transaction dataset containing payment, account, device, and label information, plus estimated fraud-loss and false-positive costs.
+    \item \textbf{Lab tasks:} Build a baseline risk model using structured transaction and account features.; Compute precision, recall, and a cost-sensitive evaluation summary.
+    \item \textbf{Expected learning outcome:} By the end of the lab, students should be able to explain fraud detection as a staged decision system rather than a single prediction score.
+  \end{itemize}
+\end{frame}
+
+\section{Managerial implications}
+
+\begin{frame}{Managerial implications}
+  \begin{itemize}
+    \item clear policy,
+    \item strong data quality,
+    \item hybrid detection methods,
+    \item review operations,
+    \item and continuous monitoring.
+  \end{itemize}
+\end{frame}
+
+\end{document}

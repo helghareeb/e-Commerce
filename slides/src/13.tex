@@ -1,0 +1,251 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[Lecture 13]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\subtitle{Lecture 13: Security, Privacy, Compliance, and Responsible AI}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item Why this chapter matters
+    \item Security as a business capability
+    \item Threat modeling for e-commerce platforms
+    \item Identity, authentication, and access control
+    \item Payment security and transactional integrity
+    \item Managerial implications
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning objectives}
+  By the end of this lecture, you should be able to:
+  \begin{itemize}
+    \item explain how security, privacy, compliance, and responsible AI interact in e-commerce platforms;
+    \item identify major risks across payments, customer accounts, APIs, data pipelines, models, and LLM-enabled interfaces;
+    \item apply practical control patterns such as least privilege, data minimization, encryption, audit logging, and human oversight;
+    \item distinguish between technical controls, process controls, and governance controls;
+    \item design a risk assessment and operating model for AI features used in commerce.
+  \end{itemize}
+\end{frame}
+
+\section{Why this chapter matters}
+
+\begin{frame}{Why this chapter matters}
+  \begin{itemize}
+    \item Digital commerce systems sit at the intersection of money, identity, behavioral data, operational processes, and automated decision-making.
+    \item That combination makes them attractive to attackers and highly visible to regulators.
+    \item A mature commerce organization therefore does not treat security as a narrow infrastructure problem, or privacy as a legal afterthought, or responsible AI as a public-relations layer.
+  \end{itemize}
+\end{frame}
+
+\section{Security as a business capability}
+
+\begin{frame}{Security as a business capability}
+  \begin{itemize}
+    \item customer identities, credentials, sessions, and account recovery channels;
+    \item payment data, refund flows, stored tokens, and settlement operations;
+    \item order data, addresses, invoices, and operational records;
+    \item APIs, integrations, partner connections, and event streams;
+    \item training data, feature tables, prompts, model endpoints, and evaluation artifacts;
+    \item internal administrative tools used by support, finance, merchandising, and operations.
+  \end{itemize}
+\end{frame}
+
+\section{Threat modeling for e-commerce platforms}
+
+\begin{frame}{Threat modeling for e-commerce platforms}
+  \begin{itemize}
+    \item \textbf{Threat modeling example: intelligent customer support:} a user attempts to retrieve another customer's order details through prompt manipulation;; a malicious knowledge-base document contains adversarial instructions that alter model behavior;
+  \end{itemize}
+\end{frame}
+
+\section{Identity, authentication, and access control}
+
+\begin{frame}{Identity, authentication, and access control}
+  \begin{itemize}
+    \item strong password policies or passwordless flows;
+    \item multi-factor authentication for high-risk actions;
+    \item rate limiting and bot mitigation for login and recovery endpoints;
+    \item device, session, and anomaly-based risk checks;
+    \item secure handling of tokens, cookies, and session expiration.
+  \end{itemize}
+\end{frame}
+
+\section{Payment security and transactional integrity}
+
+\begin{frame}{Payment security and transactional integrity}
+  \begin{itemize}
+    \item minimize the platform's direct exposure to sensitive card data;
+    \item tokenize wherever possible rather than storing primary account details;
+    \item isolate payment services from broader application concerns;
+    \item treat refund and chargeback processes as security-sensitive workflows;
+    \item reconcile payment state carefully across commerce, ERP, and finance systems.
+  \end{itemize}
+\end{frame}
+
+\section{API and integration security}
+
+\begin{frame}{API and integration security}
+  \begin{itemize}
+    \item strong service authentication and secret management;
+    \item explicit authorization scopes for each API consumer;
+    \item request signing or mutual trust mechanisms for sensitive channels;
+    \item replay protection, schema validation, and rate limiting;
+    \item network segmentation and environment isolation;
+    \item monitoring of abnormal patterns in partner or service-to-service traffic.
+  \end{itemize}
+\end{frame}
+
+\section{Data protection and privacy-by-design}
+
+\begin{frame}{Data protection and privacy-by-design}
+  \begin{itemize}
+    \item \textbf{Data minimization in AI systems:} features required for the current decision use case;; features that are merely easy to collect;
+  \end{itemize}
+\end{frame}
+
+\section{Compliance in the commerce environment}
+
+\begin{frame}{Compliance in the commerce environment}
+  \begin{itemize}
+    \item classification of data types and processing activities;
+    \item control mapping to systems, teams, and vendors;
+    \item evidence generation through logs, approvals, and documented processes;
+    \item periodic reviews of access, retention, change management, and incident handling;
+    \item traceability between declared policy and operational reality.
+  \end{itemize}
+\end{frame}
+
+\section{Responsible AI in e-commerce}
+
+\begin{frame}{Responsible AI in e-commerce}
+  \begin{itemize}
+    \item \textbf{High-risk and low-risk AI use cases:} under-governing important systems, which creates real harm;; over-governing trivial systems, which creates bureaucracy without proportional benefit.
+  \end{itemize}
+\end{frame}
+
+\section{Bias, proxies, and unintended discrimination}
+
+\begin{frame}{Bias, proxies, and unintended discrimination}
+  \begin{itemize}
+    \item a fraud model disproportionately challenging transactions from certain neighborhoods or regions;
+    \item a promotion optimization engine steering premium offers toward already advantaged segments;
+    \item a ranking model reducing visibility for small sellers because historic click-through favors large brands;
+    \item a support triage model assigning slower service to users whose writing style or language differs from the majority training set.
+  \end{itemize}
+\end{frame}
+
+\section{Explainability, contestability, and customer trust}
+
+\begin{frame}{Explainability, contestability, and customer trust}
+  \begin{itemize}
+    \item engineers need diagnostic explanations to debug systems;
+    \item business owners need performance explanations to manage tradeoffs;
+    \item auditors need traceable evidence of control operation;
+    \item customers need plain-language explanations and escalation paths when outcomes affect them materially.
+  \end{itemize}
+\end{frame}
+
+\section{LLM-specific risks and controls}
+
+\begin{frame}{LLM-specific risks and controls}
+  \begin{itemize}
+    \item hallucinated answers about refunds, shipping, warranties, or policy;
+    \item prompt injection through customer messages, seller content, or retrieved documents;
+    \item leakage of personal or confidential data through prompts or logs;
+    \item unsafe action execution when the model is connected to tools;
+    \item over-automation that removes human review from sensitive decisions.
+    \item scoped retrieval and access filtering;
+  \end{itemize}
+\end{frame}
+
+\section{Logging, monitoring, and auditability}
+
+\begin{frame}{Logging, monitoring, and auditability}
+  \begin{itemize}
+    \item structured logs with consistent identifiers across systems;
+    \item versioning of models, prompts, rules, and datasets;
+    \item records of approvals, overrides, and policy exceptions;
+    \item separation of operational logs from broad user-accessible analytics;
+    \item retention policies that preserve evidence without creating unnecessary data exposure.
+  \end{itemize}
+\end{frame}
+
+\section{Incident response and crisis handling}
+
+\begin{frame}{Incident response and crisis handling}
+  \begin{itemize}
+    \item detection channels and severity criteria;
+    \item ownership across engineering, security, legal, operations, and communications;
+    \item containment steps for account abuse, data leakage, fraudulent activity, or harmful model behavior;
+    \item evidence preservation requirements;
+    \item decision rules for customer notification, regulator engagement, and vendor escalation;
+    \item post-incident review and control improvement workflows.
+  \end{itemize}
+\end{frame}
+
+\section{Operating model: who owns what}
+
+\begin{frame}{Operating model: who owns what}
+  \begin{itemize}
+    \item product owners to define acceptable use and business outcomes;
+    \item engineering teams to implement security and reliability controls;
+    \item data and ML teams to manage datasets, models, evaluation, and monitoring;
+    \item security and privacy specialists to set standards, review risks, and support investigations;
+    \item legal and compliance teams to interpret obligations and approve control approaches;
+    \item frontline operations to handle escalations, appeals, and exception workflows.
+  \end{itemize}
+\end{frame}
+
+\section{A practical risk assessment template}
+
+\begin{frame}{A practical risk assessment template}
+  \begin{itemize}
+    \item What decision or assistance function does the system perform?
+    \item Who is affected by the output: customer, seller, employee, or partner?
+    \item What data is used, and which fields are sensitive?
+    \item Could the system materially affect access, price, eligibility, safety, or reputation?
+    \item What failure modes are plausible, and how severe are they?
+    \item What human review, override, or appeal path exists?
+  \end{itemize}
+\end{frame}
+
+\section{Managerial implications}
+
+\begin{frame}{Managerial implications}
+  \begin{itemize}
+    \item Executives often ask whether stronger controls slow innovation.
+    \item In reality, the absence of controls slows scaling.
+    \item Teams that do not know which data they can use, which actions models may take, which approvals are required, or how incidents will be handled tend to move either recklessly or not at all.
+  \end{itemize}
+\end{frame}
+
+\section{Hands-on lab: assessing an AI returns assistant}
+
+\begin{frame}{Hands-on lab: assessing an AI returns assistant}
+  \begin{itemize}
+    \item security: can the assistant expose the wrong order or trigger unauthorized actions?
+    \item privacy: what personal data is retrieved, logged, or retained?
+    \item compliance: are policy promises, consumer rights, and escalation requirements reflected in the workflow?
+    \item responsible AI: could the assistant generate misleading answers, treat some users unfairly, or deny effective recourse?
+    \item a simple architecture diagram;
+    \item a list of assets and trust boundaries;
+  \end{itemize}
+\end{frame}
+
+\end{document}

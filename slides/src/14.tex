@@ -1,0 +1,253 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[Lecture 14]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\subtitle{Lecture 14: Capstone: Enterprise-Grade AI E-Commerce Architecture}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item Capstone scenario
+    \item Purpose of the capstone
+    \item The company context
+    \item Capstone design question
+    \item Expected architectural scope
+    \item Final reflection
+  \end{enumerate}
+\end{frame}
+
+\section{Capstone scenario}
+
+\begin{frame}{Capstone scenario}
+  \begin{itemize}
+    \item Scenario: an end-to-end "AI commerce + Odoo" reference architecture for a single company.
+    \item Goal: demonstrate enterprise architecture alignment, ERP integration, and measurable AI value with operational readiness.
+    \item Business model: hybrid B2C + B2B commerce.
+    \item Commerce front-end: compare Odoo Website/eCommerce with a separate headless storefront integrated to Odoo.
+    \item AI stack: combine classical ML, deep learning, and LLM-based service automation where justified.
+  \end{itemize}
+\end{frame}
+
+\section{Purpose of the capstone}
+
+\begin{frame}{Purpose of the capstone}
+  \begin{itemize}
+    \item The capstone is the point at which isolated topics become a system.
+    \item Earlier chapters covered platforms, data foundations, enterprise architecture, integration, ERP connectivity, recommender systems, pricing, fraud, LLM support, MLOps, security, and governance.
+    \item In real enterprises, however, these elements do not operate as separate course modules.
+  \end{itemize}
+\end{frame}
+
+\section{The company context}
+
+\begin{frame}{The company context}
+  \begin{itemize}
+    \item increase online conversion and average order value;
+    \item improve cross-sell and upsell performance;
+    \item reduce fraud losses and operational false positives;
+    \item shorten support resolution time while maintaining policy compliance;
+    \item improve inventory visibility and order orchestration across channels;
+    \item establish a governed AI operating model that can scale beyond a single experiment.
+  \end{itemize}
+\end{frame}
+
+\section{Capstone design question}
+
+\begin{frame}{Capstone design question}
+  \begin{itemize}
+    \item Students must answer one central question: This question is intentionally broader than a software implementation exercise.
+    \item It requires decisions about system boundaries, ownership, integration patterns, data products, operating model, risk controls, and business metrics.
+  \end{itemize}
+\end{frame}
+
+\section{Expected architectural scope}
+
+\begin{frame}{Expected architectural scope}
+  \begin{itemize}
+    \item customer and business-facing channels;
+    \item commerce application services;
+    \item enterprise systems such as ERP, CRM, WMS, and finance processes;
+    \item integration patterns across synchronous and asynchronous flows;
+    \item data ingestion, storage, analytics, and feature computation layers;
+    \item ML and LLM services for prioritized use cases;
+  \end{itemize}
+\end{frame}
+
+\section{Business capabilities and value streams}
+
+\begin{frame}{Business capabilities and value streams}
+  \begin{itemize}
+    \item product and catalog management;
+    \item customer identity and account management;
+    \item search, browse, and personalization;
+    \item cart, checkout, payment, and order capture;
+    \item inventory visibility and fulfillment orchestration;
+    \item returns, refunds, and service case management;
+  \end{itemize}
+\end{frame}
+
+\section{Reference solution shape}
+
+\begin{frame}{Reference solution shape}
+  \begin{itemize}
+    \item \textbf{Channel layer:} a branded web storefront for B2C;; a self-service portal for B2B customers with negotiated pricing and account hierarchies;
+    \item \textbf{Commerce services layer:} catalog and content services;; pricing and promotion services;
+    \item \textbf{Enterprise systems layer:} sales order management;; inventory and warehouse operations;
+  \end{itemize}
+\end{frame}
+
+\section{Integration architecture}
+
+\begin{frame}{Integration architecture}
+  \begin{itemize}
+    \item \textbf{Synchronous interactions:} product detail retrieval;; price and promotion lookup;
+    \item \textbf{Asynchronous interactions:} order-created and payment-settled events;; inventory updates;
+    \item \textbf{Integration design decisions:} which systems publish canonical events;; how idempotency and replay are handled;
+  \end{itemize}
+\end{frame}
+
+\section{Data and analytics architecture}
+
+\begin{frame}{Data and analytics architecture}
+  \begin{itemize}
+    \item behavioral event collection from channels;
+    \item operational data from commerce and Odoo processes;
+    \item curated analytical models for orders, customers, products, and inventory;
+    \item experiment and campaign measurement tables;
+    \item feature pipelines for ML use cases;
+    \item dashboards and semantic metrics for business teams.
+  \end{itemize}
+\end{frame}
+
+\section{AI use-case portfolio}
+
+\begin{frame}{AI use-case portfolio}
+  \begin{itemize}
+    \item \textbf{Recommended initial use cases:} recommender systems for personalized ranking, related products, and bundle suggestions;; pricing and promotion analytics for elasticity-aware offers and margin protection;
+    \item \textbf{Use-case selection logic:} expected business value;; availability and quality of data;
+  \end{itemize}
+\end{frame}
+
+\section{Target operating model}
+
+\begin{frame}{Target operating model}
+  \begin{itemize}
+    \item product management to define business objectives and backlog priorities;
+    \item commerce engineering to own channel and transaction experiences;
+    \item enterprise applications teams to own Odoo processes and integrations;
+    \item data engineering to own data pipelines, contracts, and curated datasets;
+    \item ML engineering or applied science to own models, experimentation, and monitoring;
+    \item security, privacy, and compliance functions to govern sensitive use cases;
+  \end{itemize}
+\end{frame}
+
+\section{Security, privacy, and responsible AI controls}
+
+\begin{frame}{Security, privacy, and responsible AI controls}
+  \begin{itemize}
+    \item identity and access control across customer, partner, and staff roles;
+    \item payment and transaction security;
+    \item encryption, secret handling, and audit logging;
+    \item data minimization and retention;
+    \item model and LLM governance for high-impact use cases;
+    \item human review and override paths;
+  \end{itemize}
+\end{frame}
+
+\section{MLOps and production readiness}
+
+\begin{frame}{MLOps and production readiness}
+  \begin{itemize}
+    \item reproducible training and evaluation workflows;
+    \item model registration and release approval;
+    \item monitoring for technical, model, and business metrics;
+    \item retraining or rollback triggers;
+    \item feature consistency controls between training and serving;
+    \item logging and traceability for audits and incident analysis.
+  \end{itemize}
+\end{frame}
+
+\section{Evaluation framework}
+
+\begin{frame}{Evaluation framework}
+  \begin{itemize}
+    \item \textbf{Business value:} conversion rate;; average order value;
+    \item \textbf{Technical fitness:} architectural coherence;; correctness of system boundaries;
+    \item \textbf{Operational credibility:} Can this design actually be implemented by a real organization?; Are roles and ownership explicit?
+  \end{itemize}
+\end{frame}
+
+\section{Capstone deliverables}
+
+\begin{frame}{Capstone deliverables}
+  \begin{itemize}
+    \item \textbf{Optional technical annexes:} sample API contracts;; event schemas;
+  \end{itemize}
+\end{frame}
+
+\section{Suggested delivery sequence}
+
+\begin{frame}{Suggested delivery sequence}
+  \begin{itemize}
+    \item define the business strategy, operating context, and priority value streams;
+    \item map business capabilities and pain points in the current state;
+    \item define the target architecture and key system boundaries;
+    \item select AI use cases and justify them with measurable value hypotheses;
+    \item specify integration, data, and governance mechanisms;
+    \item define rollout phases, metrics, and risks;
+  \end{itemize}
+\end{frame}
+
+\section{Common failure modes in student capstones}
+
+\begin{frame}{Common failure modes in student capstones}
+  \begin{itemize}
+    \item treating every system as equally important rather than identifying the architectural core;
+    \item proposing AI use cases without sufficient data, ownership, or evaluation logic;
+    \item ignoring ERP and operational process realities in favor of front-end innovation;
+    \item omitting security, privacy, and governance until the last page;
+    \item drawing integrations without clarifying system-of-record boundaries;
+    \item assuming that good offline model performance automatically means business value.
+  \end{itemize}
+\end{frame}
+
+\section{Worked example: hybrid headless commerce with Odoo backbone}
+
+\begin{frame}{Worked example: hybrid headless commerce with Odoo backbone}
+  \begin{itemize}
+    \item the storefront delivers flexible customer experience and experimentation velocity;
+    \item pricing, promotion, and catalog services expose reusable APIs to both channels;
+    \item Odoo handles order orchestration, inventory, procurement, invoicing, and finance synchronization;
+    \item an event bus distributes order, payment, inventory, and behavior events;
+    \item a data platform supports experimentation, recommender training, fraud analytics, and management reporting;
+    \item LLM-based support tools assist agents but do not execute sensitive actions without policy controls.
+  \end{itemize}
+\end{frame}
+
+\section{Final reflection}
+
+\begin{frame}{Final reflection}
+  \begin{itemize}
+    \item The purpose of the capstone is not to prove that one tool or architecture style is universally best.
+    \item It is to show that enterprise e-commerce is a system of systems.
+    \item Channels, enterprise operations, data products, AI services, controls, and organizational responsibilities must align if the business wants durable value.
+  \end{itemize}
+\end{frame}
+
+\end{document}

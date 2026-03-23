@@ -4,6 +4,32 @@ This repository contains the LaTeX source for the book *AI-Driven E-Commerce Sys
 
 The current cover metadata identifies the book as authored by **Haitham A. El-Ghareeb**, Associate Professor, Information Systems Department, Faculty of Computers and Information Sciences, Mansoura University, Egypt.
 
+## License and Reuse
+
+The content of this repository is licensed under **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**.
+
+This means readers may:
+
+- read, download, copy, print, and share the material;
+- reuse and adapt the material for educational and other non-commercial purposes;
+- redistribute excerpts or derived educational material, provided attribution is preserved.
+
+This also means users must:
+
+- credit **Haitham A. El-Ghareeb** as the author;
+- reference this repository when reusing the content;
+- link to the CC BY-NC 4.0 license;
+- indicate whether changes were made;
+- not use the repository content for commercial purposes without separate permission.
+
+Recommended attribution:
+
+```text
+Haitham A. El-Ghareeb, AI-Driven E-Commerce Systems: Architecture, Data, Intelligence, and Operations, GitHub repository: https://github.com/helghareeb/e-Commerce
+```
+
+See [LICENSE](LICENSE) for the repository license text and [CITATION.cff](CITATION.cff) for citation metadata.
+
 ## Project Nature
 
 The manuscript is written as a continuous book rather than a slide deck or disconnected weekly notes. Its scope combines:
@@ -77,4 +103,4 @@ If only text changes are made without bibliography updates, two `pdflatex` passe
 - The front matter has been converted to a proper preface, so Chapter 1 is the first numbered chapter in the book.
 - The chapter titles no longer carry `(Week ...)` suffixes; the chapter numbers already provide sequencing.
 - Several long chapter titles use shortened running-head forms in LaTeX to keep page headers clean while preserving full chapter titles in the text.
-- Generated LaTeX artifacts such as `main.aux`, `main.out`, `main.toc`, and `main.pdf` are currently tracked in the repository.
+- Generated LaTeX build intermediates are ignored; source files and selected compiled PDFs remain in the repository.

@@ -1,0 +1,157 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[Lecture 03]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\subtitle{Lecture 03: E-Commerce Data Foundations: Events, Experimentation, and Metrics}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item Why data foundations matter
+    \item From business process to event model
+    \item Event schema design
+    \item Identity resolution and entity modeling
+    \item Data quality as a product requirement
+    \item Hands-on lab: build a minimal metrics layer
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning objectives}
+  By the end of this lecture, you should be able to:
+  \begin{itemize}
+    \item Design an event-driven data model for storefront, marketplace, and mobile commerce scenarios.
+    \item Distinguish identifiers, identities, sessions, and entities across operational and analytical systems.
+    \item Explain how attribution, data quality, and metric definitions affect decision-making and ML performance.
+    \item Plan controlled experiments and understand when adaptive approaches such as bandits are appropriate.
+  \end{itemize}
+\end{frame}
+
+\section{Why data foundations matter}
+
+\begin{frame}{Why data foundations matter}
+  \begin{itemize}
+    \item Product analytics and funnel analysis
+    \item Operational reporting across commerce and ERP systems
+    \item Reliable feature generation for ML models
+    \item Controlled online experimentation
+    \item Governance, auditing, and cross-functional alignment
+  \end{itemize}
+\end{frame}
+
+\section{From business process to event model}
+
+\begin{frame}{From business process to event model}
+  \begin{itemize}
+    \item \textbf{Events versus state:} \textbf{State} answers "what is true now?" Examples: current inventory, current product price, current loyalty tier.; \textbf{Events} answer "what happened?" Examples: product viewed, cart updated, payment failed, order shipped.
+    \item \textbf{Event taxonomies:} \textbf{Discovery events:} homepage viewed, category viewed, search submitted, filter applied, result clicked.; \textbf{Consideration events:} product viewed, review expanded, comparison opened, wishlist updated.
+  \end{itemize}
+\end{frame}
+
+\section{Event schema design}
+
+\begin{frame}{Event schema design}
+  \begin{itemize}
+    \item \textbf{Required design principles:} \textbf{Business semantics before UI semantics:} schemas should reflect domain meaning, not implementation accidents.; \textbf{Stable field names:} renaming fields casually breaks dashboards, pipelines, and models.
+    \item \textbf{Example event record:} The following conceptual record shows how a product view may be represented: The example illustrates an important practice: authenticated and anonymous identifiers may coexist.
+  \end{itemize}
+\end{frame}
+
+\section{Identity resolution and entity modeling}
+
+\begin{frame}{Identity resolution and entity modeling}
+  \begin{itemize}
+    \item \textbf{Identifiers are not interchangeable:} \textbf{User/account ID:} application-level identity for authentication and personalization.; \textbf{Customer/partner ID:} commercial identity used in ERP, billing, and support.
+    \item \textbf{Identity stitching:} linking a guest cart to a logged-in account after authentication,; attaching a mobile device history to a user after sign-in,
+    \item \textbf{Privacy-aware identity design:} minimizing collection of directly identifying information,; separating analytical IDs from operational personal data where possible,
+  \end{itemize}
+\end{frame}
+
+\section{Data quality as a product requirement}
+
+\begin{frame}{Data quality as a product requirement}
+  \begin{itemize}
+    \item \textbf{Data contracts:} event name and schema,; field definitions and allowed values,
+    \item \textbf{Validation and observability:} row-count anomalies by event family,; null-rate spikes in required fields,
+  \end{itemize}
+\end{frame}
+
+\section{Attribution and its limits}
+
+\begin{frame}{Attribution and its limits}
+  \begin{itemize}
+    \item \textbf{Common attribution models:} \textbf{Last-touch attribution:} credits the final recorded touchpoint before conversion.; \textbf{First-touch attribution:} credits the earliest touchpoint in the conversion path.
+    \item \textbf{Selection bias and measurement bias:} \textbf{Selection bias:} users exposed to an experience may differ systematically from users who are not.; \textbf{Survivorship bias:} only recorded users or channels appear in the analysis.
+  \end{itemize}
+\end{frame}
+
+\section{Metrics layers and decision quality}
+
+\begin{frame}{Metrics layers and decision quality}
+  \begin{itemize}
+    \item \textbf{North Star and supporting metrics:} traffic volume,; product-detail engagement,
+    \item \textbf{Metric dimensions:} channel (web, app, store-assisted, marketplace),; customer segment (new, returning, VIP, B2B account tier),
+    \item \textbf{Retention and cohort logic:} Did the user return to browse?; Did the user make another purchase?
+  \end{itemize}
+\end{frame}
+
+\section{Experimentation in e-commerce}
+
+\begin{frame}{Experimentation in e-commerce}
+  \begin{itemize}
+    \item \textbf{A/B testing fundamentals:} \textbf{Unit of randomization:} user, session, device, seller, or region.; \textbf{Exposure logic:} where and when eligibility is checked.
+    \item \textbf{Common experimental pitfalls:} \textbf{Contamination:} the same user sees both variants through multiple devices or sessions.; \textbf{Novelty effects:} short-term excitement masks weak long-term performance.
+    \item \textbf{Bandits and adaptive experimentation:} promotions on fast-moving catalogs,; ranking widgets with many interchangeable treatments,
+  \end{itemize}
+\end{frame}
+
+\section{From analytics to machine learning features}
+
+\begin{frame}{From analytics to machine learning features}
+  \begin{itemize}
+    \item recent category views for recommendation,
+    \item failed login or payment attempts for fraud detection,
+    \item coupon usage history for promotion targeting,
+    \item time since last order for churn models,
+    \item return behavior and order defects for seller-quality models.
+  \end{itemize}
+\end{frame}
+
+\section{Hands-on lab: build a minimal metrics layer}
+
+\begin{frame}{Hands-on lab: build a minimal metrics layer}
+  \begin{itemize}
+    \item \textbf{Lab scenario:} Assume a storefront emits five core events: , , , , and .
+    \item \textbf{Lab tasks:} Create a canonical event table with required fields, event validation flags, and ingestion metadata.; Build daily metrics for sessions, product views, add-to-cart rate, checkout-start rate, purchase conversion rate, and day-7 repeat purchase.
+    \item \textbf{Expected learning outcome:} By the end of the lab, students should be able to explain why a metric is not just an aggregation, but the result of event design choices, identity assumptions, and validation rules.
+  \end{itemize}
+\end{frame}
+
+\section{Managerial and architectural implications}
+
+\begin{frame}{Managerial and architectural implications}
+  \begin{itemize}
+    \item Which identifiers are authoritative, and where are they mastered?
+    \item Which events belong in the clickstream versus operational event streams?
+    \item How are storefront events linked to ERP objects such as orders, invoices, and shipments?
+    \item What happens when a schema changes in the storefront while ERP integrations remain stable, or vice versa?
+    \item Who approves metric definitions that drive executive dashboards and model targets?
+  \end{itemize}
+\end{frame}
+
+\end{document}

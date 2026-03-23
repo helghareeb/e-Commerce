@@ -1,0 +1,184 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[Lecture 05]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\subtitle{Lecture 05: Enterprise Integration Patterns for E-Commerce}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item Why integration patterns matter
+    \item Integration styles
+    \item Choosing the right integration style
+    \item API-first integration
+    \item Idempotency
+    \item Hands-on lab: modeling an order lifecycle
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning objectives}
+  By the end of this lecture, you should be able to:
+  \begin{itemize}
+    \item Compare synchronous APIs, asynchronous events, and batch integrations in enterprise commerce environments.
+    \item Explain why reliability patterns such as idempotency, retries, dead-letter handling, and the outbox pattern are essential in distributed commerce systems.
+    \item Design integration contracts that reduce coupling between storefront, ERP, payment, logistics, and data platforms.
+    \item Evaluate integration choices in terms of latency, resilience, consistency, and operational complexity.
+  \end{itemize}
+\end{frame}
+
+\section{Why integration patterns matter}
+
+\begin{frame}{Why integration patterns matter}
+  \begin{itemize}
+    \item E-commerce systems rarely operate as a single application.
+    \item Even a modest commerce stack may involve a storefront, search service, promotions engine, payment provider, ERP, warehouse system, shipping partner, CRM, and analytics platform.
+    \item These systems must exchange data continuously while still tolerating delays, retries, outages, and partial failures.
+  \end{itemize}
+\end{frame}
+
+\section{Integration styles}
+
+\begin{frame}{Integration styles}
+  \begin{itemize}
+    \item \textbf{Synchronous request-response:} payment authorization during checkout,; tax estimation,
+    \item \textbf{Asynchronous events:} \texttt{OrderCreated},; \texttt{InvoicePosted},
+    \item \textbf{Batch and file-based integration:} latency requirements are low,; partner systems are legacy or externally controlled,
+  \end{itemize}
+\end{frame}
+
+\section{Choosing the right integration style}
+
+\begin{frame}{Choosing the right integration style}
+  \begin{itemize}
+    \item \textbf{Questions to ask:} Does the user or operator need an immediate answer?; What is the tolerance for stale data or delayed propagation?
+    \item \textbf{Typical choices in commerce:} \textbf{Checkout payment authorization:} usually synchronous because the customer needs immediate confirmation.; \textbf{Order export to ERP:} often asynchronous because the storefront should not block on internal back-office processing.
+  \end{itemize}
+\end{frame}
+
+\section{API-first integration}
+
+\begin{frame}{API-first integration}
+  \begin{itemize}
+    \item \textbf{Good API design principles:} Model APIs around business resources and actions, not internal database tables.; Make required fields, validation rules, and error semantics explicit.
+    \item \textbf{Commands versus queries:} \textbf{Queries:} read current information, such as "get available shipping options."; \textbf{Commands:} request a state change, such as "create order" or "capture payment."
+  \end{itemize}
+\end{frame}
+
+\section{Idempotency}
+
+\begin{frame}{Idempotency}
+  \begin{itemize}
+    \item \textbf{Why idempotency is required:} Networks fail in ambiguous ways.
+    \item \textbf{Idempotency keys:} making the key stable for a business attempt,; scoping it to the operation type,
+  \end{itemize}
+\end{frame}
+
+\section{Events and event-driven architecture}
+
+\begin{frame}{Events and event-driven architecture}
+  \begin{itemize}
+    \item \textbf{Domain events versus technical events:} \textbf{Domain events:} meaningful business facts such as \texttt{OrderCanceled}.; \textbf{Technical events:} operational notifications such as cache refresh or job completion.
+    \item \textbf{Benefits of event-driven integration:} Producers and consumers can evolve more independently.; Multiple downstream systems can react to the same fact.
+    \item \textbf{Costs of event-driven integration:} Debugging becomes harder because workflows are distributed across time and services.; Consumers must tolerate reordering, duplication, and replay.
+  \end{itemize}
+\end{frame}
+
+\section{Reliability patterns in distributed workflows}
+
+\begin{frame}{Reliability patterns in distributed workflows}
+  \begin{itemize}
+    \item \textbf{Retries and backoff:} Transient failures are normal.
+    \item \textbf{Dead-letter handling:} If a message repeatedly fails processing, it should not block the entire flow indefinitely.
+    \item \textbf{Timeouts and circuit breakers:} temporarily disabling a non-critical recommendation widget,; falling back to cached delivery promises,
+    \item \textbf{Reconciliation jobs:} Not all inconsistencies can be prevented in real time.
+  \end{itemize}
+\end{frame}
+
+\section{The outbox pattern}
+
+\begin{frame}{The outbox pattern}
+  \begin{itemize}
+    \item \textbf{How the outbox pattern works:} writing the business state change and an "outbox record" in the same local transaction,; then having a separate relay process publish the outbox record to the event broker,
+    \item \textbf{Why it matters in commerce:} Commerce workflows are especially sensitive to dual-write failures because duplicated or missing side effects can affect revenue, customer trust, and financial records.
+  \end{itemize}
+\end{frame}
+
+\section{Message contracts and schema governance}
+
+\begin{frame}{Message contracts and schema governance}
+  \begin{itemize}
+    \item \textbf{What a contract should define:} message or API name,; required and optional fields,
+    \item \textbf{Backward compatibility:} adding optional fields rather than repurposing existing ones,; preserving existing semantics across versions,
+  \end{itemize}
+\end{frame}
+
+\section{Observability for integrations}
+
+\begin{frame}{Observability for integrations}
+  \begin{itemize}
+    \item \textbf{Minimum signals:} \textbf{Logs:} structured records with correlation IDs, idempotency keys, and error codes.; \textbf{Metrics:} request rates, latency, failure rates, retry counts, dead-letter counts, consumer lag.
+    \item \textbf{Correlation and traceability:} Cross-system workflows should carry shared identifiers such as order ID, correlation ID, and experiment or campaign context where relevant.
+  \end{itemize}
+\end{frame}
+
+\section{iPaaS, ESB, brokers, and workflow orchestration}
+
+\begin{frame}{iPaaS, ESB, brokers, and workflow orchestration}
+  \begin{itemize}
+    \item \textbf{iPaaS and ESB concepts:} \textbf{ESB-style platforms:} historically emphasized centralized mediation, transformation, and routing.; \textbf{iPaaS platforms:} emphasize managed connectors, workflow automation, and cloud integration convenience.
+    \item \textbf{Event brokers and streams:} Message brokers and streaming platforms provide transport for asynchronous communication.
+    \item \textbf{Workflow orchestration:} Some workflows are easier to manage with explicit orchestration, especially long-running processes such as returns handling, supplier exceptions, or manual fraud review.
+  \end{itemize}
+\end{frame}
+
+\section{Integration anti-patterns}
+
+\begin{frame}{Integration anti-patterns}
+  \begin{itemize}
+    \item direct database-to-database coupling across domains,
+    \item duplicating business rules independently in multiple systems,
+    \item publishing events without stable schemas or owners,
+    \item assuming exactly-once delivery where only at-least-once semantics are realistic,
+    \item using synchronous calls for every workflow step,
+    \item and treating reconciliation as proof that real-time design can be ignored.
+  \end{itemize}
+\end{frame}
+
+\section{Hands-on lab: modeling an order lifecycle}
+
+\begin{frame}{Hands-on lab: modeling an order lifecycle}
+  \begin{itemize}
+    \item \textbf{Lab scenario:} Assume a headless storefront, a payment service, an order service, Odoo, and a shipment service.
+    \item \textbf{Lab tasks:} Identify which interactions are synchronous and which are asynchronous.; Define an idempotency strategy for order creation and payment capture.
+    \item \textbf{Expected learning outcome:} By the end of the lab, students should be able to explain integration design in terms of business guarantees rather than technology labels alone.
+  \end{itemize}
+\end{frame}
+
+\section{Managerial and architectural implications}
+
+\begin{frame}{Managerial and architectural implications}
+  \begin{itemize}
+    \item synchronous calls where immediate business decisions are required,
+    \item events where decoupling and fan-out matter,
+    \item batch where latency is not critical,
+    \item and governance across all three.
+  \end{itemize}
+\end{frame}
+
+\end{document}

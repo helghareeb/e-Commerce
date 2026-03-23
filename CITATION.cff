@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "AI-Driven E-Commerce Systems: Architecture, Data, Intelligence, and Operations"
+message: "If you use this repository or reuse its content, please cite the repository."
+type: book
+authors:
+  - family-names: "El-Ghareeb"
+    given-names: "Haitham A."
+repository-code: "https://github.com/helghareeb/e-Commerce"
+license: "CC-BY-NC-4.0"
+abstract: "Book-length LaTeX manuscript and lecture slides on AI-driven e-commerce systems, enterprise architecture, data foundations, and applied machine learning."

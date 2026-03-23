@@ -1,0 +1,194 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\title[Lecture 07]{An Introduction to E-Commerce\\\small with a Focus on Machine Learning, Deep Learning, and Artificial Intelligence}
+\subtitle{Lecture 07: Recommenders I: Classical Methods + Learning-to-Rank}
+\author{Dr. Haitham A. El-Ghareeb}
+\institute{Faculty of Computers and Information Sciences \\ Mansoura University \\ Egypt}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Session plan (90 minutes)}
+  \begin{enumerate}
+    \item Why recommenders matter in e-commerce
+    \item Recommendation surfaces and tasks
+    \item Feedback in commerce recommendation
+    \item Memory-based collaborative filtering
+    \item Matrix factorization
+    \item Hands-on lab: a baseline recommender
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning objectives}
+  By the end of this lecture, you should be able to:
+  \begin{itemize}
+    \item Explain the business role of recommendation and ranking systems in e-commerce discovery.
+    \item Distinguish memory-based collaborative filtering, matrix factorization, and learning-to-rank approaches.
+    \item Understand the difference between explicit and implicit feedback, and why e-commerce is usually dominated by implicit signals.
+    \item Evaluate recommendation systems using offline ranking metrics while recognizing the limits of offline evaluation.
+  \end{itemize}
+\end{frame}
+
+\section{Why recommenders matter in e-commerce}
+
+\begin{frame}{Why recommenders matter in e-commerce}
+  \begin{itemize}
+    \item product discovery,
+    \item cross-sell and upsell,
+    \item session continuation,
+    \item re-engagement,
+    \item merchandising efficiency,
+    \item and marketplace supply exposure.
+  \end{itemize}
+\end{frame}
+
+\section{Recommendation surfaces and tasks}
+
+\begin{frame}{Recommendation surfaces and tasks}
+  \begin{itemize}
+    \item \textbf{Common recommendation tasks:} \textbf{Homepage recommendations:} highlight likely-interest products for returning or anonymous users.; \textbf{Product detail recommendations:} suggest similar, complementary, or substitute items.
+    \item \textbf{Retrieval versus ranking:} \textbf{Candidate generation:} find a manageable subset of items from a very large catalog.; \textbf{Ranking or re-ranking:} order the candidates for the current context.
+  \end{itemize}
+\end{frame}
+
+\section{Feedback in commerce recommendation}
+
+\begin{frame}{Feedback in commerce recommendation}
+  \begin{itemize}
+    \item \textbf{Explicit feedback:} star ratings,; likes or dislikes,
+    \item \textbf{Implicit feedback:} clicks,; product views,
+    \item \textbf{Signal strength:} a purchase usually signals stronger intent than a click,; an add-to-cart event may indicate interest but not final preference,
+  \end{itemize}
+\end{frame}
+
+\section{Memory-based collaborative filtering}
+
+\begin{frame}{Memory-based collaborative filtering}
+  \begin{itemize}
+    \item \textbf{User-based collaborative filtering:} define a user--item interaction matrix $R=[r_{ui}]$,; compute user-user similarity,
+    \item \textbf{Item-based collaborative filtering:} "similar items",; "customers also bought",
+    \item \textbf{Similarity measures:} Common similarity measures include cosine similarity, Pearson correlation, and co-occurrence-based heuristics.
+  \end{itemize}
+\end{frame}
+
+\section{Matrix factorization}
+
+\begin{frame}{Matrix factorization}
+  \begin{itemize}
+    \item \textbf{Basic idea:} Learn latent user and item factors, then score items from their interaction strength.
+    \item \textbf{Why factorization works well:} it compresses sparse interactions into learnable structure,; it generalizes beyond direct co-occurrence,
+    \item \textbf{Limitations:} it handles cold-start users and items poorly without additional features,; it may ignore rich session context,
+  \end{itemize}
+\end{frame}
+
+\section{Implicit-feedback recommendation}
+
+\begin{frame}{Implicit-feedback recommendation}
+  \begin{itemize}
+    \item \textbf{Positive-only observations:} sampling unobserved items as negatives,; weighting confidence by interaction type,
+    \item \textbf{Confidence weighting:} purchase $>$ add-to-cart $>$ click $>$ impression,; repeat purchase may strengthen confidence,
+  \end{itemize}
+\end{frame}
+
+\section{Cold start and sparsity}
+
+\begin{frame}{Cold start and sparsity}
+  \begin{itemize}
+    \item \textbf{User cold start:} popularity-based defaults,; category-entry onboarding questions,
+    \item \textbf{Item cold start:} using metadata such as category, brand, and price range,; manual merchandising boosts,
+    \item \textbf{Marketplace and fairness considerations:} In marketplaces, recommendation systems also influence seller exposure.
+  \end{itemize}
+\end{frame}
+
+\section{Learning-to-rank}
+
+\begin{frame}{Learning-to-rank}
+  \begin{itemize}
+    \item \textbf{Pointwise, pairwise, and listwise views:} \textbf{Pointwise:} predict a score or label for each item independently.; \textbf{Pairwise:} learn which of two items should be ranked higher.
+    \item \textbf{Why LTR is important in commerce:} search result ordering,; recommendation carousel ranking,
+    \item \textbf{Feature design for LTR:} user affinity to category or brand,; historical click-through rate,
+  \end{itemize}
+\end{frame}
+
+\section{Offline evaluation}
+
+\begin{frame}{Offline evaluation}
+  \begin{itemize}
+    \item \textbf{Common ranking metrics:} precision@$k$,; recall@$k$,
+    \item \textbf{What these metrics measure:} \textbf{Precision@$k$:} how many of the top-$k$ items are relevant.; \textbf{Recall@$k$:} how much of the relevant set is recovered in the top-$k$.
+    \item \textbf{Limits of offline evaluation:} causal business impact,; position bias and feedback loops,
+  \end{itemize}
+\end{frame}
+
+\section{Online evaluation and business impact}
+
+\begin{frame}{Online evaluation and business impact}
+  \begin{itemize}
+    \item click-through rate,
+    \item add-to-cart rate,
+    \item conversion rate,
+    \item average order value,
+    \item revenue per session,
+    \item repeat engagement,
+  \end{itemize}
+\end{frame}
+
+\section{Biases and practical risks}
+
+\begin{frame}{Biases and practical risks}
+  \begin{itemize}
+    \item \textbf{Popularity bias:} Popular items accumulate more exposure and therefore more interactions, reinforcing their future dominance.
+    \item \textbf{Selection bias:} Models only observe interactions for items that were shown.
+    \item \textbf{Position bias:} Higher-ranked items receive more clicks partly because they are higher ranked, not only because they are more relevant.
+    \item \textbf{Business-constraint tension:} margin objectives,; inventory constraints,
+  \end{itemize}
+\end{frame}
+
+\section{A practical recommender architecture}
+
+\begin{frame}{A practical recommender architecture}
+  \begin{itemize}
+    \item event collection and identity linking,
+    \item feature generation,
+    \item offline training,
+    \item candidate generation,
+    \item ranking logic,
+    \item serving interfaces,
+  \end{itemize}
+\end{frame}
+
+\section{Hands-on lab: a baseline recommender}
+
+\begin{frame}{Hands-on lab: a baseline recommender}
+  \begin{itemize}
+    \item \textbf{Lab scenario:} Students are given a synthetic or public interaction dataset containing user IDs, item IDs, timestamps, and event types such as view, add-to-cart, and purchase.
+    \item \textbf{Lab tasks:} Construct a user--item interaction matrix using implicit feedback.; Implement a simple popularity baseline and one collaborative filtering or matrix-factorization baseline.
+    \item \textbf{Expected learning outcome:} By the end of the lab, students should be able to explain not only which model performed better offline, but why the evaluation setup and business constraints matter.
+  \end{itemize}
+\end{frame}
+
+\section{Managerial implications}
+
+\begin{frame}{Managerial implications}
+  \begin{itemize}
+    \item strong baselines,
+    \item fast iteration cycles,
+    \item reasonable interpretability,
+    \item lower infrastructure cost than many deep systems.
+  \end{itemize}
+\end{frame}
+
+\end{document}
