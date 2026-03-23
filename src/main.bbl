@@ -1,0 +1,111 @@
+\begin{thebibliography}{14}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Aggarwal(2016)]{aggarwal2016recsys}
+Charu~C. Aggarwal.
+\newblock \emph{Recommender Systems: The Textbook}.
+\newblock Springer, Cham, 2016.
+\newblock \doi{10.1007/978-3-319-29659-3}.
+
+\bibitem[Covington et~al.(2016)Covington, Adams, and
+  Sargin]{covington2016youtube}
+Paul Covington, Jay Adams, and Emre Sargin.
+\newblock Deep neural networks for youtube recommendations.
+\newblock In \emph{Proceedings of the 10th ACM Conference on Recommender
+  Systems}, pages 191--198. ACM, 2016.
+\newblock \doi{10.1145/2959100.2959190}.
+
+\bibitem[Goodfellow et~al.(2016)Goodfellow, Bengio, and
+  Courville]{goodfellow2016dl}
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
+\newblock \emph{Deep Learning}.
+\newblock MIT Press, 2016.
+\newblock ISBN 9780262035613.
+
+\bibitem[Hastie et~al.(2009)Hastie, Tibshirani, and Friedman]{hastie2009esl}
+Trevor Hastie, Robert Tibshirani, and Jerome Friedman.
+\newblock \emph{The Elements of Statistical Learning: Data Mining, Inference,
+  and Prediction}.
+\newblock Springer, New York, 2 edition, 2009.
+\newblock \doi{10.1007/978-0-387-84858-7}.
+
+\bibitem[Hidasi et~al.(2016)Hidasi, Karatzoglou, Baltrunas, and
+  Tikk]{hidasi2016gru4rec}
+Bal{\'a}zs Hidasi, Alexandros Karatzoglou, Linas Baltrunas, and Domonkos Tikk.
+\newblock Session-based recommendations with recurrent neural networks.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2016.
+\newblock URL \url{https://openreview.net/forum?id=yofk5KZSP7}.
+\newblock Conference paper at ICLR 2016.
+
+\bibitem[Jannach et~al.(2010)Jannach, Zanker, Felfernig, and
+  Friedrich]{jannach2017recsys_eval}
+Dietmar Jannach, Markus Zanker, Alexander Felfernig, and Gerhard Friedrich.
+\newblock Evaluating recommender systems.
+\newblock In \emph{Recommender Systems: An Introduction}, pages 166--188.
+  Cambridge University Press, 2010.
+\newblock \doi{10.1017/CBO9780511763113.009}.
+
+\bibitem[Joachims(2002)]{joachims2002ltr}
+Thorsten Joachims.
+\newblock Optimizing search engines using clickthrough data.
+\newblock In \emph{Proceedings of the Eighth ACM SIGKDD International
+  Conference on Knowledge Discovery and Data Mining}, pages 133--142. ACM,
+  2002.
+\newblock \doi{10.1145/775047.775067}.
+
+\bibitem[Jurafsky and Martin(2025)]{jurafsky2023slp}
+Daniel Jurafsky and James~H. Martin.
+\newblock Speech and language processing.
+\newblock \url{https://web.stanford.edu/~jurafsky/slp3/}, 2025.
+\newblock URL \url{https://web.stanford.edu/~jurafsky/slp3/}.
+\newblock 3rd edition draft, August 24, 2025 release.
+
+\bibitem[Kleppmann(2017)]{kleppmann2017ddia}
+Martin Kleppmann.
+\newblock \emph{Designing Data-Intensive Applications: The Big Ideas Behind
+  Reliable, Scalable, and Maintainable Systems}.
+\newblock O'Reilly Media, 2017.
+\newblock ISBN 9781449373320.
+
+\bibitem[Koren et~al.(2009)Koren, Bell, and Volinsky]{koren2009mf}
+Yehuda Koren, Robert Bell, and Chris Volinsky.
+\newblock Matrix factorization techniques for recommender systems.
+\newblock \emph{Computer}, 42\penalty0 (8):\penalty0 30--37, 2009.
+\newblock \doi{10.1109/MC.2009.263}.
+
+\bibitem[Laudon and Traver(2024)]{laudon2024ecommerce}
+Kenneth~C. Laudon and Carol~Guercio Traver.
+\newblock \emph{E-commerce 2023--2024: Business, Technology, Society}.
+\newblock Pearson, 18 edition, 2024.
+\newblock ISBN 9781292449722.
+\newblock Global Edition.
+
+\bibitem[Murphy(2022)]{murphy2022ml}
+Kevin~P. Murphy.
+\newblock \emph{Probabilistic Machine Learning: An Introduction}.
+\newblock MIT Press, 2022.
+\newblock ISBN 9780262046824.
+
+\bibitem[Ngai et~al.(2009)Ngai, Xiu, and Chau]{ngai2011ec}
+E.~W.~T. Ngai, Li~Xiu, and D.~C.~K. Chau.
+\newblock Application of data mining techniques in customer relationship
+  management: A literature review and classification.
+\newblock \emph{Expert Systems with Applications}, 36\penalty0 (2):\penalty0
+  2592--2602, 2009.
+\newblock \doi{10.1016/j.eswa.2008.02.021}.
+
+\bibitem[Pozzolo et~al.(2015)Pozzolo, Caelen, Johnson, and
+  Bontempi]{dalpozzolo2015fraud}
+Andrea~Dal Pozzolo, Olivier Caelen, Reid~A. Johnson, and Gianluca Bontempi.
+\newblock Calibrating probability with undersampling for unbalanced
+  classification.
+\newblock In \emph{2015 IEEE Symposium Series on Computational Intelligence},
+  pages 159--166. IEEE, 2015.
+\newblock \doi{10.1109/SSCI.2015.33}.
+
+\end{thebibliography}

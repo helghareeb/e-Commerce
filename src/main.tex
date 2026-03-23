@@ -10,33 +10,47 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6\baselineskip}
 
-\title{AI-Driven E-Commerce (Master's Level)\\Book Structure \& 14-Week Plan (Placeholder)}
+\title{AI-Driven E-Commerce Systems\\Architecture, Data, Intelligence, and Operations}
 \author{Faculty of Computers and Information Sciences\\Mansoura University, Egypt}
 \date{\today}
 
 \begin{document}
+\frontmatter
 \maketitle
 \tableofcontents
 
-\chapter*{How to Use This Draft}
-This document is a \emph{structure-only} placeholder for an AI-driven, practical Master's-level e-commerce book.
-Each chapter will be written later; for now, sections contain brief bullets stating scope, key skills, and deliverables.
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+This book presents a practical, end-to-end view of modern e-commerce systems shaped by data engineering, enterprise architecture, machine learning, deep learning, large language models, and operational governance.
+It is designed as one continuous manuscript that moves from commercial foundations to production-grade system design.
 
-\chapter*{Intended Audience and Prerequisites}
+\section*{Purpose of the Book}
+The manuscript is organized around a full commerce platform lifecycle:
 \begin{itemize}
-  \item Audience: Master's students in Information Systems / Computer \& Information Sciences.
+  \item digital business models and platform strategy;
+  \item data foundations, experimentation, and metrics;
+  \item enterprise architecture and integration patterns;
+  \item ERP/CRM/SCM alignment with Odoo as the reference operational backbone;
+  \item AI applications in recommendation, pricing, fraud, customer service, and operations;
+  \item MLOps, security, privacy, compliance, and responsible AI;
+  \item a final capstone architecture that integrates the full stack into one enterprise design.
+\end{itemize}
+
+\section*{Intended Audience and Prerequisites}
+\begin{itemize}
+  \item Audience: advanced students and practitioners in Information Systems, Computer Science, software engineering, analytics, and digital transformation.
   \item Prereqs (recommended): databases, basic programming, web fundamentals, and introductory ML.
   \item Tooling (suggested): Python, notebooks, APIs, cloud services, and an ERP/EA modeling tool (as available).
 \end{itemize}
 
-\chapter*{Hands-on Track (Agreed)}
+\section*{Hands-on Orientation}
 \begin{itemize}
-  \item Approach: both tracks (lighter each).
-  \item Track A (Enterprise/ERP): Odoo-focused integration labs (Sales/Inventory/Accounting flows).
-  \item Track B (AI/ML): ML-heavy notebooks using e-commerce datasets (recsys, pricing, fraud, support).
+  \item Track A (Enterprise/ERP): Odoo-focused integration labs across sales, inventory, procurement, service, and accounting flows.
+  \item Track B (AI/ML): analytical and ML-driven work on recommendation, pricing, fraud, forecasting, support automation, and MLOps.
+  \item Design principle: combine enterprise process realism with measurable AI value rather than treating them as separate domains.
 \end{itemize}
 
-\chapter*{Course Outcomes (Draft)}
+\section*{Learning Outcomes}
 \begin{itemize}
   \item Design end-to-end e-commerce systems with enterprise architecture (EA) and integration concerns.
   \item Apply ML/DL/AI to personalization, search, pricing, fraud, operations, and customer service.
@@ -44,10 +58,9 @@ Each chapter will be written later; for now, sections contain brief bullets stat
   \item Evaluate systems for security, privacy, governance, ethics, and measurable business value.
 \end{itemize}
 
-\chapter{Weekly Plan Overview}
-\section*{Course emphasis (agreed)}
+\section*{Book Roadmap}
 \begin{itemize}
-  \item Overall emphasis: balanced (EA/ERP + ML/DL/AI).
+  \item Overall emphasis: balanced across commerce strategy, enterprise systems, data platforms, and AI-enabled decision systems.
   \item ERP reference stack: Odoo (concepts remain vendor-neutral where possible).
 \end{itemize}
 \begin{center}
@@ -73,6 +86,7 @@ Each chapter will be written later; for now, sections contain brief bullets stat
 \end{tabular}
 \end{center}
 
+\mainmatter
 \input{chapters/ch01-foundations}
 \input{chapters/ch02-platforms}
 \input{chapters/ch03-data-foundations}
